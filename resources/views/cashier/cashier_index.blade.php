@@ -1,5 +1,5 @@
 @extends('cashier.cashier_app')
-@push('css')
+@push('CSS')
 
 <style>
     /* Ensure the rest of the page fits within the viewport */
@@ -210,7 +210,7 @@
     <!-- Header -->
     <div class="flex justify-between items-center bg-green-700 text-white p-3 rounded">
         <div>
-            <img src="{{asset('Hanguk_super/assets/img/logo/logo.jpeg')}}" alt="logo-dark" class="h-20">
+            <img src="{{asset('Hanguk_super/assets/IMG/logo/logo.jpeg')}}" alt="logo-dark" class="h-20">
         </div> <!-- logo-dark end -->
         <div>
             <p>Date: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</p>
@@ -395,7 +395,7 @@
     <!-- Header -->
     <div class="flex justify-between items-center bg-green-700 text-white p-3 rounded">
         <div>
-            <img src="{{asset('Hanguk_super/assets/img/logo/logo.jpeg')}}" alt="logo-dark" class="h-20">
+            <img src="{{asset('Hanguk_super/assets/IMG/logo/logo.jpeg')}}" alt="logo-dark" class="h-20">
         </div> <!-- logo-dark end -->
         <div>
             <p>Date: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</p>
@@ -576,7 +576,7 @@
 @endsection
 
 @push('script')
-    <script src="{{asset('Hanguk_super/assets/js/jquary/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{asset('Hanguk_super/assets/JS/jquary/jquery-3.7.1.min.JS')}}"></script>
     <script>
         function deleteRow(button) {
             // Find the row to be deleted

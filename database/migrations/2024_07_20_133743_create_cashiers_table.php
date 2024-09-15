@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('NIC_no');
             $table->string('phone_no');
             $table->string('whatsapp_no');
-            $table->string('img');
+            $table->string('IMG');
             $table->string('username');
             $table->string('password');
             $table->timestamps();

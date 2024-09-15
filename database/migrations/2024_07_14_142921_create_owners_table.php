@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('add_by');
             $table->string('password');
             $table->string('referral_no');
-            $table->string('img');
+            $table->string('IMG');
             $table->timestamps();
         });
     }

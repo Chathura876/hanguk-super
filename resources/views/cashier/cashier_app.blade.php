@@ -2,7 +2,7 @@
 <html lang="en">
 
 @include('cashier.components.head')
-@stack('css')
+@stack('CSS')
 <body>
 {{--@include('supermarketpos::cashier.components.sidebar')--}}
 {{--<div class="min-h-screen lg:ps-64 w-full">--}}

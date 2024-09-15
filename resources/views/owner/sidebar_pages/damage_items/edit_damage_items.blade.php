@@ -35,7 +35,7 @@
                     <div class="p-8">
                         <div class="flex flex-col md:flex-row gap-4">
                             <div class="flex-shrink">
-                                <img alt="" class="h-40 w-40" src="{{asset("Hanguk_super/assets/img/fruit-59cd8491.png")}}">
+                                <img alt="" class="h-40 w-40" src="{{asset("Hanguk_super/assets/IMG/fruit-59cd8491.png")}}">
                             </div><!-- end flex-shrink -->
                             <div class="flex-grow flex">
                                 <div class="flex-grow flex flex-col">

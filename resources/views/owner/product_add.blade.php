@@ -78,7 +78,7 @@
                                 </h5>
                                 <p class="text-sm text-default-600 mb-2">Upload a cover image for your product (optional).</p>
                             </label>
-                            @error('img')
+                            @error('IMG')
                             <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
                             @enderror
                         </div>

@@ -8,8 +8,8 @@
 
     <div class="sticky top-0 flex h-18 items-center justify-start px-6">
         <a href="">
-            <img src="{{asset('Hanguk_super/assets/img/logo/logo_fav_02.png')}}" alt="logo" class="flex h-10 dark:hidden">
-            <img src="{{asset('Hanguk_super/assets/img/logo/logo_fav_02.png')}}" alt="logo" class="hidden h-10 dark:flex">
+            <img src="{{asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png')}}" alt="logo" class="flex h-10 dark:hidden">
+            <img src="{{asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png')}}" alt="logo" class="hidden h-10 dark:flex">
         </a>
     </div>
 

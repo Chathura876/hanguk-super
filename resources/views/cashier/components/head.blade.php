@@ -2,17 +2,17 @@
     <meta charset="utf-8">
     <title>Hanguk Super - Cashier</title>
     <!-- Theme favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset("Hanguk_super/assets/img/logo/logo_fav_02.png")}}">
+    <link rel="icon" type="image/x-icon" href="{{asset("Hanguk_super/assets/IMG/logo/logo_fav_02.png")}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description">
     <meta content="coderthemes" name="author">
 
-    <!-- Head js -->
-    <script type="module" crossorigin="" src="{{asset("Hanguk_super/assets/JS/admin-dashboard-27890ed3.js")}}"></script>
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/theme-9c065fc6.js")}}">
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/apexcharts.common-4fae8482.js")}}">
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/colors-4fe812b9.js")}}">
-    <link rel="stylesheet" href="{{asset("Hanguk_super/assets/CSS/theme-ecf0ae99.css")}}">
+    <!-- Head JS -->
+    <script type="module" crossorigin="" src="{{asset("Hanguk_super/assets/JS/admin-dashboard-27890ed3.JS")}}"></script>
+    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/theme-9c065fc6.JS")}}">
+    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/apexcharts.common-4fae8482.JS")}}">
+    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/colors-4fe812b9.JS")}}">
+    <link rel="stylesheet" href="{{asset("Hanguk_super/assets/CSS/theme-ecf0ae99.CSS")}}">
     <!-- Include SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
@@ -58,5 +58,5 @@
         }
     </style>
 
-    @stack('css')
+    @stack('CSS')
 </head>

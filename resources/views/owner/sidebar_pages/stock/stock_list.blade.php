@@ -116,7 +116,7 @@
                                                alt="{{ $item->product->product_name }}"
                                                class="max-w-full h-full rounded-full">
                                       @else
-                                          <img src="{{ asset('Hanguk_super/assets/img/logo/logo_fav_02.png') }}"
+                                          <img src="{{ asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png') }}"
                                                alt="default image"
                                                class="max-w-full h-full rounded-full">
                                       @endif

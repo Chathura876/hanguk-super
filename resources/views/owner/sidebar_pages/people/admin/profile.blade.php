@@ -22,7 +22,7 @@
         <div class="grid lg:grid-cols-2">
             <div class="lg:col-span-1">
                 <div class="p-6 rounded-lg border border-default-200">
-                    <img src="{{asset('Hanguk_super/assets/img/profile_images/ex_image.jpg')}}" alt="" class="w-50 mx-auto rounded-3xl p-1 border-2 border-dashed border-default-300 bg-default-100">
+                    <img src="{{asset('Hanguk_super/assets/IMG/profile_images/ex_image.jpg')}}" alt="" class="w-50 mx-auto rounded-3xl p-1 border-2 border-dashed border-default-300 bg-default-100">
                     <h4 class="mb-1 mt-3 text-lg text-default-900 text-center">Namal Bandara</h4>
                     <p class="text-default-600 text-center mb-4">Admin</p>
 
@@ -48,7 +48,7 @@
 {{--        <div class="grid lg:grid-cols-1">--}}
 {{--            <div class="lg:col-span-1">--}}
 {{--                <div class="p-6 rounded-lg border border-default-200">--}}
-{{--                    <img src="{{asset('Hanguk_super/assets/img/profile_images/ex_image.jpg')}}" alt="" class="w-50 mx-auto rounded-3xl p-1 border-2 border-dashed border-default-300 bg-default-100">--}}
+{{--                    <IMG src="{{asset('Hanguk_super/assets/IMG/profile_images/ex_image.jpg')}}" alt="" class="w-50 mx-auto rounded-3xl p-1 border-2 border-dashed border-default-300 bg-default-100">--}}
 {{--                    <h4 class="mb-1 mt-3 text-lg text-default-900 text-center">Namal Bandara</h4>--}}
 {{--                    <p class="text-default-600 text-center mb-4">Cashier</p>--}}
 

@@ -11,8 +11,8 @@
         <!-- Logo -->
         <div class="flex lg:hidden">
             <a href="">
-                <img src="{{asset('Hanguk_super/assets/img/logo/logo_fav_02.png')}}" alt="logo" class="flex h-10 w-full dark:hidden">
-                <img src="{{asset('Hanguk_super/assets/img/logo/logo_fav_02.png')}}" alt="logo" class="hidden h-10 w-full dark:flex">
+                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png')}}" alt="logo" class="flex h-10 w-full dark:hidden">
+                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png')}}" alt="logo" class="hidden h-10 w-full dark:flex">
             </a>
         </div>
 
@@ -35,7 +35,7 @@
             <div class="flex">
                 <div class="hs-dropdown relative inline-flex">
                     <button id="hs-dropdown-with-header" type="button" class="hs-dropdown-toggle inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-md align-middle text-xs font-medium text-default-700 transition-all">
-                        <img class="inline-block h-10 w-10 rounded-full" src="{{asset('Hanguk_super/assets/img/profile_images/ex_image.jpg')}}">
+                        <img class="inline-block h-10 w-10 rounded-full" src="{{asset('Hanguk_super/assets/IMG/profile_images/ex_image.jpg')}}">
                         <div class="hidden text-start lg:block">
                             <p class="text-xs font-semibold text-default-700">Mary Hopkins</p>
                             <p class="mt-1 text-xs text-default-500">Cashier</p>

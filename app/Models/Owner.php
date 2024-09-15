@@ -22,7 +22,7 @@ class Owner extends Authenticatable
         'email',
         'add_by',
         'referral_no',
-        'img'
+        'IMG'
     ];
 
 //    protected static function newFactory()

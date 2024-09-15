@@ -126,7 +126,7 @@
                                         <div class="flex justify-between items-center">
 
                                             <div>
-                                                <img src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="logo-dark" class="h-36">
+                                                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="logo-dark" class="h-36">
                                             </div> <!-- logo-dark end -->
 
                                             <div class="flex sm:justify-end space-y-2">
@@ -236,7 +236,7 @@
                                         <div class="flex justify-between items-center">
 
                                             <div>
-                                                <img src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="logo-dark" class="h-36">
+                                                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="logo-dark" class="h-36">
                                             </div> <!-- logo-dark end -->
 
                                             <div class="flex sm:justify-end space-y-2">
@@ -346,7 +346,7 @@
                                         <div class="flex justify-between items-center">
 
                                             <div>
-                                                <img src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="logo-dark" class="h-36">
+                                                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="logo-dark" class="h-36">
                                             </div> <!-- logo-dark end -->
 
                                             <div class="flex sm:justify-end space-y-2">
@@ -456,7 +456,7 @@
                                         <div class="flex justify-between items-center">
 
                                             <div>
-                                                <img src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="logo-dark" class="h-36">
+                                                <img src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="logo-dark" class="h-36">
                                             </div> <!-- logo-dark end -->
 
                                             <div class="flex sm:justify-end space-y-2">

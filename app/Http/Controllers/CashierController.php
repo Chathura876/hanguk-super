@@ -58,7 +58,7 @@ class CashierController extends Controller
                 'NIC_no'=>$request->NIC_no,
                 'phone_no'=>$request->phone_no,
                 'whatsapp_no'=>$request->whatsapp_no,
-                'img'=>$request->img,
+                'IMG'=>$request->img,
                 'username'=>$request->username,
                 'password'=>$request->password
             ]);
@@ -121,7 +121,7 @@ class CashierController extends Controller
                     'NIC_no'=>$request->NIC_no,
                     'phone_no'=>$request->phone_no,
                     'whatsapp_no'=>$request->whatsapp_no,
-                    'img'=>$request->img,
+                    'IMG'=>$request->img,
                     'username'=>$request->username,
                     'password'=>$request->password
                 ]);

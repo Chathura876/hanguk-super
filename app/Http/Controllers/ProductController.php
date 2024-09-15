@@ -61,12 +61,12 @@ class ProductController extends Controller
             'brand_id' => 'required|integer',
             'sale_on_hare_price' => 'nullable|numeric',
             'enable_stock_group' => 'nullable|boolean',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $imageController = new Imageuploader();
-        $imagePath = $request->hasFile('img')
-            ? $imageController->imgUpload($request->file('img'), 'product_image_', 'product')
+        $imagePath = $request->hasFile('IMG')
+            ? $imageController->imgUpload($request->file('IMG'), 'product_image_', 'product')
             : null;
 
         try {
@@ -129,7 +129,7 @@ class ProductController extends Controller
             'bar_code' => 'required|string|max:255',
             'shop_id' => 'required|integer',
             'type' => 'required|string|max:255',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'IMG' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'brand_id' => 'required|integer',
             'category_id' => 'required|integer',
             'sub_category_id' => 'required|integer',
@@ -145,7 +145,7 @@ class ProductController extends Controller
             $imagePath = $product->image;
 
             // Handle new image upload if provided
-            if ($request->hasFile('img')) {
+            if ($request->hasFile('IMG')) {
                 $imageController = new Imageuploader();
                 $imagePath = $imageController->imgUpload($request->img, 'product_image_', 'product');
             }
@@ -424,19 +424,19 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $imageController = new Imageuploader();
-        $imagePath = $request->hasFile('img')
-            ? $imageController->imgUpload($request->file('img'), 'brand_image_', 'brand')
+        $imagePath = $request->hasFile('IMG')
+            ? $imageController->imgUpload($request->file('IMG'), 'brand_image_', 'brand')
             : null;
 
         try {
             Brand::create([
                 'name' => $request->input('name'),
                 'Company' => $request->input('company'),
-                'img' => $imagePath,
+                'IMG' => $imagePath,
             ]);
 
             return redirect()->back()->with('success', 'Brand created successfully');
@@ -457,13 +457,13 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'company' => 'required|string|max:255',
-            'img' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
         $brand = Brand:: query()-> findOrFail($id);
         $imagePath = $brand->img;
 
-        if ($request->hasFile('img')) {
+        if ($request->hasFile('IMG')) {
             $imageController = new Imageuploader();
             $imagePath = $imageController->imgUpload($request->img, 'brand_image_', 'brand');
         }
@@ -472,7 +472,7 @@ class ProductController extends Controller
             $brand->update([
                 'name' => $request->input('name'),
                 'Company' => $request->input('company'),
-                'img' => $imagePath,
+                'IMG' => $imagePath,
             ]);
 
             return redirect()->route('brand.index')->with('success', 'Brand updated successfully!');

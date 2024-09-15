@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('themes', function (Blueprint $table) {
             $table->id();
-            $table->string('js');
-            $table->string('css');
+            $table->string('JS');
+            $table->string('CSS');
             $table->string('color');
             $table->integer('shop_id');
             $table->timestamps();

@@ -90,7 +90,7 @@
                         <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">
                           <span class="flex items-center gap-2">
                             <span class="h-8 w-8 inline-flex items-center justify-center rounded-full">
-                              <img src="{{asset("Hanguk_super/assets/img/logo/logo_fav_02.png")}}" alt="avatar" class="max-w-full h-full rounded-full">
+                              <img src="{{asset("Hanguk_super/assets/IMG/logo/logo_fav_02.png")}}" alt="avatar" class="max-w-full h-full rounded-full">
                             </span>
 {{--                            <h6 class="text-sm font-semibold text-default-700">Imorich Chocolate Ice Cream</h6>--}}
                           </span>

@@ -40,7 +40,7 @@ class OwnerController extends Controller
                 'add_by'=>$request->add_by,
                 'password'=>Hash::make($request->password),
                 '$referral_no='=>$request->referral_no,
-                'img'=>$imagePath
+                'IMG'=>$imagePath
            ]);
 
             return response()->json('success',200);

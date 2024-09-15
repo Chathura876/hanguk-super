@@ -206,7 +206,7 @@
 @endsection
 @push('script')
     <!-- Load jQuery first -->
-    <script src="{{asset('Hanguk_super/assets/js/jquary/jquery-3.7.1.min.js')}}"></script>
+    <script src="{{asset('Hanguk_super/assets/JS/jquary/jquery-3.7.1.min.JS')}}"></script>
 
     <!-- Your custom JavaScript -->
     <script>

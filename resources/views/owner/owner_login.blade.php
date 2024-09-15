@@ -5,18 +5,18 @@
     <meta charset="utf-8">
     <title>Hanguk Super</title>
     <!-- Theme favicon -->
-    <link rel="icon" type="image/x-icon" href="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}">
+    <link rel="icon" type="image/x-icon" href="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="description">
     <meta content="coderthemes" name="author">
 
-    <!-- Head js -->
-    <script type="module" crossorigin="" src="{{asset('Hanguk_super/assets/js/theme-9c065fc6.js')}}"></script>
-    <script type="module" crossorigin="" src="{{asset('Hanguk_super/assets/js/auth-23747e5d.js')}}"></script>
-    <link rel="stylesheet" href="{{asset('Hanguk_super/assets/css/theme-ecf0ae99.css')}}">
+    <!-- Head JS -->
+    <script type="module" crossorigin="" src="{{asset('Hanguk_super/assets/JS/theme-9c065fc6.JS')}}"></script>
+    <script type="module" crossorigin="" src="{{asset('Hanguk_super/assets/JS/auth-23747e5d.JS')}}"></script>
+    <link rel="stylesheet" href="{{asset('Hanguk_super/assets/CSS/theme-ecf0ae99.CSS')}}">
     <style>
         body{
-            background-image: url("{{asset('Hanguk_super/assets/img/banner-11-84d6d521.jpg')}}");
+            background-image: url("{{asset('Hanguk_super/assets/IMG/banner-11-84d6d521.jpg')}}");
         }
     </style>
 </head>
@@ -24,14 +24,14 @@
 <body>
 <section
     class="sm:p-10 p-6 flex items-center lg:justify-center justify-center relative bg-no-repeat bg-cover min-h-screen"
-    style="background-image: url('{{asset('Hanguk_super/assets/img/banner-11.jpg')}}');">
+    style="background-image: url('{{asset('Hanguk_super/assets/IMG/banner-11.jpg')}}');">
 
 
     <div class="max-w-lg w-full  rounded-xl bg-white/80 backdrop-blur-2xl sm:p-10 p-6 h-full flex flex-col dark:bg-default-50/60 border-t-4 border-primary">
         <div class="flex justify-center items-center w-full h-full">
             <a href="index.html" class="block mb-5">
-                <img class="h-12 block dark:hidden" src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="" style="width: 150px; height: 170px;">
-                <img class="h-12 hidden dark:block" src="{{asset('Hanguk_super/assets/img/logo/logo1.png')}}" alt="" style="width: 150px; height: 170px;">
+                <img class="h-12 block dark:hidden" src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="" style="width: 150px; height: 170px;">
+                <img class="h-12 hidden dark:block" src="{{asset('Hanguk_super/assets/IMG/logo/logo1.png')}}" alt="" style="width: 150px; height: 170px;">
             </a>
         </div>
         <div class="my-auto">

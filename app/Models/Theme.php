@@ -10,8 +10,8 @@ class Theme extends Model
     use HasFactory;
 
     protected $fillable = [
-        'js',
-        'css',
+        'JS',
+        'CSS',
         'color',
         'shop_id'
     ];

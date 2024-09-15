@@ -61,7 +61,7 @@
                             @if ($product->image)
                                 <img src="{{ asset($product->image) }}" alt="Product Image" class="mt-2 max-w-full h-auto">
                             @endif
-                            @error('img')
+                            @error('IMG')
                             <span class="text-red-500 text-sm">{{ $message }}</span>
                             @enderror
                         </div>

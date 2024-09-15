@@ -147,7 +147,7 @@
                                 <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
                                     <spam class="flex items-center gap-2">
 {{--                    <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">--}}
-{{--                      <img src="assets/1-2ca96552.png" alt="" class="max-w-full h-full rounded-full">--}}
+{{--                      <IMG src="assets/1-2ca96552.png" alt="" class="max-w-full h-full rounded-full">--}}
 {{--                    </span>--}}
                                         <h6 class="text-sm font-semibold text-default-700">
                                             {{$item->id}}

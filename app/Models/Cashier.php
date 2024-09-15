@@ -17,7 +17,7 @@ class Cashier extends Model
         'NIC_no',
         'phone_no',
         'whatsapp_no',
-        'img',
+        'IMG',
         'username',
         'password'
     ];
