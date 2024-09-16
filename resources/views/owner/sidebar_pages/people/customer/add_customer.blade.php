@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">
@@ -18,7 +18,17 @@
                 </li>
             </ol>
         </div>
+        @if(session('success'))
+            <div class="alert alert-success bg-green-500 text-white p-4 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if(session('error'))
+            <div class="alert alert-error bg-red-500 text-white p-4 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
         @if ($errors->any())
             <div class="alert alert-danger">
                 <ul>
@@ -79,12 +89,6 @@
                         <div>
                             <label class="block text-sm font-medium text-default-900 mb-2" for="user_name">Username</label>
                             <input id="user_name" name="user_name" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Username">
-                        </div>
-
-                        {{-- Shop ID --}}
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="shop_id">Shop ID</label>
-                            <input id="shop_id" name="shop_id" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="number" placeholder="Add Shop ID">
                         </div>
 
                         {{-- Card Number --}}

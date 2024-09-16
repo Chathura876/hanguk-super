@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">
@@ -101,7 +101,7 @@
                                     <a href="{{ route('customer.edit', $customer->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:bg-default-200">
                                         <i class="ti ti-edit-circle text-base"></i>
                                     </a>
-                                    <form action="{{ route('customer.delete', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this customer?');">
+                                    <form style="padding-top: 10px" action="{{ route('customer.delete', $customer->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this customer?');">
                                         @csrf
                                         <button type="submit" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                             <i class="ti ti-trash text-lg"></i>

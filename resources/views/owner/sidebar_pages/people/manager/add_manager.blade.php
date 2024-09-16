@@ -2,7 +2,17 @@
 @section('content')
 
     <div class="p-6 space-y-6">
+        @if(session('success'))
+            <div class="alert alert-success bg-green-500 text-white p-4 rounded">
+                {{ session('success') }}
+            </div>
+        @endif
 
+        @if(session('error'))
+            <div class="alert alert-error bg-red-500 text-white p-4 rounded">
+                {{ session('error') }}
+            </div>
+        @endif
         <div class="flex w-full items-center justify-between print:hidden">
             <h4 class="text-lg font-semibold text-default-900">Add Manager</h4>
 
