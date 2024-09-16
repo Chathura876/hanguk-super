@@ -28,7 +28,7 @@ class StockController extends Controller
             $stock = $query->paginate(15);
 
             // Pass the data to the view
-            return view('owner.sidebar_pages.stock.stock_list', compact('stock',compact('user')));
+            return view('owner.sidebar_pages.stock.stock_list', compact('stock','user'));
         } catch (\Exception $exception) {
             // Return or handle the exception properly
             return $exception;
@@ -49,12 +49,13 @@ class StockController extends Controller
         try {
             // Validate the request data
             $request->validate([
-                'item_id' => 'required|integer',
                 'qty' => 'required|numeric',
                 'stock_price' => 'required|numeric',
                 'selling_price' => 'required|numeric',
                 'discount_price' => 'nullable|numeric',
-                'free_item' => 'nullable|numeric'
+                'from_item' => 'nullable|numeric',
+                'to_item' => 'nullable|numeric',
+                'unit_type' =>'required|string|max:255',
             ]);
 
             // Create a new stock record
@@ -64,9 +65,10 @@ class StockController extends Controller
                 'stock_price' => $request->stock_price,
                 'selling_price' => $request->selling_price,
                 'discount_price' => $request->discount_price,
-                'free_item' => $request->free_item
+                'from_item' => $request->from_item,
+                'to_item' => $request->to_item,
+                'unit' => $request->unit_type
             ]);
-
             return redirect()->route('stock.index')->with('success', 'Stock added successfully.');
         } catch (\Exception $exception) {
             return redirect()->back()->with('error', 'An error occurred: ' . $exception->getMessage());
