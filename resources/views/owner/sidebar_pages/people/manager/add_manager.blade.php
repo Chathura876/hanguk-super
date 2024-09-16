@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">

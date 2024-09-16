@@ -16,7 +16,7 @@ class ManagerController extends Controller
             $managers=Manager::all();
             $user=Auth::user();
 
-            return view('supermarketpos::owner.sidebar_pages.people.manager.manager_list',compact('managers','user'));
+            return view('owner.sidebar_pages.people.manager.manager_list',compact('managers','user'));
 
         }
         catch (\Exception $exception){
@@ -27,7 +27,7 @@ class ManagerController extends Controller
     public function create()
     {
         $user=Auth::user();
-        return view('supermarketpos::owner.sidebar_pages.people.manager.add_manager',compact('user'));
+        return view('owner.sidebar_pages.people.manager.add_manager',compact('user'));
     }
 
     public function store(Request $request)
