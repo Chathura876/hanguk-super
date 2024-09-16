@@ -59,18 +59,18 @@
                             @enderror
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="image">Profile Image</label>
-                            @if($admin->image)
-                                <img id="imagePreview" src="{{ asset('storage/' . $admin->image) }}" alt="Image Preview" style="width: 60px; height: 60px; margin-bottom: 10px;">
-                            @else
-                                <img id="imagePreview" src="" alt="Image Preview" style="display: none; width: 60px; height: 60px; margin-bottom: 10px;">
-                            @endif
-                            <input id="image" name="image" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" placeholder="Upload Profile Image" onchange="previewImage(event)">
-                            @error('image')
-                            <p class="text-red-600 text-sm">{{ $message }}</p>
-                            @enderror
-                        </div>
+{{--                        <div>--}}
+{{--                            <label class="block text-sm font-medium text-default-900 mb-2" for="image">Profile Image</label>--}}
+{{--                            @if($admin->image)--}}
+{{--                                <img id="imagePreview" src="{{ asset('storage/' . $admin->image) }}" alt="Image Preview" style="width: 60px; height: 60px; margin-bottom: 10px;">--}}
+{{--                            @else--}}
+{{--                                <img id="imagePreview" src="" alt="Image Preview" style="display: none; width: 60px; height: 60px; margin-bottom: 10px;">--}}
+{{--                            @endif--}}
+{{--                            <input id="image" name="image" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" placeholder="Upload Profile Image" onchange="previewImage(event)">--}}
+{{--                            @error('image')--}}
+{{--                            <p class="text-red-600 text-sm">{{ $message }}</p>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
 
                     </div>
 

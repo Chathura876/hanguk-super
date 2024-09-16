@@ -37,7 +37,7 @@ class AdminController extends Controller
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255|unique:admins,email',
             'password' => 'required|string|min:6',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+//            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         // Validate the request data
@@ -55,14 +55,15 @@ class AdminController extends Controller
             $admin->phone = $request->phone;
             $admin->email = $request->email;
             $admin->password = bcrypt($request->password);
+            $admin->image = 0;
 
             // Handle file upload
-            if ($request->hasFile('image')) {
-                $file = $request->file('image');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->storeAs('public', $filename);
-                $admin->image = $filename;
-            }
+//            if ($request->hasFile('image')) {
+//                $file = $request->file('image');
+//                $filename = time() . '.' . $file->getClientOriginalExtension();
+//                $file->storeAs('public', $filename);
+//                $admin->image = $filename;
+//            }
 
             $admin->save();
 
@@ -97,7 +98,7 @@ class AdminController extends Controller
             'phone' => 'required|string|max:20',
             'email' => 'required|email|max:255',
             'password' => 'string|min:6',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
+//            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ];
 
         // Validate the request data
@@ -115,18 +116,18 @@ class AdminController extends Controller
             $admin->phone = $request->phone;
             $admin->email = $request->email;
             $admin->password = $request->password ? bcrypt($request->password) : $admin->password;
-
+            $admin->image = 0;
             // Handle file upload
-            if ($request->hasFile('image')) {
-                // Delete old image if exists
-                if ($admin->image && file_exists(storage_path('app/public/' . $admin->image))) {
-                    unlink(storage_path('app/public/' . $admin->image));
-                }
-                $file = $request->file('image');
-                $filename = time() . '.' . $file->getClientOriginalExtension();
-                $file->storeAs('public', $filename);
-                $admin->image = $filename;
-            }
+//            if ($request->hasFile('image')) {
+//                // Delete old image if exists
+//                if ($admin->image && file_exists(storage_path('app/public/' . $admin->image))) {
+//                    unlink(storage_path('app/public/' . $admin->image));
+//                }
+//                $file = $request->file('image');
+//                $filename = time() . '.' . $file->getClientOriginalExtension();
+//                $file->storeAs('public', $filename);
+//                $admin->image = $filename;
+//            }
 
             $admin->save();
 
