@@ -125,8 +125,10 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::prefix('cheque')->group(function () {
             Route::get('/', [ChequeController::class, 'index'])->name('cheque.index');
             Route::get('/add', [ChequeController::class, 'create'])->name('cheque.create');
-            Route::get('/show', [ChequeController::class, 'show'])->name('cheque.show');
-            Route::get('/update', [ChequeController::class, 'update'])->name('cheque.update');
+            Route::post('/cheque/store', [ChequeController::class, 'store'])->name('cheque.store');
+            Route::get('/cheques/{id}/edit', [ChequeController::class, 'edit'])->name('cheque.edit');
+            Route::put('/cheques/{id}', [ChequeController::class, 'update'])->name('cheque.update');
+            Route::delete('/cheques/{id}', [ChequeController::class, 'destroy'])->name('cheque.destroy');
         });
 
         Route::prefix('sale')->group(function () {

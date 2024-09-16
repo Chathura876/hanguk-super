@@ -51,45 +51,47 @@
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-32">Bank Name</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-32">Company Name</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-32">Amount</th>
-                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-40">Issued Date</th>
-                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-40">Written Date</th>
+{{--                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-40">Issued Date</th>--}}
+{{--                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-40">Written Date</th>--}}
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900 min-w-40">Collected By</th>
                         <th scope="col" class="px-3 py-3 text-center text-sm capitalize font-semibold text-default-900 min-w-32">Status</th>
                         <th scope="col" class="px-3 py-3 text-center text-sm capitalize font-semibold text-default-900 min-w-32">Action</th>
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-dashed divide-default-200">
-                    <tr>
-                        <td class="px-6 py-3">
-                            <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
-                        </td>
-                        <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap"><b>#STZ1020@20</b></td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Fruit</td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
-                            <span class="block mb-0.5">12 Apr 2023</span>
-                        </td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Fruit</td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Fruit</td>
-                        <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">Fruit</td>
-                        <td class="px-6 py-3 text-primary font-semibold whitespace-nowrap">$ 1,42,430</td>
-                        <td class="px-6 py-3 font-medium whitespace-nowrap text-center">
-                            <input type="checkbox" class="form-checkbox rounded bg-transparent border-default-200 text-primary" id="customCheck1">
-                        </td>
-                        <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
-                            <div class="flex items-center justify-center gap-2">
-{{--                                <a href="{{ route("cheque.show") }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">--}}
-{{--                                    <i class="ti ti-eye text-base"></i>--}}
-{{--                                </a>--}}
-                                <a href="{{ route("cheque.update") }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                    <i class="ti ti-edit-circle text-base"></i>
-                                </a>
-                                <a href="" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                    <i class="ti ti-trash text-base"></i>
-                                </a>
-                            </div>
-                        </td>
-                    </tr>
+                    @foreach($cheques as $cheque)
+                        <tr>
+                            <td class="px-6 py-3">
+                                <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
+                            </td>
+                            <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">{{ $cheque->number }}</td>
+                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->bank }}</td>
+                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->company }}</td>
+                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->amount }}</td>
+{{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->issued_date }}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->written_date }}</td>--}}
+                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $cheque->collect_by }}</td>
+                            <td class="px-6 py-3 font-medium whitespace-nowrap text-center">
+                                <input type="checkbox" class="form-checkbox rounded bg-transparent border-default-200 text-primary" {{ $cheque->status ? 'checked' : '' }}>
+                            </td>
+                            <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('cheque.edit', $cheque->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                        <i class="ti ti-edit-circle text-base"></i>
+                                    </a>
+                                    <form style="padding-top: 10px" action="{{ route('cheque.destroy', $cheque->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                            <i class="ti ti-trash text-base"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
+
                 </table>
             </div>
             <div class="flex items-center justify-between py-3 px-6 border-t border-dashed border-default-200">
