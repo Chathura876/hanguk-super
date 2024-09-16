@@ -46,6 +46,7 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             // Validate the request data
             $request->validate([

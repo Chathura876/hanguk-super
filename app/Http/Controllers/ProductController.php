@@ -57,17 +57,17 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required|string|max:255',
-            'bar_code' => 'required|string|max:255',
-            'type' => 'required|integer',
-            'category_id' => 'required|integer',
-            'sub_category_id' => 'required|integer',
-            'brand_id' => 'required|integer',
-            'sale_on_hare_price' => 'nullable|numeric',
-            'enable_stock_group' => 'nullable|boolean',
+//        $request->validate([
+//            'product_name' => 'required|string|max:255',
+//            'bar_code' => 'required|string|max:255',
+//            'type' => 'required|integer',
+//            'category_id' => 'required|integer',
+//            'sub_category_id' => 'required|integer',
+//            'brand_id' => 'required|integer',
+//            'sale_on_hare_price' => 'nullable|numeric',
+//            'enable_stock_group' => 'nullable|boolean',
 //            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
+//        ]);
 
 //        $imageController = new Imageuploader();
 //        $imagePath = $request->hasFile('IMG')
@@ -80,7 +80,7 @@ class ProductController extends Controller
                 'bar_code' => $request->input('bar_code'),
                 'shop_id' => $request->input('shop_id', 1),
                 'type' => $request->input('type'),
-                'image' => 0,
+                'image' => 'ab',
                 'brand_id' => $request->input('brand_id'),
                 'category_id' => $request->input('category_id'),
                 'sub_category_id' => $request->input('sub_category_id'),

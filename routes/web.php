@@ -10,6 +10,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuperMarketPosController;
 use Illuminate\Support\Facades\Route;
@@ -140,10 +141,10 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
                 Route::delete('/cheques/{id}', [ChequeController::class, 'destroy'])->name('cheque.destroy');
             });
 
-            Route::prefix('sale')->group(function () {
-                Route::get('/profit', [OwnerController::class, 'profit'])->name('owner.profit');
-                Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
-                Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
+        Route::prefix('sale')->group(function () {
+            Route::get('/profit', [ProfitController::class, 'profit'])->name('owner.profit');
+            Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
+            Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
 
             });
 
@@ -201,8 +202,13 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
 
     });
-//  });
-});
+  });
+
+  Route::prefix('profit')->group(function () {
+      Route::get('/', [ProfitController::class, 'profit'])->name('profit.index');
+  });
+
+//});
 //});
 
 

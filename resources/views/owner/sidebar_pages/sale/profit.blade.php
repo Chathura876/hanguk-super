@@ -101,7 +101,13 @@
             <div class="p-5 border-t border-dashed border-default-200">
                 <div class="border-b border-default-200">
                     <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
-                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50 hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg active" id="card-type-tab-item-1" data-hs-tab="#card-type-tab-1" aria-controls="card-type-tab-1" role="tab">
+                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50
+                        hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px
+                        py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg
+                        active" id="card-type-tab-item-1"
+                                data-hs-tab="#card-type-tab-1"
+                                aria-controls="card-type-tab-1"
+                                role="tab">
                             Today
                         </button>
                         <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50 hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg" id="card-type-tab-item-2" data-hs-tab="#card-type-tab-2" aria-controls="card-type-tab-2" role="tab">
