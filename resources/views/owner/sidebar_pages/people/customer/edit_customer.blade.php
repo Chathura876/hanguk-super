@@ -62,7 +62,7 @@
                         {{-- Birthday --}}
                         <div>
                             <label class="block text-sm font-medium text-default-900 mb-2" for="b_day">Birthday</label>
-                            <input id="b_day" name="b_day" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="date" value="{{ old('b_day', $customer->b_day) }}" required>
+                            <input id="b_day" name="b_day" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="date" value="{{ old('birthday', $customer->birthday) }}" required>
                         </div>
 
                         {{-- Phone Number --}}
@@ -79,8 +79,8 @@
 
                         {{-- Shop ID --}}
                         <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="shop_id">Shop ID</label>
-                            <input id="shop_id" name="shop_id" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="number" value="{{ old('shop_id', $customer->shop_id) }}" placeholder="Add Shop ID">
+                            <label class="block text-sm font-medium text-default-900 mb-2" for="shop_id">phone</label>
+                            <input id="phone" name="phone" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="number" value="{{ old('phone', $customer->phone) }}" placeholder="Add Shop ID">
                         </div>
 
                         {{-- Card Number --}}
