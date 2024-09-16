@@ -74,9 +74,6 @@ class ProductController extends Controller
 //            ? $imageController->imgUpload($request->file('IMG'), 'product_image_', 'product')
 //            : null;
 
-//        dd($request->all());
-
-
         try {
             $product = Product::query()->create([
                 'product_name' => $request->input('product_name'),
