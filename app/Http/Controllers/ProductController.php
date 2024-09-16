@@ -83,7 +83,7 @@ class ProductController extends Controller
                 'category_id' => $request->input('category_id'),
                 'sub_category_id' => $request->input('sub_category_id'),
                 'add_by' => 'owner',
-                'sale_on_hare_price' => $request->input('sale_on_hare_price'),
+                'sale_on_hare_price' => 0 ,
                 'enable_stock_group' => $request->input('enable_stock_group')
             ]);
 
@@ -100,7 +100,6 @@ class ProductController extends Controller
         try {
             // Validate the request data
             $request->validate([
-                'item_id' => 'required|integer',
                 'qty' => 'required|numeric',
                 'stock_price' => 'required|numeric',
                 'selling_price' => 'required|numeric',
