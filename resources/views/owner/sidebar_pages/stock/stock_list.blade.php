@@ -74,9 +74,9 @@
                             <input type="checkbox"
                                    class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
                         </th>
-                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">
-                            Product Image
-                        </th>
+{{--                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">--}}
+{{--                            Product Image--}}
+{{--                        </th>--}}
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">
                             Product Name
                         </th>
@@ -108,21 +108,21 @@
                                 <input type="checkbox"
                                        class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">
-                              <span class="flex items-center gap-2">
-                                  <span class="h-8 w-8 inline-flex items-center justify-center rounded-full">
-                                      @if ($item->product && $item->product->image)
-                                          <img src="{{ asset('storage/' . $item->product->image) }}"
-                                               alt="{{ $item->product->product_name }}"
-                                               class="max-w-full h-full rounded-full">
-                                      @else
-                                          <img src="{{ asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png') }}"
-                                               alt="default image"
-                                               class="max-w-full h-full rounded-full">
-                                      @endif
-                                  </span>
-                              </span>
-                            </td>
+{{--                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">--}}
+{{--                              <span class="flex items-center gap-2">--}}
+{{--                                  <span class="h-8 w-8 inline-flex items-center justify-center rounded-full">--}}
+{{--                                      @if ($item->product && $item->product->image)--}}
+{{--                                          <img src="{{ asset('storage/' . $item->product->image) }}"--}}
+{{--                                               alt="{{ $item->product->product_name }}"--}}
+{{--                                               class="max-w-full h-full rounded-full">--}}
+{{--                                      @else--}}
+{{--                                          <img src="{{ asset('Hanguk_super/assets/IMG/logo/logo_fav_02.png') }}"--}}
+{{--                                               alt="default image"--}}
+{{--                                               class="max-w-full h-full rounded-full">--}}
+{{--                                      @endif--}}
+{{--                                  </span>--}}
+{{--                              </span>--}}
+{{--                            </td>--}}
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">
                                 {{ $item->product ? $item->product->product_name : 'N/A' }}
                             </td>
@@ -140,10 +140,10 @@
                                     </a>
 
                                     <!-- Delete Button -->
-                                    <form action="{{ route('stock.delete', $item->id) }}" method="GET" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                    <form style="padding-top: 10px" action="{{ route('stock.delete', $item->id) }}" method="GET" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                         @csrf
                                         <button type="submit"
-                                                class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                                class=" inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                             <i class="ti ti-trash text-lg"></i>
                                         </button>
                                     </form>
