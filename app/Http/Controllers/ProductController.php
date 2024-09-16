@@ -64,13 +64,13 @@ class ProductController extends Controller
             'brand_id' => 'required|integer',
             'sale_on_hare_price' => 'nullable|numeric',
             'enable_stock_group' => 'nullable|boolean',
-            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+//            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $imageController = new Imageuploader();
-        $imagePath = $request->hasFile('IMG')
-            ? $imageController->imgUpload($request->file('IMG'), 'product_image_', 'product')
-            : null;
+//        $imageController = new Imageuploader();
+//        $imagePath = $request->hasFile('IMG')
+//            ? $imageController->imgUpload($request->file('IMG'), 'product_image_', 'product')
+//            : null;
 
         try {
             $product=Product::query()->create([
@@ -78,12 +78,12 @@ class ProductController extends Controller
                 'bar_code' => $request->input('bar_code'),
                 'shop_id' => $request->input('shop_id', 1),
                 'type' => $request->input('type'),
-                'image' => $imagePath,
+                'image' => 0,
                 'brand_id' => $request->input('brand_id'),
                 'category_id' => $request->input('category_id'),
                 'sub_category_id' => $request->input('sub_category_id'),
                 'add_by' => 'owner',
-                'sale_on_hare_price' => $request->input('sale_on_hare_price'),
+                'sale_on_hare_price' => 0 ,
                 'enable_stock_group' => $request->input('enable_stock_group')
             ]);
 
@@ -100,7 +100,6 @@ class ProductController extends Controller
         try {
             // Validate the request data
             $request->validate([
-                'item_id' => 'required|integer',
                 'qty' => 'required|numeric',
                 'stock_price' => 'required|numeric',
                 'selling_price' => 'required|numeric',
