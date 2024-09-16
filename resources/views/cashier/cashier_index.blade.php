@@ -744,9 +744,11 @@
                             qty: 1,
                             discount: discount,
                             totalDiscount : 0,
-                            subtotal: subtotal
+                            subtotal: subtotal,
+                            stock_id:response.id
                         });
 
+                        console.log(billItem);
                         // Update total amount
                         updateTotalAmount();
 

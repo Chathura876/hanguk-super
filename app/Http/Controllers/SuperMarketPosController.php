@@ -17,6 +17,7 @@ class SuperMarketPosController extends Controller
 
     public function productScan(Request $request)
     {
+
         try {
             $product = null;
 
@@ -32,7 +33,7 @@ class SuperMarketPosController extends Controller
                 if ($products) {
                     // Fetch stock details for the product
                     $product_stock = Stock::query()
-                        ->where('id', $products->id)
+                        ->where('item_id', $products->id)
                         ->first();
 
                     if ($product_stock) {
@@ -47,6 +48,7 @@ class SuperMarketPosController extends Controller
 
             // Check if product exists and has quantity
             if ($product && $product['qty'] != 0) {
+
 
                 return response()->json($product, 200);
             } else {
