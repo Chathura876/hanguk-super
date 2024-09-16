@@ -34,7 +34,7 @@ class ProductTypeController extends Controller
             // Create the new ProductType record
             ProductType::query()-> create([
                 'type' => $request->type,
-                'Description' => $request->description,
+                'description' => $request->description,
             ]);
 
 
@@ -61,10 +61,10 @@ class ProductTypeController extends Controller
                 'description' => 'nullable|string|max:255',
             ]);
 
-            $productType->update([
-                'type' => $request->type,
-                'Description' => $request->description,
-            ]);
+        $productType->update([
+            'type' => $request->type,
+            'description' => $request->description,
+        ]);
 
             return redirect()->route('product-type.index')->with('success', 'Product Type updated successfully.');
         } catch (\Exception $e) {
