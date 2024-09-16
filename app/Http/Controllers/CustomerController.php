@@ -24,7 +24,7 @@ class CustomerController extends Controller
                     ->paginate(15);
             }
 
-            return view('owner.sidebar_pages.people.customer.customer_list',compact('customers'));
+            return view('owner.sidebar_pages.people.customer.customer_list',compact('customers','user'));
         }
         catch (\Exception $exception){
             return $exception;
@@ -39,6 +39,7 @@ class CustomerController extends Controller
     }
     public function store(Request $request)
     {
+//        dd($request->all());
         // Validate the input data
         $request->validate([
             'first_name' => 'required|string|max:255',
@@ -58,8 +59,9 @@ class CustomerController extends Controller
                 'user_name' => $request->user_name ?? null, // Handle null if not present
                 'nic' => $request->nic,
                 'email' => $request->email,
-                'b_day' => $request->b_day,
-                'shop_id' => $request->shop_id ?? 1, // Default value if not present
+                'birthday' => $request->b_day,
+                'phone' => $request->phone_number,
+                'shop_id' =>1, // Default value if not present
                 'card_no' => $request->card_no ?? null, // Handle null if not present
                 'type' => $request->type ?? 'regular', // Default value if not present
                 // 'status' => 1 // Uncomment if you want to set a default status
@@ -99,8 +101,9 @@ class CustomerController extends Controller
                     'user_name'=>$request->user_name,
                     'nic'=>$request->nic,
                     'email'=>$request->email,
-                    'b_day'=>$request->b_day,
-                    'shop_id'=>$request->shop_id,
+                    'phone'=>$request->phone,
+                    'birthday'=>$request->b_day,
+                    'shop_id'=>1,
                     'card_no'=>$request->card_no,
                     'type'=>$request->type,
 //                    'status'=>1

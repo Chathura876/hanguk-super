@@ -164,7 +164,7 @@ Route::middleware(['auth:owner'])->group(function () {
             Route::post('/',[CustomerController::class,'store'])->name('customer.store');
             Route::get('/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
             Route::post('/{id}', [CustomerController::class, 'update'])->name('customer.update');
-            Route::get('/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+            Route::post('/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
 
         });
 
