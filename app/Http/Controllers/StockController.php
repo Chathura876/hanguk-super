@@ -103,7 +103,9 @@ class StockController extends Controller
                     'stock_price'=>$request->stock_price,
                     'selling_price'=>$request->selling_price,
                     'discount_price'=>$request->discount_price,
-                    'free_item'=>$request->free_item
+                    'from_item' => $request->from_item,
+                    'to_item' => $request->to_item,
+                    'unit' => $request->unit_type
                 ]);
             return redirect()->route('stock.index');
         }

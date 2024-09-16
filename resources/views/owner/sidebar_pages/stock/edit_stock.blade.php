@@ -43,11 +43,36 @@
                             <input id="qty" name="qty" value="{{ old('qty', $stock->qty) }}" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Quantity">
                         </div>
 
-                        <!-- Free Item Quantity -->
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="free_item">Free Item Quantity</label>
-                            <input id="free_item" name="free_item" value="{{ old('free_item', $stock->free_item) }}" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Free Item">
+                        <!-- From Item to To Item -->
+                        <div class="flex items-center">
+                            <div class="w-full">
+                                <label class="block text-sm font-medium text-default-900 mb-2" for="from_item">Free Item</label>
+                                <input id="from_item" value="{{ old('from_item', $stock->from_item) }}" name="from_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+                            </div>
+
+                            <span class="mx-4 text-default-900">to</span>
+
+                            <div class="w-full">
+                                <label class="block text-sm font-medium text-default-900 mb-2" for="to_item">To Item</label>
+                                <input id="to_item" value="{{ old('to_item', $stock->to_item) }}" name="to_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+                            </div>
                         </div>
+
+                        <div>
+                            <label class="block text-sm font-medium text-default-900 mb-2" for="to_item">Unit Type</label>
+                            <select name="unit_type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
+                                <option value="" {{ old('unit_type', $stock->unit ?? '') == '' ? 'selected' : '' }}>Select Unit Type</option>
+                                <option value="pcs" {{ old('unit_type', $stock->unit ?? '') == 'pcs' ? 'selected' : '' }}>Piece (pcs)</option>
+                                <option value="kg" {{ old('unit_type', $stock->unit ?? '') == 'kg' ? 'selected' : '' }}>Kilogram (kg)</option>
+                                <option value="g" {{ old('unit_type', $stock->unit ?? '') == 'g' ? 'selected' : '' }}>Gram (g)</option>
+                                <option value="ltr" {{ old('unit_type', $stock->unit ?? '') == 'ltr' ? 'selected' : '' }}>Liter (ltr)</option>
+                                <option value="ml" {{ old('unit_type', $stock->unit ?? '') == 'ml' ? 'selected' : '' }}>Milliliter (ml)</option>
+                            </select>
+                            @error('unit_type')
+                            <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
+
 
                         <!-- Stock Price -->
                         <div>
