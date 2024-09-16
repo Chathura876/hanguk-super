@@ -159,15 +159,34 @@
                                 <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
                                 @enderror
                             </div>
+
+
+
+
+
                         </div>
                     </div>
 
-                    <!-- Price and Stock Inputs -->
-                    {{--                    <div class="grid lg:grid-cols-3 gap-6 mb-6">--}}
-                    <!-- Quantity -->
-                    <div>
-                        <input id="qty" name="qty" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Quantity">
+                    <div class="lg:col-span-1 grid lg:grid-cols-1">
+                        <!-- Quantity -->
+                        <div>
+                            <input id="qty" name="qty" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Quantity">
+                        </div>
+
+                        <!-- Unit Type (Moved under Quantity) -->
+                        <div>
+                            <select name="unit_type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
+                                <option value="" selected>Select Unit Type</option>
+                                @foreach($unitTypes as $unitType)
+                                    <option value="{{ $unitType->id }}" {{ old('unit_type') == $unitType->id ? 'selected' : '' }}>{{ $unitType->type }}</option>
+                                @endforeach
+                            </select>
+                            @error('unit_type')
+                            <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
+
 
                     <!-- Stock Price -->
                     <div>
@@ -193,12 +212,22 @@
                         <input id="percentage" name="percentage" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Percentage">
                     </div>
 
-                    <!-- Free Item Quantity -->
-                    <div>
-                        <label class="block text-sm font-medium text-default-900 mb-2" for="free_item">Free Item </label>
-                        <input id="free_item" name="free_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+
+                    <!-- From Item to To Item -->
+                    <div class="flex items-center">
+                        <div class="w-full">
+                            <label class="block text-sm font-medium text-default-900 mb-2" for="from_item">Free Item</label>
+                            <input id="from_item" name="from_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+                        </div>
+
+                        <span class="mx-4 text-default-900">to</span>
+
+                        <div class="w-full">
+                            <label class="block text-sm font-medium text-default-900 mb-2" for="to_item">To Item</label>
+                            <input id="to_item" name="to_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+                        </div>
                     </div>
-                    {{--                    </div>--}}
+
 
                     <!-- Stock Group Checkbox -->
                     <div class="flex items-center">

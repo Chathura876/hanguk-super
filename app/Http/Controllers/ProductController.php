@@ -40,13 +40,15 @@ class ProductController extends Controller
             $subCategories = SubCategory::all();
             $brands = Brand::all();
             $productTypes = ProductType::all();
+            $unitTypes  = ProductType::all();
 
             return view('owner.product_add', compact(
                 'categories',
                 'subCategories',
                 'brands',
                 'productTypes',
-                'user'
+                'user',
+                'unitTypes'
             ));
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());

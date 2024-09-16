@@ -15,7 +15,8 @@ class Stock extends Model
         'stock_price',
         'selling_price',
         'discount_price',
-        'free_item'
+        'to_item',
+        'from_item'
     ];
 
     protected static function newFactory()
