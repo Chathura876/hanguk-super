@@ -27,4 +27,15 @@ class OrderItem extends Model
     {
         return \Modules\SuperMarketPos\Database\factories\OrderItemFactory::new();
     }
+    public function product()
+    {
+        return $this->belongsTo(Product::class, 'product_id');
+    }
+
+    public function stock()
+    {
+        return $this->belongsTo(Stock::class, 'stock_id');
+    }
+
+
 }
