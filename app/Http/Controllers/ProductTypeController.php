@@ -20,19 +20,20 @@ class ProductTypeController extends Controller
         return view('owner.sidebar_pages.product.product_type', compact('user'));
     }
 
-    public function store(Request $request)
+    public function store_type(Request $request)
     {
         try {
             // Validate the request
             $request->validate([
                 'type' => 'required|string|max:255',
-                'description' => 'nullable|string|max:255',
+                'Description' => 'nullable|string|max:255',
             ]);
 
+
             // Create the new ProductType record
-            ProductType::create([
+            ProductType::query()-> create([
                 'type' => $request->type,
-                'description' => $request->description,
+                'Description' => $request->description,
             ]);
 
             // Redirect with success message
@@ -43,30 +44,36 @@ class ProductTypeController extends Controller
     }
 
 
-    public function edit(ProductType $productType)
+    public function edit($id)
     {
-        return view('owner.sidebar_pages.product.product_type_edit', compact('productType'));
+        $productType = ProductType::find($id);
+        $user=Auth::user();
+        return view('owner.sidebar_pages.product.product_type_edit', compact('user','productType'));
     }
 
     public function update(Request $request, ProductType $productType)
     {
-        $request->validate([
-            'type' => 'required|string|max:255',
-            'description' => 'nullable|string|max:255',
-        ]);
+        try {
+            $request->validate([
+                'type' => 'required|string|max:255',
+                'description' => 'nullable|string|max:255',
+            ]);
 
-        $productType->update([
-            'type' => $request->type,
-            'description' => $request->description,
-        ]);
+            $productType->update([
+                'type' => $request->type,
+                'Description' => $request->description,
+            ]);
 
-        return redirect()->route('product-types.index')->with('success', 'Product Type updated successfully.');
+            return redirect()->route('product-type.index')->with('success', 'Product Type updated successfully.');
+        } catch (\Exception $e) {
+            return redirect()->route('product-type.index')->with('error', 'An error occurred while updating the product type.');
+        }
     }
 
     public function destroy(ProductType $productType)
     {
         $productType->delete();
-        return redirect()->route('product-types.index')->with('success', 'Product Type deleted successfully.');
+        return redirect()->route('product-type.index')->with('success', 'Product Type deleted successfully.');
     }
 
 
