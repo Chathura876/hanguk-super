@@ -17,14 +17,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/',[CashierController::class,'login'])->name('cashier.login');
 Route::post('/',[CashierController::class,'login_check'])->name('cashier.login-check');
 
-Route::prefix('super_market_pos')->group(function () {
+//Route::prefix('super_market_pos')->group(function () {
     Route::prefix('owner')->group(function () {
-        Route::get('/', [OwnerController::class, 'login'])->name('login');
+        Route::get('/login', [OwnerController::class, 'login'])->name('login');
         Route::post('/login-check', [OwnerController::class, 'login_check'])->name('owner.login.check');
        Route::get('/logout', [OwnerController::class, 'logout'])->name('owner.logout');
 
 Route::middleware(['auth:owner'])->group(function () {
-        Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
+        Route::get('/', [OwnerController::class, 'index'])->name('owner.dashboard');
         Route::post('/create', [OwnerController::class, 'create'])->name('owner.create');
 
         Route::get('/profile', [OwnerController::class, 'profile'])->name('owner.profile');
@@ -185,7 +185,7 @@ Route::middleware(['auth:owner'])->group(function () {
 
     });
   });
-});
+//});
 //});
 
 

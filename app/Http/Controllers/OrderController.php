@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -173,16 +174,26 @@ class OrderController extends Controller
     {
         try {
             foreach ($ItemList as $item) {
+
+                $product=Stock::query()
+                    ->where('item_id',$item['id'])
+                    ->first();
+                $selling_price=$product->selling_price * $item['qty'];
+                $stock_price=$product->stock_price * $item['qty'];
+                $discount=$item['discount'] * $item['qty'];
+                $profit = $selling_price-($stock_price+$discount);
+
                 OrderItem::create([
                     'order_id' => $orderID,
                     'product_id' => $item['id'], // Accessing array keys
-                    'stock_id' => 1,
+                    'stock_id' => $item['stock_id'],
                     'shop_id' => 0,
                     'quantity' => $item['qty'], // Accessing array keys
                     'date' => now(),
                     'price' => $item['selling_price'], // Accessing array keys
                     'discount_price' => $item['discount'], // Accessing array keys
-                    'sub_total' => $item['subtotal'], // Accessing array keys
+                    'sub_total' => $item['subtotal'],
+                    'profit' => $profit,
                     'free_item' => 0
                 ]);
 
@@ -237,11 +248,5 @@ class OrderController extends Controller
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
-
-
-
-
-
-
 
 }

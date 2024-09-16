@@ -738,7 +738,7 @@
 
                         // Push item to the billItem array
                         billItem.push({
-                            id: response.id,
+                            id: response.item_id,
                             product_name: response.product_name,
                             selling_price: sellingPrice,
                             qty: 1,
