@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Cashier;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Modules\SuperMarketPos\Entities\Customer;
 use Modules\SuperMarketPos\Entities\Product;
 use PHPUnit\Exception;
@@ -18,7 +19,7 @@ class CashierController extends Controller
     {
 
         try {
-
+            $user=Auth::user();
             $search = $request->input('search');
 
             if ($search === null) {
@@ -30,7 +31,8 @@ class CashierController extends Controller
                     ->orWhere('NIC_no', 'like', '%' . $search . '%')
                     ->get();
             }
-            return view('supermarketpos::owner.sidebar_pages.people.cashier.cashier_list',compact('cashier'));
+            return view('supermarketpos::owner.sidebar_pages.people.cashier.cashier_list',
+                compact('cashier','user'));
         }
         catch (\Exception $exception){
             return $exception;
@@ -42,7 +44,8 @@ class CashierController extends Controller
      */
     public function create()
     {
-        return view('supermarketpos::owner.sidebar_pages.people.cashier.add_cashier');
+        $user=Auth::user();
+        return view('supermarketpos::owner.sidebar_pages.people.cashier.add_cashier',compact('user'));
     }
 
     /**
@@ -98,12 +101,12 @@ class CashierController extends Controller
     public function edit(string $id)
     {
         $cashier = Cashier::find($id);
-
+        $user=Auth::user();
         if (!$cashier) {
             return redirect()->back()->with('error', 'Cashier not found.');
         }
 
-        return view('supermarketpos::owner.sidebar_pages.people.cashier.edit_cashier', compact('cashier'));
+        return view('supermarketpos::owner.sidebar_pages.people.cashier.edit_cashier', compact('cashier','user'));
     }
 
     /**

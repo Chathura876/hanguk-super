@@ -11,6 +11,7 @@ use App\Models\ProductType;
 use App\Models\Stock;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Modules\SuperMarketPos\Entities\Sub_category;
 use function PHPUnit\Framework\isEmpty;
 
@@ -18,7 +19,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-
+        $user=Auth::user();
         $search = $request->input('search', '');
 
         $product = Product::query()
@@ -28,12 +29,13 @@ class ProductController extends Controller
             })
             ->paginate(10);
 
-        return view('owner.product', compact('product'));
+        return view('owner.product', compact('product','user'));
     }
 
     public function create()
     {
         try {
+            $user=Auth::user();
             $categories = Category::all();
             $subCategories = SubCategory::all();
             $brands = Brand::all();
@@ -43,7 +45,8 @@ class ProductController extends Controller
                 'categories',
                 'subCategories',
                 'brands',
-                'productTypes'
+                'productTypes',
+                'user'
             ));
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
@@ -191,6 +194,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
+        $user=Auth::user();
         // Fetch the product by ID
         $product = Product::findOrFail($id);
 
@@ -201,12 +205,19 @@ class ProductController extends Controller
         $productTypes = ProductType::all();
 
         // Return the view with the product and related data
-        return view('owner.product_update', compact('product', 'categories', 'subCategories', 'brands', 'productTypes'));
+        return view('owner.product_update', compact('product',
+            'categories',
+            'subCategories',
+            'brands',
+            'productTypes',
+            'user'
+        ));
     }
 
     public function type()
     {
-        return view('owner.sidebar_pages.product.product_type');
+        $user=Auth::user();
+        return view('owner.sidebar_pages.product.product_type',compact('user'));
     }
 
 
@@ -217,7 +228,7 @@ class ProductController extends Controller
     public function category_index(Request $request)
     {
         $search = $request->input('search');
-
+        $user=Auth::user();
         if ($search === null) {
             $category=Category::all();
         } else {
@@ -228,17 +239,19 @@ class ProductController extends Controller
         }
 
 //        return response()->json($category);
-        return view('owner.category',compact('category'));
+        return view('owner.category',compact('category','user'));
     }
 
     public function category_edit($id)
     {
-        return view('owner.category_update');
+        $user=Auth::user();
+        return view('owner.category_update',compact('user'));
     }
 
     public  function category_create()
     {
-        return view('owner.category_add');
+        $user=Auth::user();
+        return view('owner.category_add',compact('user'));
     }
 
     public function category_store(Request $request)
@@ -300,7 +313,7 @@ class ProductController extends Controller
     public function subcategory_index(Request $request)
     {
         $search = $request->input('search');
-
+        $user=Auth::user();
         if ($search === null) {
             $sub_category = SubCategory::all();
         } else {
@@ -309,18 +322,20 @@ class ProductController extends Controller
                 ->where('name', 'like', '%' . $search . '%')
                 ->get();
         }
-        return view('owner.Sub_category',compact('sub_category'));
+        return view('owner.Sub_category',compact('sub_category','user'));
     }
 
     public  function Sub_category_create()
     {
+        $user=Auth::user();
         $categories = Category::all();
 
-        return view('owner.Sub_category_add',compact('categories'));
+        return view('owner.Sub_category_add',compact('categories','user'));
     }
     public function Sub_category_edit($id)
     {
-        return view('owner.category_update');
+        $user=Auth::user();
+        return view('owner.category_update',compact('user'));
     }
     public function subcategory_store(Request $request)
     {
@@ -399,7 +414,7 @@ class ProductController extends Controller
     public function brand_index(Request $request)
     {
         $search = $request->input('search', '');
-
+        $user=Auth::user();
         $brands = Brand::query()
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%')
@@ -407,7 +422,7 @@ class ProductController extends Controller
             })
             ->paginate(10);
 //dd($brands);
-        return view('owner.brand', compact('brands'));
+        return view('owner.brand', compact('brands','user'));
     }
 
     public function brand_create()
@@ -449,7 +464,8 @@ class ProductController extends Controller
     public function brand_edit($id)
     {
         $brand = Brand::findOrFail($id);
-        return view('supermarketpos::owner.brand_update', compact('brand'));
+        $user=Auth::user();
+        return view('supermarketpos::owner.brand_update', compact('brand','user'));
     }
     // Update brand details
     public function brand_update(Request $request, $id)

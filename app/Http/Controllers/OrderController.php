@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 //use Modules\SuperMarketPos\Entities\Order;
 
@@ -19,7 +20,7 @@ class OrderController extends Controller
     {
         try {
             $search = $request->input('search');
-
+            $user=Auth::user();
             if ($search === null) {
                 $orders = Order::paginate(15);
             } else {

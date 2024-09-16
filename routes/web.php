@@ -21,7 +21,7 @@ Route::prefix('super_market_pos')->group(function () {
         Route::post('/login-check', [OwnerController::class, 'login_check'])->name('owner.login.check');
 
 
-//Route::middleware(['auth:owner'])->group(function () {
+Route::middleware(['auth:owner'])->group(function () {
         Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
         Route::post('/create', [OwnerController::class, 'create'])->name('owner.create');
 
@@ -161,7 +161,7 @@ Route::prefix('super_market_pos')->group(function () {
         });
 
     });
-//    });
+    });
 
     Route::prefix('pos')->group(function () {
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');

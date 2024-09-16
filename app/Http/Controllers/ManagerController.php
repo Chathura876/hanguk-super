@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Manager;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ManagerController extends Controller
 {
@@ -13,8 +14,9 @@ class ManagerController extends Controller
         try {
 
             $managers=Manager::all();
+            $user=Auth::user();
 
-            return view('supermarketpos::owner.sidebar_pages.people.manager.manager_list',compact('managers'));
+            return view('supermarketpos::owner.sidebar_pages.people.manager.manager_list',compact('managers','user'));
 
         }
         catch (\Exception $exception){
@@ -24,7 +26,8 @@ class ManagerController extends Controller
 
     public function create()
     {
-        return view('supermarketpos::owner.sidebar_pages.people.manager.add_manager');
+        $user=Auth::user();
+        return view('supermarketpos::owner.sidebar_pages.people.manager.add_manager',compact('user'));
     }
 
     public function store(Request $request)
@@ -50,11 +53,12 @@ class ManagerController extends Controller
     public function edit($id)
     {
         try {
+            $user=Auth::user();
             $manager = Manager::query()
                 ->where('id',$id)
                 ->first();
 
-            return view('owner.sidebar_pages.people.manager.edit_manager',compact('manager'));
+            return view('owner.sidebar_pages.people.manager.edit_manager',compact('manager','user'));
         }
         catch (\Exception $exception){
             return $exception;

@@ -7,6 +7,7 @@ use App\Models\Stock;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Auth;
 
 
 class SuperMarketPosController extends Controller
@@ -61,55 +62,66 @@ class SuperMarketPosController extends Controller
 
     public function dashboard()
     {
-        return view('cashier.cashier_index');
+        $user=Auth::user();
+        return view('cashier.cashier_index',compact('user'));
     }
 
     public function damage_items()
     {
-        return view('cashier.sidebar_pages.damage_items');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.damage_items',compact('user'));
     }
 
     public function add_damage_items()
     {
-        return view('cashier.sidebar_pages.add_damage_items');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.add_damage_items',compact('user'));
     }
 
     public function edit_damage_items()
     {
-        return view('cashier.sidebar_pages.edit_damage_items');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.edit_damage_items',compact('user'));
     }
 
     public function stock()
     {
-        return view('cashier.sidebar_pages.stock');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.stock',compact('user'));
     }
 
     public function reports()
     {
-        return view('cashier.sidebar_pages.reports');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.reports',compact('user'));
     }
 
     public function members()
     {
-        return view('cashier.sidebar_pages.members');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.members',compact('user'));
     }
 
     public function cheque_list()
     {
-        return view('cashier.sidebar_pages.cheque.cheque_list');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.cheque.cheque_list',compact('user'));
     }
     public function add_cheque()
     {
-        return view('cashier.sidebar_pages.cheque.add_cheque');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.cheque.add_cheque',compact('user'));
     }
     public function view_cheque()
     {
-        return view('cashier.sidebar_pages.cheque.view_cheque');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.cheque.view_cheque',compact('user'));
     }
 
     public function edit_cheque()
     {
-        return view('cashier.sidebar_pages.cheque.edit_cheque');
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.cheque.edit_cheque',compact('user'));
     }
 
 }

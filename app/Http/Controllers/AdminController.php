@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
@@ -13,8 +14,9 @@ class AdminController extends Controller
     public function index()
     {
         try {
+            $user=Auth::user();
             $admins=Admin::all();
-            return view('owner.sidebar_pages.people.admin.admin_list',compact('admins'));
+            return view('owner.sidebar_pages.people.admin.admin_list',compact('admins','user'));
         }
         catch (\Exception $exception){
             return $exception;
@@ -23,7 +25,8 @@ class AdminController extends Controller
     }
 
     public function create(){
-        return view('owner.sidebar_pages.people.admin.add_admin');
+        $user=Auth::user();
+        return view('owner.sidebar_pages.people.admin.add_admin',compact('user'));
     }
 
     public function store(Request $request)
@@ -77,8 +80,8 @@ class AdminController extends Controller
             $admin=Admin::query()
                 ->where('id',$id)
                 ->first();
-
-            return view('owner.sidebar_pages.people.admin.edit_admin',compact('admin'));
+            $user=Auth::user();
+            return view('owner.sidebar_pages.people.admin.edit_admin',compact('admin','user'));
         }
         catch (\Exception $exception){
             return $exception;

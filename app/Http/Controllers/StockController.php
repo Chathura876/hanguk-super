@@ -6,12 +6,14 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Stock;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class StockController extends Controller
 {
     public function index(Request $request)
     {
         try {
+            $user=Auth::user();
             $search = $request->input('search');
 
             // Start the query with eager loading of the related product
@@ -26,7 +28,7 @@ class StockController extends Controller
             $stock = $query->paginate(15);
 
             // Pass the data to the view
-            return view('owner.sidebar_pages.stock.stock_list', compact('stock'));
+            return view('owner.sidebar_pages.stock.stock_list', compact('stock',compact('user')));
         } catch (\Exception $exception) {
             // Return or handle the exception properly
             return $exception;
@@ -38,7 +40,8 @@ class StockController extends Controller
     {
         $products = Product::all();
         $stock=Product::all();
-        return view('owner.sidebar_pages.stock.add_stock',compact('stock','products'));
+        $user=Auth::user();
+        return view('owner.sidebar_pages.stock.add_stock',compact('stock','products','user'));
     }
 
     public function store(Request $request)
@@ -74,11 +77,12 @@ class StockController extends Controller
     public function edit($id)
     {
         try {
+            $user=Auth::user();
             $stock=Stock::query()
                 ->where('id',$id)
                 ->first();
             $products = Product::all();
-            return view('owner.sidebar_pages.stock.edit_stock',compact('stock','products'));
+            return view('owner.sidebar_pages.stock.edit_stock',compact('stock','products','user'));
         }
         catch (\Exception $exception){
             return $exception;

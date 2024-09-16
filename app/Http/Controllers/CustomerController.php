@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Customer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 
 class CustomerController extends Controller
 {
     public function index(Request $request){
         try {
-
+            $user=Auth::user();
             $search = $request->input('search');
 
             if ($search === null) {
@@ -33,7 +34,8 @@ class CustomerController extends Controller
 
     public function create()
     {
-        return view('owner.sidebar_pages.people.customer.add_customer');
+        $user=Auth::user();
+        return view('owner.sidebar_pages.people.customer.add_customer',compact('user'));
     }
     public function store(Request $request)
     {
@@ -75,10 +77,11 @@ class CustomerController extends Controller
     public function edit($id)
     {
         try {
+            $user=Auth::user();
             $customer=Customer::query()
                 ->where('id',$id)
                 ->first();
-            return view('owner.sidebar_pages.people.customer.edit_customer',compact('customer'));
+            return view('owner.sidebar_pages.people.customer.edit_customer',compact('customer','user'));
         }
         catch (\Exception $exception){
             return $exception;

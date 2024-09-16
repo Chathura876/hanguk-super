@@ -164,7 +164,7 @@
                     <button id="hs-dropdown-with-header" type="button" class="hs-dropdown-toggle inline-flex flex-shrink-0 items-center justify-center gap-2 rounded-md align-middle text-xs font-medium text-default-700 transition-all">
                         <img class="inline-block h-10 w-10 rounded-full" src="{{asset('Hanguk_super/assets/IMG/profile_images/ex_image.jpg')}}">
                         <div class="hidden text-start lg:block">
-                            <p class="text-xs font-semibold text-default-700">Nam</p>
+                            <p class="text-xs font-semibold text-default-700">{{$user->first_name}}</p>
                             <p class="mt-1 text-xs text-default-500">Admin</p>
                         </div>
                     </button>

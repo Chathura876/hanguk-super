@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ChequeController extends Controller
 {
@@ -12,7 +13,8 @@ class ChequeController extends Controller
      */
     public function index()
     {
-        return view('owner.sidebar_pages.cheque.cheque_list');
+        $user=Auth::user();
+        return view('owner.sidebar_pages.cheque.cheque_list',compact('user'));
     }
 
     /**
@@ -20,8 +22,8 @@ class ChequeController extends Controller
      */
     public function create()
     {
-        //
-        return view('owner.sidebar_pages.cheque.add_cheque');
+        $user=Auth::user();
+        return view('owner.sidebar_pages.cheque.add_cheque',compact('user'));
     }
 
     /**
@@ -46,7 +48,8 @@ class ChequeController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $user=Auth::user();
+        return view('owner.sidebar_pages.cheque.edit_cheque',compact('user'));
     }
 
     /**
@@ -55,7 +58,7 @@ class ChequeController extends Controller
     public function update()
     {
         //
-        return view('owner.sidebar_pages.cheque.edit_cheque');
+
     }
 
     /**
