@@ -15,6 +15,7 @@ class Stock extends Model
         'stock_price',
         'selling_price',
         'discount_price',
+        'unit',
         'to_item',
         'from_item'
     ];

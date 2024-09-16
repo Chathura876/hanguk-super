@@ -19,7 +19,7 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
-        $user=Auth::user();
+        $user = Auth::user();
         $search = $request->input('search', '');
 
         $product = Product::query()
@@ -29,18 +29,18 @@ class ProductController extends Controller
             })
             ->paginate(10);
 
-        return view('owner.product', compact('product','user'));
+        return view('owner.product', compact('product', 'user'));
     }
 
     public function create()
     {
         try {
-            $user=Auth::user();
+            $user = Auth::user();
             $categories = Category::all();
             $subCategories = SubCategory::all();
             $brands = Brand::all();
             $productTypes = ProductType::all();
-            $unitTypes  = ProductType::all();
+            $unitTypes = ProductType::all();
 
             return view('owner.product_add', compact(
                 'categories',
@@ -75,7 +75,7 @@ class ProductController extends Controller
 //            : null;
 
         try {
-            $product=Product::query()->create([
+            $product = Product::query()->create([
                 'product_name' => $request->input('product_name'),
                 'bar_code' => $request->input('bar_code'),
                 'shop_id' => $request->input('shop_id', 1),
@@ -85,11 +85,11 @@ class ProductController extends Controller
                 'category_id' => $request->input('category_id'),
                 'sub_category_id' => $request->input('sub_category_id'),
                 'add_by' => 'owner',
-                'sale_on_hare_price' => 0 ,
+                'sale_on_hare_price' => 0,
                 'enable_stock_group' => $request->input('enable_stock_group')
             ]);
 
-               $this->stockStore($request,$product);
+            $this->stockStore($request, $product);
 
             return redirect()->back()->with('success', 'Data saved successfully');
         } catch (\Exception $e) {
@@ -97,7 +97,7 @@ class ProductController extends Controller
         }
     }
 
-    public function stockStore($request,$product)
+    public function stockStore($request, $product)
     {
         try {
             // Validate the request data
@@ -106,7 +106,9 @@ class ProductController extends Controller
                 'stock_price' => 'required|numeric',
                 'selling_price' => 'required|numeric',
                 'discount_price' => 'nullable|numeric',
-                'free_item' => 'nullable|numeric'
+                'from_item' => 'nullable|numeric',
+                'to_item' => 'nullable|numeric',
+                'unit_type' =>'required|string|max:255',
             ]);
 
             // Create a new stock record
@@ -116,7 +118,9 @@ class ProductController extends Controller
                 'stock_price' => $request->stock_price,
                 'selling_price' => $request->selling_price,
                 'discount_price' => $request->discount_price,
-                'free_item' => $request->free_item
+                'from_item' => $request->from_item,
+                'to_item' => $request->to_item,
+                'unit' => $request->unit_type
             ]);
 
             return redirect()->route('stock.index')->with('success', 'Stock added successfully.');
@@ -184,18 +188,17 @@ class ProductController extends Controller
     {
         try {
             Product::query()
-                ->where('id',$id)
+                ->where('id', $id)
                 ->delete();
             return redirect()->route('product.index');
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
 
     public function edit($id)
     {
-        $user=Auth::user();
+        $user = Auth::user();
         // Fetch the product by ID
         $product = Product::findOrFail($id);
 
@@ -217,8 +220,8 @@ class ProductController extends Controller
 
     public function type()
     {
-        $user=Auth::user();
-        return view('owner.sidebar_pages.product.product_type',compact('user'));
+        $user = Auth::user();
+        return view('owner.sidebar_pages.product.product_type', compact('user'));
     }
 
 
@@ -229,9 +232,9 @@ class ProductController extends Controller
     public function category_index(Request $request)
     {
         $search = $request->input('search');
-        $user=Auth::user();
+        $user = Auth::user();
         if ($search === null) {
-            $category=Category::all();
+            $category = Category::all();
         } else {
 
             $category = Category::query()
@@ -240,19 +243,19 @@ class ProductController extends Controller
         }
 
 //        return response()->json($category);
-        return view('owner.category',compact('category','user'));
+        return view('owner.category', compact('category', 'user'));
     }
 
     public function category_edit($id)
     {
-        $user=Auth::user();
-        return view('owner.category_update',compact('user'));
+        $user = Auth::user();
+        return view('owner.category_update', compact('user'));
     }
 
-    public  function category_create()
+    public function category_create()
     {
-        $user=Auth::user();
-        return view('owner.category_add',compact('user'));
+        $user = Auth::user();
+        return view('owner.category_add', compact('user'));
     }
 
     public function category_store(Request $request)
@@ -276,18 +279,17 @@ class ProductController extends Controller
         }
     }
 
-    public function category_update(Request $request,$id)
+    public function category_update(Request $request, $id)
     {
         try {
             Category::query()
-                ->where('id',$id)
+                ->where('id', $id)
                 ->update([
-                    'name'=>$request->name,
-                    'shop_id'=>0
+                    'name' => $request->name,
+                    'shop_id' => 0
                 ]);
             return response()->json('updated');
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
@@ -296,13 +298,11 @@ class ProductController extends Controller
     {
         try {
             Category::query()
-                ->where('id',$id)
+                ->where('id', $id)
                 ->delete();
 //            return response()->json('deleted');
             return redirect()->back()->with('deleted', 'Category deleted successfully');
-        }
-
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
@@ -314,7 +314,7 @@ class ProductController extends Controller
     public function subcategory_index(Request $request)
     {
         $search = $request->input('search');
-        $user=Auth::user();
+        $user = Auth::user();
         if ($search === null) {
             $sub_category = SubCategory::all();
         } else {
@@ -323,21 +323,23 @@ class ProductController extends Controller
                 ->where('name', 'like', '%' . $search . '%')
                 ->get();
         }
-        return view('owner.Sub_category',compact('sub_category','user'));
+        return view('owner.Sub_category', compact('sub_category', 'user'));
     }
 
-    public  function Sub_category_create()
+    public function Sub_category_create()
     {
-        $user=Auth::user();
+        $user = Auth::user();
         $categories = Category::all();
 
-        return view('owner.Sub_category_add',compact('categories','user'));
+        return view('owner.Sub_category_add', compact('categories', 'user'));
     }
+
     public function Sub_category_edit($id)
     {
-        $user=Auth::user();
-        return view('owner.category_update',compact('user'));
+        $user = Auth::user();
+        return view('owner.category_update', compact('user'));
     }
+
     public function subcategory_store(Request $request)
     {
         try {
@@ -352,43 +354,43 @@ class ProductController extends Controller
         }
     }
 
-    public function subcategory_update(Request $request,$id)
+    public function subcategory_update(Request $request, $id)
     {
         try {
-          Category::query()
-              ->where('id',$id)
-              ->update([
-                  'name'=>$request->name,
-                  'category_id'=>$request->category_id,
-                  'shop_id'=>0
-              ]);
-          return response()->json('updated');
-        }
-        catch (\Exception $exception){
+            Category::query()
+                ->where('id', $id)
+                ->update([
+                    'name' => $request->name,
+                    'category_id' => $request->category_id,
+                    'shop_id' => 0
+                ]);
+            return response()->json('updated');
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
+
     public function subcategory_show($id)
     {
         try {
-            $sub_category=SubCategory::query()
-                ->where('id',$id)
+            $sub_category = SubCategory::query()
+                ->where('id', $id)
                 ->first();
 
             return response()->json($sub_category);
-        }
-        catch (\Exception $exception){
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
-    public function subcategory_delete($id){
+
+    public function subcategory_delete($id)
+    {
         try {
             SubCategory::query()
-                ->where('id',$id)
+                ->where('id', $id)
                 ->delete();
-        return response()->json('deleted');
-        }
-        catch (\Exception $exception){
+            return response()->json('deleted');
+        } catch (\Exception $exception) {
             return $exception;
         }
     }
@@ -415,7 +417,7 @@ class ProductController extends Controller
     public function brand_index(Request $request)
     {
         $search = $request->input('search', '');
-        $user=Auth::user();
+        $user = Auth::user();
         $brands = Brand::query()
             ->when($search, function ($query, $search) {
                 return $query->where('name', 'like', '%' . $search . '%')
@@ -423,7 +425,7 @@ class ProductController extends Controller
             })
             ->paginate(10);
 //dd($brands);
-        return view('owner.brand', compact('brands','user'));
+        return view('owner.brand', compact('brands', 'user'));
     }
 
     public function brand_create()
@@ -466,9 +468,10 @@ class ProductController extends Controller
     public function brand_edit($id)
     {
         $brand = Brand::findOrFail($id);
-        $user=Auth::user();
-        return view('supermarketpos::owner.brand_update', compact('brand','user'));
+        $user = Auth::user();
+        return view('supermarketpos::owner.brand_update', compact('brand', 'user'));
     }
+
     // Update brand details
     public function brand_update(Request $request, $id)
     {
@@ -478,7 +481,7 @@ class ProductController extends Controller
             'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
         ]);
 
-        $brand = Brand:: query()-> findOrFail($id);
+        $brand = Brand:: query()->findOrFail($id);
         $imagePath = $brand->img;
 
         if ($request->hasFile('IMG')) {
@@ -502,7 +505,7 @@ class ProductController extends Controller
     public function brand_delete($id)
     {
         try {
-            Brand::query()-> findOrFail($id)->delete();
+            Brand::query()->findOrFail($id)->delete();
             return redirect()->route('brand.index')->with('success', 'Brand deleted successfully');
         } catch (\Exception $e) {
             return back()->with('error', 'Failed to delete brand: ' . $e->getMessage());
