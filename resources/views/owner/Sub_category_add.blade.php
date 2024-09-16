@@ -4,7 +4,7 @@
     <div class="p-6 space-y-6">
 
         <div class="flex w-full items-center justify-between print:hidden">
-            <h4 class="text-lg font-semibold text-default-900">Add Product</h4>
+            <h4 class="text-lg font-semibold text-default-900">Add Sub Category</h4>
 
             <ol aria-label="Breadcrumb" class="hidden min-w-0 items-center gap-2 whitespace-nowrap md:flex">
                 <li class="text-sm">
@@ -24,37 +24,37 @@
                 </li>
 
                 <li aria-current="page" class="truncate text-sm font-medium text-primary-600 hover:text-primary">
-                    Add Product
+                    Add Sub Category
                 </li>
             </ol>
         </div>
         <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-            <div class="px-6 py-4 flex items-center justify-between gap-4">
-                <h5 class="grow text-lg font-medium text-default-900">Total Sales</h5>
-                <div class="shrink hs-dropdown relative [--placement:bottom-right]">
-                    <button type="button"
-                            class="hs-dropdown-toggle h-8 w-8 inline-flex items-center justify-center bg-default-950/5 border border-default-200 rounded-full text-base focus:rotate-90 transition-all duration-500">
-                        <i class="ti ti-dots-vertical"></i></button>
+{{--            <div class="px-6 py-4 flex items-center justify-between gap-4">--}}
+{{--                <h5 class="grow text-lg font-medium text-default-900">Total Sales</h5>--}}
+{{--                <div class="shrink hs-dropdown relative [--placement:bottom-right]">--}}
+{{--                    <button type="button"--}}
+{{--                            class="hs-dropdown-toggle h-8 w-8 inline-flex items-center justify-center bg-default-950/5 border border-default-200 rounded-full text-base focus:rotate-90 transition-all duration-500">--}}
+{{--                        <i class="ti ti-dots-vertical"></i></button>--}}
 
-                    <div
-                        class="hs-dropdown-menu hs-dropdown-open:opacity-100 min-w-[180px] transition-[opacity,margin] mt-4 opacity-0 z-10 bg-white dark:bg-default-50 shadow-lg rounded-lg border border-default-100 p-1.5 hidden">
-                        <ul class="flex flex-col gap-1">
-                            <li>
-                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"
-                                   href="#">Action</a>
-                            </li>
-                            <li>
-                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"
-                                   href="#">Another Action</a>
-                            </li>
-                            <li>
-                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"
-                                   href="#">Somthing else here</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
+{{--                    <div--}}
+{{--                        class="hs-dropdown-menu hs-dropdown-open:opacity-100 min-w-[180px] transition-[opacity,margin] mt-4 opacity-0 z-10 bg-white dark:bg-default-50 shadow-lg rounded-lg border border-default-100 p-1.5 hidden">--}}
+{{--                        <ul class="flex flex-col gap-1">--}}
+{{--                            <li>--}}
+{{--                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"--}}
+{{--                                   href="#">Action</a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"--}}
+{{--                                   href="#">Another Action</a>--}}
+{{--                            </li>--}}
+{{--                            <li>--}}
+{{--                                <a class="flex items-center font-normal text-default-600 py-2 px-3 transition-all hover:text-default-700 hover:bg-default-400/10 rounded"--}}
+{{--                                   href="#">Somthing else here</a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                    </div>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
             <div class="p-5 border-t border-dashed border-default-200">
                 <form action="{{ route('subcategory.store') }}" method="POST" enctype="multipart/form-data" class="px-6 py-4">
