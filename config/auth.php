@@ -69,10 +69,9 @@ return [
             'model' => App\Models\User::class,
         ],
 
-
         'owners' => [
             'driver' => 'eloquent',
-            'model' => App\Models\User::class,
+            'model' => App\Models\Owner::class,
         ],
 
         // 'users' => [

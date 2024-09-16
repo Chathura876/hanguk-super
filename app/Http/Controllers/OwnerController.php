@@ -28,20 +28,31 @@ class OwnerController extends Controller
 
     public function create(Request $request)
     {
-        $imageController = new Imageuploader();
-        $imagePath = $imageController->imgUpload($request->img, 'owner_image_', 'owners');
+//        $imageController = new Imageuploader();
+//        $imagePath = $imageController->imgUpload($request->img, 'owner_image_', 'owners');
         try {
             Owner::query()->create([
-                'first_name'=>$request->first_name,
-                'second_name'=>$request->second_name,
-                'user_name'=>$request->user_name,
-                'nic'=>$request->nic,
-                'email'=>$request->email,
-                'add_by'=>$request->add_by,
-                'password'=>Hash::make($request->password),
-                '$referral_no='=>$request->referral_no,
-                'IMG'=>$imagePath
+                'first_name'=>'admin',
+                'second_name'=>'admin',
+                'user_name'=>'admin',
+                'nic'=>'2000',
+                'email'=>'admin',
+                'add_by'=>'admin',
+                'password'=>Hash::make(123),
+                '$referral_no='=>'123212',
+                'img'=>'admin'
            ]);
+//            Owner::query()->create([
+//                'first_name'=>$request->first_name,
+//                'second_name'=>$request->second_name,
+//                'user_name'=>$request->user_name,
+//                'nic'=>$request->nic,
+//                'email'=>$request->email,
+//                'add_by'=>$request->add_by,
+//                'password'=>Hash::make($request->password),
+//                '$referral_no='=>$request->referral_no,
+//                'IMG'=>$imagePath
+//           ]);
 
             return response()->json('success',200);
         }
@@ -57,6 +68,7 @@ class OwnerController extends Controller
 
     public function login_check(Request $request)
     {
+
         // Validate request data
         $request->validate([
             'email' => 'required|email',
@@ -67,17 +79,21 @@ class OwnerController extends Controller
             // Log request data for debugging
             Log::info('Login attempt for email: ' . $request->email);
 
-            $owner = Owner::where('email', $request->email)->first();
+            $owner = Owner::query()
+                ->where('email', $request->email)
+                ->first();
 
 
             if ($owner && Hash::check($request->password, $owner->password)) {
-                Auth::login($owner);
+
+                Auth::guard('owner')->login($owner);
+
                 // Log successful login
                 Log::info('Login successful for email: ' . $request->email);
 
                 return redirect()->route('owner.dashboard');
             } else {
-                // Log failed login attempt
+
                 Log::warning('Login failed for email: ' . $request->email);
 
                 return redirect()->route('login')->with('error', 'Invalid credentials');
