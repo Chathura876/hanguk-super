@@ -80,10 +80,10 @@
                             <input type="checkbox"
                                    class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded focus:ring-0 text-primary bg-default-50 ring-transparent ring-offset-0">
                         </td>
-                        <th scope="col"
-                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
-                            Image
-                        </th>
+{{--                        <th scope="col"--}}
+{{--                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">--}}
+{{--                            Image--}}
+{{--                        </th>--}}
                         <th scope="col"
                             class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
                             Product
@@ -141,13 +141,13 @@
                                 <input type="checkbox"
                                        class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
                             </td>
-                            <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
-                                <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">
-                                         <img src="{{ asset('storage/' . Str::replaceFirst('public/', '', $item->image)) }}" alt="{{ $item->product_name }}"
-                                         class="max-w-full h-full rounded-full">
-                                </span>
+{{--                            <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">--}}
+{{--                                <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">--}}
+{{--                                         <img src="{{ asset('storage/' . Str::replaceFirst('public/', '', $item->image)) }}" alt="{{ $item->product_name }}"--}}
+{{--                                         class="max-w-full h-full rounded-full">--}}
+{{--                                </span>--}}
 
-                            </td>
+{{--                            </td>--}}
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->product_name }}</td>
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->bar_code }}</td>
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->shop_id }}</td>
