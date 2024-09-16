@@ -424,8 +424,9 @@ class ProductController extends Controller
 
     public function brand_create()
     {
+        $user=Auth::user();
         try {
-            return view('owner.brand_add');
+            return view('owner.brand_add',compact('user'));
         } catch (\Exception $exception) {
             return back()->with('error', $exception->getMessage());
         }
