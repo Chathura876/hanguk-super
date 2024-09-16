@@ -326,7 +326,7 @@
         </div>
         <div>
             <p>Time: <span class="live-time"></span></p>
-            <p>Cashier:</p>
+            <p>Cashier:{{$user->first_name}}</p>
         </div>
 {{--        <input type="text" class="bg-green-800 px-4 py-2 rounded" placeholder="Search or Scan">--}}
         <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="searchProduct" onchange="searchProduct()" placeholder="Search for product">
@@ -846,8 +846,7 @@
 
                         // Push item to the billItem array
                         billItem.push({
-                            id: response.id,
-                            item_id:response.item_id,
+                            id: response.item_id,
                             product_name: response.product_name,
                             selling_price: sellingPrice,
                             qty: 1,
