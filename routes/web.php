@@ -143,6 +143,10 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
                 Route::delete('/cheques/{id}', [ChequeController::class, 'destroy'])->name('cheque.destroy');
             });
 
+            Route::prefix('sale')->group(function () {
+                Route::get('/profit', [OwnerController::class, 'profit'])->name('owner.profit');
+                Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
+                Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
         Route::prefix('sale')->group(function () {
             Route::get('/profit', [ProfitController::class, 'profit'])->name('owner.profit');
             Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
@@ -226,7 +230,7 @@ Route::prefix('reports')->group(function () {
       Route::get('/report/monthly', [Reportcontroller::class, 'monthlyReport'])->name('report.monthly');
   });
 
-//});
+});
 //});
 
 
