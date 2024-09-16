@@ -177,7 +177,7 @@
 
                         <hr class="-mx-2 my-2 border-default-200">
 
-                        <a class="flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-400/10" href="auth-login.html">
+                        <a class="flex items-center gap-x-3.5 rounded-md px-3 py-2 text-sm font-medium text-red-500 hover:bg-red-400/10" href="{{route('owner.logout')}}">
                             <i class="h-4 w-4" data-lucide="log-out"></i>
                             Log out
                         </a>

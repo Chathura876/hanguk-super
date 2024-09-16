@@ -200,4 +200,10 @@ class CashierController extends Controller
             return redirect()->route('cashier.login')->with('error', 'An error occurred. Please try again.');
         }
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('cashier.login');
+    }
 }

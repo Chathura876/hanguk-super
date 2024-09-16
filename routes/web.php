@@ -16,11 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/',[CashierController::class,'login'])->name('cashier.login');
 Route::post('/',[CashierController::class,'login_check'])->name('cashier.login-check');
+
 Route::prefix('super_market_pos')->group(function () {
     Route::prefix('owner')->group(function () {
         Route::get('/', [OwnerController::class, 'login'])->name('login');
         Route::post('/login-check', [OwnerController::class, 'login_check'])->name('owner.login.check');
-
+       Route::get('/logout', [OwnerController::class, 'logout'])->name('owner.logout');
 
 Route::middleware(['auth:owner'])->group(function () {
         Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
@@ -166,6 +167,7 @@ Route::middleware(['auth:owner'])->group(function () {
 
   Route::middleware(['auth:cashier'])->group(function (){
       Route::prefix('pos')->group(function () {
+          Route::get('/logout',[CashierController::class,'logout'])->name('cashier.logout');
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');
         Route::get('/damage_items', [SuperMarketPosController::class, 'damage_items'])->name('pos.damage_items');
         Route::get('/add_damage_items', [SuperMarketPosController::class, 'add_damage_items'])->name('pos.add_damage_items');

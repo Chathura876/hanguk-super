@@ -377,7 +377,12 @@
                         <div class="hs-dropdown-menu z-10 mt-4 hidden min-w-[200px] overflow-hidden rounded-lg border border-default-100 bg-white pb-1.5 opacity-0 shadow transition-[opacity,margin] hs-dropdown-open:opacity-100 dark:bg-default-50">
                             <ul class="flex flex-col gap-1">
                                 <li class="px-1.5">
-                                    <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600 transition-all hover:bg-red-500/10 hover:text-red-500" href="auth-login.html"><i class="ti ti-logout-2 me-2 text-lg"></i> Log Out</a>
+                                    <a class="flex items-center rounded-md px-3 py-2 font-normal text-default-600
+                                    transition-all hover:bg-red-500/10 hover:text-red-500"
+                                       href="{{route('cashier.logout')}}">
+                                        <i class="ti ti-logout-2 me-2 text-lg"></i>
+                                        Log Out
+                                    </a>
                                 </li>
                             </ul>
                         </div>
