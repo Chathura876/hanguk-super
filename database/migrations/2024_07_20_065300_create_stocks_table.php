@@ -20,6 +20,9 @@ return new class extends Migration
             $table->double('stock_price');
             $table->double('selling_price');
             $table->double('discount_price');
+            $table->integer('from_item');
+            $table->string('unit');
+            $table->integer('to_item');
             $table->integer('free_item');
 
             $table->timestamps();

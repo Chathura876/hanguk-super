@@ -42,7 +42,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-base font-semibold text-default-600">Today profit</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4">Rs 10000.00</h4>
+                            <h4 class="text-2xl font-semibold text-default-900 mt-4">Rs.<span>{{$totalProfitToday}}</span></h4>
                         </div>
                         <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-primary/20 text-primary">
                         <i class="ti ti-chalkboard text-4xl"></i>
@@ -147,18 +147,19 @@
 
                                                     <div class="grid grid-cols-4 gap-x-3">
                                                         <h6 class="col-span-2 font-semibold text-default-900">Date:</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Jan 17, 2023</p>
+                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">{{ today()->format('Y-m-d') }}</p>
+
                                                     </div> <!-- grid-end -->
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
                                                 </div> <!-- grid-end -->
 
@@ -255,18 +256,19 @@
 
                                                     <div class="grid grid-cols-4 gap-x-3">
                                                         <h6 class="col-span-2 font-semibold text-default-900">Date:</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Jan 17, 2023</p>
+                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">{{ today()->format('Y-m-d') }}</p>
+
                                                     </div> <!-- grid-end -->
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
                                                 </div> <!-- grid-end -->
 
@@ -363,18 +365,19 @@
 
                                                     <div class="grid grid-cols-4 gap-x-3">
                                                         <h6 class="col-span-2 font-semibold text-default-900">Date:</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Jan 17, 2023</p>
+                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">{{ today()->format('Y-m-d') }}</p>
+
                                                     </div> <!-- grid-end -->
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
                                                 </div> <!-- grid-end -->
 
@@ -471,18 +474,19 @@
 
                                                     <div class="grid grid-cols-4 gap-x-3">
                                                         <h6 class="col-span-2 font-semibold text-default-900">Date:</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Jan 17, 2023</p>
+                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">{{ today()->format('Y-m-d') }}</p>
+
                                                     </div> <!-- grid-end -->
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Report No. :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">#123456</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
-                                                    <div class="grid grid-cols-4 gap-x-3">
-                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>
-                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>
-                                                    </div> <!-- grid-end -->
+{{--                                                    <div class="grid grid-cols-4 gap-x-3">--}}
+{{--                                                        <h6 class="col-span-2 font-semibold text-default-900">Profit :</h6>--}}
+{{--                                                        <p class="col-span-2 sm:text-end text-default-600 font-medium">Rs. 00.00</p>--}}
+{{--                                                    </div> <!-- grid-end -->--}}
 
                                                 </div> <!-- grid-end -->
 
@@ -530,7 +534,7 @@
                                     <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalSale30Day}}</span></h6>
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
@@ -538,7 +542,7 @@
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfit30Day}}</span></h6>
                                         </div>
 
                                     </div>
