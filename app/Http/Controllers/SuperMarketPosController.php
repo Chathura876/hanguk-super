@@ -14,7 +14,6 @@ class SuperMarketPosController extends Controller
 {
 
 
-
     public function productScan(Request $request)
     {
 
@@ -65,66 +64,115 @@ class SuperMarketPosController extends Controller
 
     public function dashboard()
     {
-        $user=Auth::user();
-        return view('cashier.cashier_index',compact('user'));
+        $user = Auth::user();
+        return view('cashier.cashier_index', compact('user'));
     }
 
     public function damage_items()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.damage_items',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.damage items.damage_items_list', compact('user'));
     }
 
     public function add_damage_items()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.add_damage_items',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.add_damage_items', compact('user'));
     }
 
     public function edit_damage_items()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.edit_damage_items',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.edit_damage_items', compact('user'));
     }
 
     public function stock()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.stock',compact('user'));
+        try {
+//            $search = $request->input('search');
+            $userstock = Stock::all();
+            // Start the query with eager loading of the related product
+            $query = Stock::with('product');
+            $stock = $query->paginate(15);
+            $user = Auth::user();
+            return view('cashier.sidebar_pages.stock', compact('user', 'stock', 'userstock'));
+        } catch (\Exception $exception) {
+            // Return or handle the exception properly
+            return $exception;
+        }
     }
 
+    public function create_stock()
+    {
+        $products = Product::all();
+        $stock=Product::all();
+        $user=Auth::user();
+        return view('cashier.sidebar_pages.stockAdd',compact('stock','products','user'));
+    }
+    public function stock_store(Request $request)
+    {
+        try {
+            // Validate the request data
+            $request->validate([
+                'qty' => 'required|numeric',
+                'stock_price' => 'required|numeric',
+                'selling_price' => 'required|numeric',
+                'discount_price' => 'nullable|numeric',
+                'from_item' => 'nullable|numeric',
+                'to_item' => 'nullable|numeric',
+                'unit_type' =>'required|string|max:255',
+            ]);
+
+            // Create a new stock record
+            Stock::query()->create([
+                'item_id' => $request->item_id,
+                'qty' => $request->qty,
+                'stock_price' => $request->stock_price,
+                'selling_price' => $request->selling_price,
+                'discount_price' => $request->discount_price,
+                'from_item' => $request->from_item,
+                'to_item' => $request->to_item,
+                'unit' => $request->unit_type
+            ]);
+            return redirect()->route('stock.index')->with('success', 'Stock added successfully.');
+        } catch (\Exception $exception) {
+            return redirect()->back()->with('error', 'An error occurred: ' . $exception->getMessage());
+        }
+    }
     public function reports()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.reports',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.reports', compact('user'));
     }
 
     public function members()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.members',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.members', compact('user'));
     }
 
     public function cheque_list()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.cheque.cheque_list',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.cheque.cheque_list', compact('user'));
     }
+
     public function add_cheque()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.cheque.add_cheque',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.cheque.add_cheque', compact('user'));
     }
+
     public function view_cheque()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.cheque.view_cheque',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.cheque.view_cheque', compact('user'));
     }
 
     public function edit_cheque()
     {
-        $user=Auth::user();
-        return view('cashier.sidebar_pages.cheque.edit_cheque',compact('user'));
+        $user = Auth::user();
+        return view('cashier.sidebar_pages.cheque.edit_cheque', compact('user'));
     }
 
     public function purchase()
