@@ -176,7 +176,7 @@ class OrderController extends Controller
             foreach ($ItemList as $item) {
 
                 $product=Stock::query()
-                    ->where('item_id',$item['id'])
+                    ->where('item_id',$item['item_id'])
                     ->first();
                 $selling_price=$product->selling_price * $item['qty'];
                 $stock_price=$product->stock_price * $item['qty'];
