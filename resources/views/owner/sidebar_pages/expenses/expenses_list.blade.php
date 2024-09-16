@@ -84,28 +84,6 @@
                 </div>
 
                 <div class="flex flex-wrap items-center gap-2">
-{{--                    <div class="relative">--}}
-{{--                        <select id="all-select-categories" data-hs-select='{--}}
-{{--                                "placeholder": "Filter Options",--}}
-{{--                                "toggleTag": "<button type=\"button\"></button>",--}}
-{{--                                "toggleClasses": "hs-select-disabled:pointer-events-none hs-select-disabled:opacity-50 form-input block w-full rounded py-2.5 ps-4 pe-10 text-default-800 text-sm focus:ring-transparent border-0 bg-default-100 before:absolute before:inset-0 before:z-[1]",--}}
-{{--                                "dropdownClasses": "mt-2 z-50 min-w-[200px] max-h-[300px] p-1.5 space-y-0.5 bg-white border border-default-200 rounded-lg overflow-hidden overflow-y-auto dark:bg-default-50",--}}
-{{--                                "optionClasses": "py-2 px-3 w-full text-sm text-default-800 cursor-pointer rounded-md hover:bg-default-100 focus:outline-none focus:bg-default-100",--}}
-{{--                                "optionTemplate": "<div class=\"flex justify-between items-center w-full\"><span data-title></span><span class=\"hidden hs-selected:block\"><i class=\"ti ti-checks text-lg flex-shrink-0 text-primary\" /></i></span></div>"--}}
-{{--                                }' class="hidden">--}}
-{{--                            <option></option>--}}
-{{--                            <option selected="">Brand</option>--}}
-{{--                            --}}{{--                            <option>Refund</option>--}}
-{{--                            --}}{{--                            <option>Paid</option>--}}
-{{--                            <option>Brand Names</option>--}}
-{{--                        </select>--}}
-
-
-{{--                        <div class="absolute -inset-y-0 end-3 flex items-center">--}}
-{{--                            <i class="ti ti-selector shrink text-base/none text-default-500"></i>--}}
-{{--                        </div>--}}
-{{--                    </div><!-- End Select -->--}}
-
                     <div class="relative">
                         <input type="date">
                     </div><!-- end relative -->
@@ -137,30 +115,33 @@
                     </tr>
                     </thead>
                     <tbody class="divide-y divide-default-200">
-                    <tr>
-                        <td class="px-6 py-4 whitespace-nowrap">
-                            <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
-                        </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">01.04.2024</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">Details</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">Type</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">Namal</td>
-                        <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">16000.00</td>
-                        <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
-                            <div class="flex items-center justify-center gap-2">
-                                {{--                                <a href="admin-sellers-detail.html" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">--}}
-                                {{--                                    <i class="ti ti-eye text-lg"></i>--}}
-                                {{--                                </a>--}}
-                                <a href="{{ route("owner.edit_expenses") }}" type="button" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                    <i class="ti ti-edit-circle text-base"></i>
-                                </a>
-                                <button class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                    <i class="ti ti-trash text-lg"></i>
-                                </button>
-                            </div>
-                        </td>
-                    </tr>
-
+                    @foreach($expenses as $expense)
+                        <tr>
+                            <td class="px-6 py-4 whitespace-nowrap">
+                                <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
+                            </td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $expense->date}}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $expense->details }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $expense->type }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $expense->addBy }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ number_format($expense->amount, 2) }}</td>
+                            <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
+                                <div class="flex items-center justify-center gap-2">
+                                    <a href="{{ route('owner.edit_expenses', $expense->id) }}" type="button" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                        <i class="ti ti-edit-circle text-base"></i>
+                                    </a>
+                                    <form style="padding-top: 10px" action=" {{ route('owner.delete_expenses', $expense->id) }}
+                                    " method="POST" onsubmit="return confirm('Are you sure?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                            <i class="ti ti-trash text-lg"></i>
+                                        </button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

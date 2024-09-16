@@ -113,8 +113,11 @@ Route::middleware(['auth:owner'])->group(function () {
 
         Route::prefix('expenses')->group(function () {
             Route::get('/add_expenses', [OwnerController::class, 'add_expenses'])->name('owner.add_expenses');
-            Route::get('/edit_expenses', [OwnerController::class, 'edit_expenses'])->name('owner.edit_expenses');
+            Route::post('/expenses/store', [OwnerController::class, 'store_expenses'])->name('expenses.store');
+            Route::get('/edit_expenses/{id}', [OwnerController::class, 'edit_expenses'])->name('owner.edit_expenses');
+            Route::put('/expenses/{id}', [OwnerController::class, 'update_expenses'])->name('owner.update_expenses');
             Route::get('/expenses_list', [OwnerController::class, 'expenses_list'])->name('owner.expenses_list');
+            Route::delete('/expenses/{id}', [OwnerController::class, 'destroy_expenses'])->name('owner.delete_expenses');
             Route::get('/report', [OwnerController::class, 'report'])->name('expenses.report');
         });
 
@@ -165,7 +168,7 @@ Route::middleware(['auth:owner'])->group(function () {
     });
     });
 
-  Route::middleware(['auth:cashier'])->group(function (){
+//  Route::middleware(['auth:cashier'])->group(function (){
       Route::prefix('pos')->group(function () {
           Route::get('/logout',[CashierController::class,'logout'])->name('cashier.logout');
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');
@@ -184,7 +187,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
 
     });
-  });
+//  });
 });
 //});
 
