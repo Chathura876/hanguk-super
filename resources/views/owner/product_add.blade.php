@@ -177,9 +177,12 @@
                         <div>
                             <select name="unit_type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
                                 <option value="" selected>Select Unit Type</option>
-                                @foreach($unitTypes as $unitType)
-                                    <option value="{{ $unitType->id }}" {{ old('unit_type') == $unitType->id ? 'selected' : '' }}>{{ $unitType->type }}</option>
-                                @endforeach
+                                <option value="pcs" {{ old('unit_type') == 'pcs' ? 'selected' : '' }}>Piece (pcs)</option>
+                                <option value="kg" {{ old('unit_type') == 'kg' ? 'selected' : '' }}>Kilogram (kg)</option>
+                                <option value="g" {{ old('unit_type') == 'g' ? 'selected' : '' }}>Gram (g)</option>
+                                <option value="ltr" {{ old('unit_type') == 'ltr' ? 'selected' : '' }}>Liter (ltr)</option>
+                                <option value="ml" {{ old('unit_type') == 'ml' ? 'selected' : '' }}>Milliliter (ml)</option>
+
                             </select>
                             @error('unit_type')
                             <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
