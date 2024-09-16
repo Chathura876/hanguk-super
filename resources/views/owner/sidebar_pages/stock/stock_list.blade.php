@@ -84,7 +84,7 @@
                             Quantity
                         </th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">
-                            Free Item
+                            Unit
                         </th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">
                             Stock Price (Rs.)
@@ -127,7 +127,7 @@
                                 {{ $item->product ? $item->product->product_name : 'N/A' }}
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->qty }}</td>
-                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->free_item }}</td>
+                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->unit }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->stock_price }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->selling_price }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $item->discount_price }}</td>
