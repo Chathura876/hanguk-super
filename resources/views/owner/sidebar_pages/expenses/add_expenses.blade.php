@@ -41,15 +41,6 @@
             </ol>
         </div>
         <div class="border border-default-200 rounded-lg">
-            <div class="px-6 py-6 flex items-center justify-between gap-4">
-                <div class="hidden lg:flex">
-                    <label for="icon" class="sr-only">Search</label>
-                    <div class="relative hidden lg:flex">
-                        <input type="search" class="block rounded-full border-default-200 bg-default-50 py-2.5 pe-10 ps-12 text-sm text-default-800 focus:border-primary focus:ring-primary lg:w-64" placeholder="Search for products...">
-                        <i class="ti ti-search absolute start-4 top-1/2 -translate-y-1/2 text-lg text-default-600"></i>
-                    </div>
-                </div>
-            </div>
             <div class="p-5 border-t border-dashed border-default-200">
                 <form action="{{ route('expenses.store') }}" method="POST">
                     @csrf
