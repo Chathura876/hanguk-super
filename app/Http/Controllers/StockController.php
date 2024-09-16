@@ -28,7 +28,7 @@ class StockController extends Controller
             $stock = $query->paginate(15);
 
             // Pass the data to the view
-            return view('owner.sidebar_pages.stock.stock_list', compact('stock',compact('user')));
+            return view('owner.sidebar_pages.stock.stock_list', compact('stock','user'));
         } catch (\Exception $exception) {
             // Return or handle the exception properly
             return $exception;
@@ -46,6 +46,7 @@ class StockController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             // Validate the request data
             $request->validate([
