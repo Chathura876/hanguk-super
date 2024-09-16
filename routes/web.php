@@ -9,6 +9,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuperMarketPosController;
 use Illuminate\Support\Facades\Route;
@@ -49,8 +50,13 @@ Route::middleware(['auth:owner'])->group(function () {
             Route::get('/edit/{id}', [ProductController::class, 'edit'])->name('product.edit');
             Route::post('/{id}', [ProductController::class, 'update'])->name('product.update');
             Route::get('/delete/{id}', [ProductController::class, 'delete'])->name('product.delete');
-            Route::get('/type', [ProductController::class, 'type'])->name('product.type');
             Route::post('/search',[ProductController::class,'searchProduct'])->name('product.search');
+
+//            **** product type ****
+            Route::get('/type', [ProductTypeController::class, 'type_create'])->name('product.type');
+            Route::get('/type_create', [ProductTypeController::class, 'store'])->name('product.type_create');
+            Route::get('/type_list', [ProductTypeController::class, 'index'])->name('product-type.index');
+            Route::get('/type_delete/{id}', [ProductTypeController::class, 'destroy'])->name('product-type.delete');
 
         });
 

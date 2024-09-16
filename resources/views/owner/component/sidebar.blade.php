@@ -54,6 +54,13 @@
                                 Product Type
                             </a>
                         </li>
+                        <li class="menu-item">
+                            <a href="{{route('product-type.index')}}"
+                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
+                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
+                                Product Type List
+                            </a>
+                        </li>
                     </ul>
                 </div>
             </li>
