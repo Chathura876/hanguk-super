@@ -159,6 +159,11 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
             });
 
             Route::prefix('manager')->group(function () {
+
+            });
+
+            Route::prefix('customer')->group(function () {
+                Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
                 Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
                 Route::get('/add', [ManagerController::class, 'create'])->name('manager.create');
                 Route::post('/', [ManagerController::class, 'store'])->name('manager.store');
@@ -166,11 +171,6 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
                 Route::post('/{id}', [ManagerController::class, 'update'])->name('manager.update');
                 Route::get('/delete/{id}', [ManagerController::class, 'delete'])->name('manager.delete');
 
-
-            });
-
-            Route::prefix('customer')->group(function () {
-                Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
                 Route::get('/add', [CustomerController::class, 'create'])->name('owner.add_customer');
                 Route::post('/', [CustomerController::class, 'store'])->name('customer.store');
                 Route::get('/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
