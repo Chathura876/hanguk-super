@@ -110,10 +110,16 @@
                                 role="tab">
                             Today
                         </button>
-                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50 hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg" id="card-type-tab-item-2" data-hs-tab="#card-type-tab-2" aria-controls="card-type-tab-2" role="tab">
+                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50
+                         hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px
+                         py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg"
+                                id="card-type-tab-item-2" data-hs-tab="#card-type-tab-2" aria-controls="card-type-tab-2" role="tab">
                             Last 7 days
                         </button>
-                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50 hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg" id="card-type-tab-item-3" data-hs-tab="#card-type-tab-3" aria-controls="card-type-tab-3" role="tab">
+                        <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50
+                        hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px
+                        py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg"
+                                id="card-type-tab-item-3" data-hs-tab="#card-type-tab-3" aria-controls="card-type-tab-3" role="tab">
                             This month
                         </button>
                         <button type="button" class="hs-tab-active:bg-white dark:hs-tab-active:bg-default-50 hs-tab-active:border hs-tab-active:border-default-200 hs-tab-active:border-b-transparent -mb-px py-2 px-3 inline-flex items-center gap-2 font-semibold text-center text-default-600 rounded-t-lg" id="card-type-tab-item-4" data-hs-tab="#card-type-tab-4" aria-controls="card-type-tab-4" role="tab">
@@ -170,26 +176,24 @@
                                                         <tr>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Description</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Amount (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Expenses</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
                                                         </tr> <!-- tr-end -->
                                                         </thead> <!-- thead-end -->
 
                                                         <tbody>
+                                                        @foreach($profitsToday as $profit)
                                                         <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
-                                                            <td class="px-6 py-2 font-medium">#4357</td>
-                                                            <td class="px-6 py-2 font-medium">Imorich Blueberry Ice cream</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['barcode']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
                                                         </tr> <!-- tr-end -->
-
+                                                        @endforeach
                                                         </tbody> <!-- tbody-end -->
 
                                                     </table> <!-- table-end -->
@@ -202,7 +206,7 @@
                                     <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalSaleToday}}</span></h6>
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
@@ -210,7 +214,7 @@
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfitToday}}</span></h6>
                                         </div>
 
                                     </div>
@@ -280,26 +284,24 @@
                                                         <tr>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Description</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Amount (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Expenses</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
                                                         </tr> <!-- tr-end -->
                                                         </thead> <!-- thead-end -->
 
                                                         <tbody>
-                                                        <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
-                                                            <td class="px-6 py-2 font-medium">#4357</td>
-                                                            <td class="px-6 py-2 font-medium">Imorich Blueberry Ice cream</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                        </tr> <!-- tr-end -->
-
+                                                        @foreach($profits7Day as $profit)
+                                                            <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
+                                                                <td class="px-6 py-2 font-medium">{{$profit['barcode']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
+                                                            </tr> <!-- tr-end -->
+                                                        @endforeach
                                                         </tbody> <!-- tbody-end -->
 
                                                     </table> <!-- table-end -->
@@ -312,7 +314,7 @@
                                     <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalSale7Day}}</span></h6>
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
@@ -320,7 +322,7 @@
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfit7Day}}</span></h6>
                                         </div>
 
                                     </div>
@@ -390,26 +392,24 @@
                                                         <tr>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Description</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Amount (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Expenses</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
                                                         </tr> <!-- tr-end -->
                                                         </thead> <!-- thead-end -->
 
                                                         <tbody>
-                                                        <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
-                                                            <td class="px-6 py-2 font-medium">#4357</td>
-                                                            <td class="px-6 py-2 font-medium">Imorich Blueberry Ice cream</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                        </tr> <!-- tr-end -->
-
+                                                        @foreach($profits30Day as $profit)
+                                                            <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
+                                                                <td class="px-6 py-2 font-medium">{{$profit['barcode']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
+                                                            </tr> <!-- tr-end -->
+                                                        @endforeach
                                                         </tbody> <!-- tbody-end -->
 
                                                     </table> <!-- table-end -->
@@ -422,7 +422,7 @@
                                     <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalSale30Day}}</span></h6>
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
@@ -430,7 +430,7 @@
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfit30Day}}</span></h6>
                                         </div>
 
                                     </div>
@@ -500,26 +500,24 @@
                                                         <tr>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Description</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Amount (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Expenses</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
                                                         </tr> <!-- tr-end -->
                                                         </thead> <!-- thead-end -->
 
                                                         <tbody>
-                                                        <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
-                                                            <td class="px-6 py-2 font-medium">#4357</td>
-                                                            <td class="px-6 py-2 font-medium">Imorich Blueberry Ice cream</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                        </tr> <!-- tr-end -->
-
+                                                        @foreach($profits30Day as $profit)
+                                                            <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
+                                                                <td class="px-6 py-2 font-medium">{{$profit['barcode']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
+                                                                <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
+                                                            </tr> <!-- tr-end -->
+                                                        @endforeach
                                                         </tbody> <!-- tbody-end -->
 
                                                     </table> <!-- table-end -->
