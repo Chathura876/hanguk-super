@@ -111,7 +111,6 @@ class OrderController extends Controller
     public function orderSubmit(Request $request)
     {
 
-
         // Start the transaction
         DB::beginTransaction();
         try {
@@ -128,7 +127,6 @@ class OrderController extends Controller
 
             // Save order items
             $this->orderItemSave($order_id, $request->item);
-
             $this->returnItemSave($request->returnItem);
 
             // Commit the transaction
@@ -174,14 +172,12 @@ class OrderController extends Controller
 
     public function orderItemSave($orderID, $ItemList)
     {
-//dd($ItemList);
         try {
             foreach ($ItemList as $item) {
 
                 $product=Stock::query()
-                    ->where('item_id',$item['item_id'])
+                    ->where('item_id',$item['id'])
                     ->first();
-
                 $selling_price=$product->selling_price * $item['qty'];
                 $stock_price=$product->stock_price * $item['qty'];
                 $discount=$item['discount'] * $item['qty'];
@@ -204,7 +200,6 @@ class OrderController extends Controller
 //                 If stock update logic is needed per item
                  $stock = new StockController;
                  $stock->stokeUpdateWithOrder($item['stock_id'], $item['qty']);
-
             }
 
             return 'success'; // Moved outside the loop to return success only after all items are processed

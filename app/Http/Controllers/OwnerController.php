@@ -6,6 +6,7 @@ use App\Http\Controllers\ImageController;
 use App\Http\Controllers\Imageuploader;
 use App\Models\Admin;
 use App\Models\Expense;
+use App\Models\Order;
 use App\Models\Owner;
 use App\Models\Product;
 use App\Models\Stock;
@@ -252,7 +253,9 @@ class OwnerController extends Controller
 
     public function issued_bills()
     {
-        return view('owner.receipt.issued_bills');
+        $user=Auth::user();
+        $bill=Order::all();
+        return view('owner.receipt.issued_bills',compact('bill','user'));
     }
 
     public function sale()

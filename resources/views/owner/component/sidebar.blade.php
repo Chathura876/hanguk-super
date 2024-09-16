@@ -16,7 +16,8 @@
     <div class="hs-accordion-group h-[calc(100%-72px)] p-4" data-simplebar="">
         <ul class="admin-menu flex w-full flex-col gap-1.5">
             <li class="menu-item">
-                <a class="flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100"
+                <a class="flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700
+                transition-all hover:bg-default-100 hs-accordion-active:bg-default-100"
                    href="{{route('owner.dashboard')}}">
                     <i class="ti ti-smart-home text-xl"></i>
                     Dashboard
@@ -25,7 +26,8 @@
 
             <li class="menu-item hs-accordion">
                 <a href="javascript:void(0)"
-                   class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
+                   class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700
+                   transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
                     <i class="ti ti-ticket text-xl"></i>
                     Product
                     <i class="ti ti-chevron-right ms-auto text-sm transition-all hs-accordion-active:rotate-90"></i>
@@ -187,27 +189,27 @@
 
                 <div id="menuSale" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
                     <ul class="mt-2 flex flex-col gap-2">
-                        <li class="menu-item">
-                            <a href="{{ route("owner.sale") }}"
-                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
-                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
-                                Sale
-                            </a>
-                        </li>
+{{--                        <li class="menu-item">--}}
+{{--                            <a href="{{ route("owner.sale") }}"--}}
+{{--                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">--}}
+{{--                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>--}}
+{{--                                Sale--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                         <li class="menu-item">
                             <a href="{{ route("owner.profit") }}"
                                class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
                                 <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
-                                Profit
+                                Profit and Sale
                             </a>
                         </li>
-                        <li class="menu-item">
-                            <a href="{{ route("owner.return_items") }}"
-                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
-                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
-                                Return Item
-                            </a>
-                        </li>
+{{--                        <li class="menu-item">--}}
+{{--                            <a href="{{ route("owner.return_items") }}"--}}
+{{--                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">--}}
+{{--                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>--}}
+{{--                                Return Item--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
                     </ul>
                 </div>
             </li>

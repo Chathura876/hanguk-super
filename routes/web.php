@@ -177,7 +177,7 @@ Route::middleware(['auth:owner'])->group(function () {
     });
     });
 
- Route::middleware(['auth:cashier'])->group(function (){
+  Route::middleware(['auth:cashier'])->group(function (){
       Route::prefix('pos')->group(function () {
           Route::get('/logout',[CashierController::class,'logout'])->name('cashier.logout');
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');
