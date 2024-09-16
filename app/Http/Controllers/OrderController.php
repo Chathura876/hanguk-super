@@ -125,6 +125,7 @@ class OrderController extends Controller
 
             // Save order items
             $this->orderItemSave($order_id, $request->item);
+            $this->returnItemSave($request->returnItem);
 
             // Commit the transaction
             DB::commit();
@@ -193,6 +194,16 @@ class OrderController extends Controller
 
         } catch (\Exception $exception) {
             throw $exception; // Throw exception to be caught in orderSubmit
+        }
+    }
+
+    public function returnItemSave($returnItem)
+    {
+        try {
+
+        }
+        catch (\Exception $exception){
+            return $exception;
         }
     }
 

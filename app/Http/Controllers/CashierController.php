@@ -160,46 +160,42 @@ class CashierController extends Controller
     }
     public function login_check(Request $request)
     {
-
-
         // Validate request data
         $request->validate([
             'email' => 'required|string',
             'password' => 'required|string',
         ]);
 
-
         try {
             // Log request data for debugging
             Log::info('Login attempt for email: ' . $request->email);
 
-            $cashier = Cashier::query()
-                ->where('username', $request->email)
-                ->first();
+            // Fetch cashier record based on username
+            $cashier = Cashier::where('username', $request->email)->first();
 
-
-
+            // Check if cashier exists and password matches
             if ($cashier && Hash::check($request->password, $cashier->password)) {
-
+                // Log the cashier in using the cashier guard
                 Auth::guard('cashier')->login($cashier);
 
                 // Log successful login
                 Log::info('Login successful for email: ' . $request->email);
 
-                return redirect()->route('pos.dashboard');
+                return redirect()->route('pos.dashboard'); // Redirect to cashier's dashboard
             } else {
-
+                // Log failed login attempt
                 Log::warning('Login failed for email: ' . $request->email);
 
                 return redirect()->route('cashier.login')->with('error', 'Invalid credentials');
             }
         } catch (\Exception $e) {
-            // Log exception
+            // Log the exception
             Log::error('Login error: ' . $e->getMessage());
 
             return redirect()->route('cashier.login')->with('error', 'An error occurred. Please try again.');
         }
     }
+
 
     public function logout()
     {
