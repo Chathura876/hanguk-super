@@ -18,9 +18,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [CashierController::class, 'login'])->name('cashier.login');
 Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login-check');
 
-Route::prefix('super_market_pos')->group(function () {
+//Route::prefix('super_market_pos')->group(function () {
     Route::prefix('owner')->group(function () {
-        Route::get('/', [OwnerController::class, 'login'])->name('login');
+        Route::get('/login', [OwnerController::class, 'login'])->name('login');
         Route::post('/login-check', [OwnerController::class, 'login_check'])->name('owner.login.check');
         Route::get('/logout', [OwnerController::class, 'logout'])->name('owner.logout');
 
@@ -180,7 +180,7 @@ Route::prefix('super_market_pos')->group(function () {
         });
     });
 
-//  Route::middleware(['auth:cashier'])->group(function (){
+ Route::middleware(['auth:cashier'])->group(function (){
     Route::prefix('pos')->group(function () {
         Route::get('/logout', [CashierController::class, 'logout'])->name('cashier.logout');
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');

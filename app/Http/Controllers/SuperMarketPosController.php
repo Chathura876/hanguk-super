@@ -35,6 +35,7 @@ class SuperMarketPosController extends Controller
                         ->where('item_id', $products->id)
                         ->first();
 
+
                     if ($product_stock) {
                         // Merge product and stock data
                         $product = array_merge(

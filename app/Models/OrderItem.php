@@ -19,6 +19,7 @@ class OrderItem extends Model
         'price',
         'discount_price',
         'sub_total',
+        'profit',
         'free_item'
     ];
 

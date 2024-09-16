@@ -23,6 +23,8 @@ return new class extends Migration
             $table->date('date');
             $table->double('price');
             $table->double('discount_price')->default(0);
+            $table->double('sub_total');
+            $table->double('profit');
             $table->integer('free_item')->default(0);
             $table->timestamps();
         });
