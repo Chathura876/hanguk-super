@@ -144,7 +144,7 @@ Route::middleware(['auth:owner'])->group(function () {
             Route::post('/',[AdminController::class,'store'])->name('admin.store');
             Route::get('/{id}',[AdminController::class,'edit'])->name('admin.edit');
             Route::post('/update/{id}',[AdminController::class,'update'])->name('admin.update');
-            Route::get('/delete/{id}',[AdminController::class,'delete'])->name('admin.delete');
+            Route::post('/delete/{id}',[AdminController::class,'delete'])->name('admin.delete');
         });
 
         Route::prefix('manager')->group(function (){
