@@ -228,7 +228,8 @@ class OwnerController extends Controller
 
     public function profit()
     {
-
+        $user=Auth::user();
+        return view('owner.sidebar_pages.sale.profit',compact('user'));
     }
 
     public function return_items()
