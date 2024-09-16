@@ -11,6 +11,7 @@ use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProfitController;
+use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuperMarketPosController;
 use Illuminate\Support\Facades\Route;
