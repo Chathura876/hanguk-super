@@ -238,6 +238,12 @@ class ProductController extends Controller
         ));
     }
 
+    public function type()
+    {
+        $user = Auth::user();
+        return view('owner.sidebar_pages.product.product_type', compact('user'));
+    }
+
 
 //===========================================================================
 //==========================Category===========================================
