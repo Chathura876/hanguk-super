@@ -34,7 +34,7 @@ class CashierController extends Controller
                     ->orWhere('NIC_no', 'like', '%' . $search . '%')
                     ->get();
             }
-            return view('supermarketpos::owner.sidebar_pages.people.cashier.cashier_list',
+            return view('owner.sidebar_pages.people.cashier.cashier_list',
                 compact('cashier','user'));
         }
         catch (\Exception $exception){
@@ -48,7 +48,7 @@ class CashierController extends Controller
     public function create()
     {
         $user=Auth::user();
-        return view('supermarketpos::owner.sidebar_pages.people.cashier.add_cashier',compact('user'));
+        return view('owner.sidebar_pages.people.cashier.add_cashier',compact('user'));
     }
 
     /**
@@ -64,7 +64,7 @@ class CashierController extends Controller
                 'NIC_no'=>$request->NIC_no,
                 'phone_no'=>$request->phone_no,
                 'whatsapp_no'=>$request->whatsapp_no,
-                'IMG'=>$request->img,
+                'IMG'=>0,
                 'username'=>$request->username,
                 'password'=>$request->password
             ]);
@@ -109,7 +109,7 @@ class CashierController extends Controller
             return redirect()->back()->with('error', 'Cashier not found.');
         }
 
-        return view('supermarketpos::owner.sidebar_pages.people.cashier.edit_cashier', compact('cashier','user'));
+        return view('owner.sidebar_pages.people.cashier.edit_cashier', compact('cashier','user'));
     }
 
     /**
@@ -127,11 +127,11 @@ class CashierController extends Controller
                     'NIC_no'=>$request->NIC_no,
                     'phone_no'=>$request->phone_no,
                     'whatsapp_no'=>$request->whatsapp_no,
-                    'IMG'=>$request->img,
+                    'IMG'=>0,
                     'username'=>$request->username,
                     'password'=>$request->password
                 ]);
-            return response()->json('updated');
+            return redirect()->route('owner-cashier-index')->with('success', 'Cashier updated successfully.');
         }
         catch (\Exception $exception){
             return $exception;

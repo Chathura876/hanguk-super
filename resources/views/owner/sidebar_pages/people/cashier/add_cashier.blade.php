@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 
 
 @section('content')
@@ -64,11 +64,11 @@
                             <input id="whatsapp_no" name="whatsapp_no" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add WhatsApp Number">
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="image">Profile Image</label>
-                            <img id="imagePreview" src="" alt="Image Preview" style="display: none; width: 60px; height: 60px; margin-bottom: 10px;">
-                            <input id="image" name="img" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" placeholder="Upload Profile Image" onchange="previewImage(event)">
-                        </div>
+{{--                        <div>--}}
+{{--                            <label class="block text-sm font-medium text-default-900 mb-2" for="image">Profile Image</label>--}}
+{{--                            <img id="imagePreview" src="" alt="Image Preview" style="display: none; width: 60px; height: 60px; margin-bottom: 10px;">--}}
+{{--                            <input id="image" name="img" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" placeholder="Upload Profile Image" onchange="previewImage(event)">--}}
+{{--                        </div>--}}
 
                         <div>
                             <label class="block text-sm font-medium text-default-900 mb-2" for="username">Username</label>
