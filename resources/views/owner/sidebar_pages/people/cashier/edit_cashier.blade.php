@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">
@@ -51,11 +51,11 @@
                             <input id="address" name="address" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" value="{{ old('address', $cashier->address) }}" placeholder="Add address">
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="img">Profile Image</label>
-                            <img id="imagePreview" src="{{ $cashier->img }}" alt="Image Preview" style="display: block; width: 60px; height: 60px; margin-bottom: 10px;">
-                            <input id="img" name="img" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" onchange="previewImage(event)">
-                        </div>
+{{--                        <div>--}}
+{{--                            <label class="block text-sm font-medium text-default-900 mb-2" for="img">Profile Image</label>--}}
+{{--                            <img id="imagePreview" src="{{ $cashier->img }}" alt="Image Preview" style="display: block; width: 60px; height: 60px; margin-bottom: 10px;">--}}
+{{--                            <input id="img" name="img" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="file" onchange="previewImage(event)">--}}
+{{--                        </div>--}}
 
                         <div>
                             <label class="block text-sm font-medium text-default-900 mb-2" for="user_name">Username</label>

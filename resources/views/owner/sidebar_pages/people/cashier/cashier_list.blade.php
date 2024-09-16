@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">
@@ -48,7 +48,7 @@
                         <input type="text" class="py-2.5 w-40 px-9 block bg-default-100 rounded-md border-0 text-sm text-default-700 font-medium focus:border-default-200 focus:ring-0 flatpickr-input" id="datepicker-basic" readonly="readonly">
                     </div>
 
-                    <a href="" class="relative overflow-hidden py-2.5 pe-6 ps-12 inline-flex items-center justify-center font-semibold align-middle duration-500 text-sm text-center bg-primary-600 text-white rounded-full hover:bg-primary-700">
+                    <a href="{{route('owner-cashier-add')}} " class="relative overflow-hidden py-2.5 pe-6 ps-12 inline-flex items-center justify-center font-semibold align-middle duration-500 text-sm text-center bg-primary-600 text-white rounded-full hover:bg-primary-700">
                         <span class="absolute top-1/2 -translate-y-1/2 start-0 h-full w-10 rounded-full inline-flex items-center justify-center bg-white/20 text-white me-3"><i class="ti ti-circle-plus text-xl"></i></span>
                         Add Cashier
                     </a>
@@ -62,7 +62,6 @@
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">#</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">First Name</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Last Name</th>
-                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Address</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">NIC</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Phone</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Username</th>
@@ -83,10 +82,10 @@
                             <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">
 
-                                    <a href="{{ route('owner-cashier-show', $cash->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
+                                    <a href="{{ route('owner-cashier-edit', $cash->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                         <i class="ti ti-edit-circle text-base"></i>
                                     </a>
-                                    <form action="{{ route('owner-cashier-delete', $cash->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this cashier?');">
+                                    <form style="padding-top: 10px" action="{{ route('owner-cashier-delete', $cash->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this cashier?');">
                                         @csrf
                                         <button type="submit" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                             <i class="ti ti-trash text-lg"></i>
