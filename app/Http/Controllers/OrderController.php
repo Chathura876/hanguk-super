@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -185,9 +186,9 @@ class OrderController extends Controller
                     'free_item' => 0
                 ]);
 
-                // If stock update logic is needed per item
-//                 $stock = new StockController;
-//                 $stock->stokeUpdateWithOrder($item['stock_id'], $item['qty']);
+//                 If stock update logic is needed per item
+                 $stock = new StockController;
+                 $stock->stokeUpdateWithOrder($item['stock_id'], $item['qty']);
             }
 
             return 'success'; // Moved outside the loop to return success only after all items are processed
@@ -200,12 +201,43 @@ class OrderController extends Controller
     public function returnItemSave($returnItem)
     {
         try {
+            foreach ($returnItem as $item) {
+                // Validate item data before processing
+                if (!isset($item['id']) || !isset($item['qty'])) {
+                    return response()->json(['error' => 'Invalid item data'], 400);
+                }
 
-        }
-        catch (\Exception $exception){
-            return $exception;
+                // Fetch stock for the current item
+                $stock = Stock::query()->where('id', $item['id'])->first();
+
+                // Check if stock exists
+                if (!$stock) {
+                    return response()->json(['error' => 'Stock not found for item ID: ' . $item['id']], 404);
+                }
+
+                // Calculate the new stock quantity
+                $oldQty = $stock->qty;
+                $returnQty = $item['qty'];
+
+                // Ensure returnQty is valid (e.g., non-negative)
+                if ($returnQty < 0) {
+                    return response()->json(['error' => 'Invalid return quantity for item ID: ' . $item['id']], 400);
+                }
+
+                // Update stock quantity
+                $newQty = $oldQty + $returnQty;
+                $stock->update(['qty' => $newQty]);
+            }
+
+            return response()->json(['message' => 'Stock updated successfully'], 200);
+        } catch (\Exception $exception) {
+            // Log the exception for debugging
+            \Log::error('Error in returnItemSave: ' . $exception->getMessage());
+
+            return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
+
 
 
 
