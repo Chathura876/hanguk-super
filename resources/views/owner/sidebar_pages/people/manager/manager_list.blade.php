@@ -1,4 +1,4 @@
-@extends('supermarketpos::owner.app')
+@extends('owner.app')
 @section('content')
 
     <div class="p-6 space-y-6">
@@ -19,60 +19,6 @@
                 </li>
             </ol>
         </div>
-{{--        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">--}}
-{{--            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">--}}
-{{--                <div class="p-5">--}}
-{{--                    <div class="flex items-center justify-between">--}}
-{{--                        <div>--}}
-{{--                            <p class="text-base font-semibold text-default-600">All Sellers</p>--}}
-{{--                            <h4 class="text-2xl font-semibold text-default-900 mt-4">198K</h4>--}}
-{{--                        </div>--}}
-{{--                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-primary/20 text-primary">--}}
-{{--                <i class="ti ti-chalkboard text-4xl"></i>--}}
-{{--              </span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">--}}
-{{--                <div class="p-5">--}}
-{{--                    <div class="flex items-center justify-between">--}}
-{{--                        <div>--}}
-{{--                            <p class="text-base font-semibold text-default-600">New Sellers</p>--}}
-{{--                            <h4 class="text-2xl font-semibold text-default-900 mt-4">30K</h4>--}}
-{{--                        </div>--}}
-{{--                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-500">--}}
-{{--                <i class="ti ti-brand-planetscale text-4xl"></i>--}}
-{{--              </span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">--}}
-{{--                <div class="p-5">--}}
-{{--                    <div class="flex items-center justify-between">--}}
-{{--                        <div>--}}
-{{--                            <p class="text-base font-semibold text-default-600">Active Sellers</p>--}}
-{{--                            <h4 class="text-2xl font-semibold text-default-900 mt-4">150K</h4>--}}
-{{--                        </div>--}}
-{{--                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-amber-500/20 text-amber-500">--}}
-{{--                <i class="ti ti-activity-heartbeat text-4xl"></i>--}}
-{{--              </span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">--}}
-{{--                <div class="p-5">--}}
-{{--                    <div class="flex items-center justify-between">--}}
-{{--                        <div>--}}
-{{--                            <p class="text-base font-semibold text-default-600">Blocked Sellers</p>--}}
-{{--                            <h4 class="text-2xl font-semibold text-default-900 mt-4">18K</h4>--}}
-{{--                        </div>--}}
-{{--                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-red-500/20 text-red-500">--}}
-{{--                <i class="ti ti-circle-off text-4xl"></i>--}}
-{{--              </span>--}}
-{{--                    </div>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-{{--        </div>--}}
 
         <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
             <div class="flex flex-wrap items-center justify-between py-4 px-5">
@@ -152,7 +98,7 @@
                                     <a href="{{ route('manager.edit', $manager->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                         <i class="ti ti-edit-circle text-base"></i>
                                     </a>
-                                    <form action="{{ route('manager.delete', $manager->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this manager?');">
+                                    <form style="padding-top: 10px" action="{{ route('manager.delete', $manager->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this manager?');">
                                         @csrf
                                         <button class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                             <i class="ti ti-trash text-lg"></i>
