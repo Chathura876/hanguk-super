@@ -14,7 +14,8 @@ use App\Http\Controllers\SuperMarketPosController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');
+Route::get('/',[CashierController::class,'login'])->name('cashier.login');
+Route::post('/',[CashierController::class,'login_check'])->name('cashier.login-check');
 Route::prefix('super_market_pos')->group(function () {
     Route::prefix('owner')->group(function () {
         Route::get('/', [OwnerController::class, 'login'])->name('login');
@@ -163,7 +164,8 @@ Route::middleware(['auth:owner'])->group(function () {
     });
     });
 
-    Route::prefix('pos')->group(function () {
+  Route::middleware(['auth:cashier'])->group(function (){
+      Route::prefix('pos')->group(function () {
         Route::get('/', [SuperMarketPosController::class, 'dashboard'])->name('pos.dashboard');
         Route::get('/damage_items', [SuperMarketPosController::class, 'damage_items'])->name('pos.damage_items');
         Route::get('/add_damage_items', [SuperMarketPosController::class, 'add_damage_items'])->name('pos.add_damage_items');
@@ -180,6 +182,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
 
     });
+  });
 });
 //});
 

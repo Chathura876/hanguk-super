@@ -4,8 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Cashier;
+use App\Models\Owner;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Modules\SuperMarketPos\Entities\Customer;
 use Modules\SuperMarketPos\Entities\Product;
 use PHPUnit\Exception;
@@ -148,6 +151,53 @@ class CashierController extends Controller
         }
         catch (\Exception $exception){
             return $exception;
+        }
+    }
+
+    public function login()
+    {
+        return view('cashier.cashier_login');
+    }
+    public function login_check(Request $request)
+    {
+
+
+        // Validate request data
+        $request->validate([
+            'email' => 'required|string',
+            'password' => 'required|string',
+        ]);
+
+
+        try {
+            // Log request data for debugging
+            Log::info('Login attempt for email: ' . $request->email);
+
+            $cashier = Cashier::query()
+                ->where('username', $request->email)
+                ->first();
+
+
+
+            if ($cashier && Hash::check($request->password, $cashier->password)) {
+
+                Auth::guard('cashier')->login($cashier);
+
+                // Log successful login
+                Log::info('Login successful for email: ' . $request->email);
+
+                return redirect()->route('pos.dashboard');
+            } else {
+
+                Log::warning('Login failed for email: ' . $request->email);
+
+                return redirect()->route('cashier.login')->with('error', 'Invalid credentials');
+            }
+        } catch (\Exception $e) {
+            // Log exception
+            Log::error('Login error: ' . $e->getMessage());
+
+            return redirect()->route('cashier.login')->with('error', 'An error occurred. Please try again.');
         }
     }
 }
