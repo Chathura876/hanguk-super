@@ -1,20 +1,7 @@
 @extends('owner.app')
 
 @section('content')
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@1.39.1/tabler-icons.min.css">
 
-    <style>
-        ::-webkit-scrollbar {
-            width: 6px;
-        }
-        ::-webkit-scrollbar-track {
-            background-color: transparent;
-        }
-        ::-webkit-scrollbar-thumb {
-            background-color: #cccccc; /* Gray scrollbar */
-        }
-    </style>
 
     @if (session('success'))
         <div class="bg-green-100 text-green-700 p-4 rounded mb-4">
@@ -113,19 +100,6 @@
                                 @enderror
                             </div>
 
-                            <!-- Sub Category -->
-{{--                            <div>--}}
-{{--                                <select name="sub_category_id" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">--}}
-{{--                                    <option value="" selected>Select Sub Category</option>--}}
-{{--                                    @foreach($subCategories as $subCategory)--}}
-{{--                                        <option value="{{ $subCategory->id }}" {{ old('sub_category_id') == $subCategory->id ? 'selected' : '' }}>{{ $subCategory->name }}</option>--}}
-{{--                                    @endforeach--}}
-{{--                                </select>--}}
-{{--                                @error('sub_category_id')--}}
-{{--                                <div class="text-red-600 text-sm mt-2">{{ $message }}</div>--}}
-{{--                                @enderror--}}
-{{--                            </div>--}}
-
                             <!-- Brand -->
                             <div>
                                 <select name="brand_id" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
@@ -147,7 +121,7 @@
                                 @enderror
                             </div>
 
-                            <!-- Type -->
+{{--                            <!-- Type -->--}}
 {{--                            <div>--}}
 {{--                                <select name="type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">--}}
 {{--                                    <option value="" selected>Select Type</option>--}}
