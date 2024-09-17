@@ -114,17 +114,17 @@
                             </div>
 
                             <!-- Sub Category -->
-                            <div>
-                                <select name="sub_category_id" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
-                                    <option value="" selected>Select Sub Category</option>
-                                    @foreach($subCategories as $subCategory)
-                                        <option value="{{ $subCategory->id }}" {{ old('sub_category_id') == $subCategory->id ? 'selected' : '' }}>{{ $subCategory->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('sub_category_id')
-                                <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
+{{--                            <div>--}}
+{{--                                <select name="sub_category_id" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">--}}
+{{--                                    <option value="" selected>Select Sub Category</option>--}}
+{{--                                    @foreach($subCategories as $subCategory)--}}
+{{--                                        <option value="{{ $subCategory->id }}" {{ old('sub_category_id') == $subCategory->id ? 'selected' : '' }}>{{ $subCategory->name }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                @error('sub_category_id')--}}
+{{--                                <div class="text-red-600 text-sm mt-2">{{ $message }}</div>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
 
                             <!-- Brand -->
                             <div>
@@ -148,21 +148,17 @@
                             </div>
 
                             <!-- Type -->
-                            <div>
-                                <select name="type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
-                                    <option value="" selected>Select Type</option>
-                                    @foreach($productTypes as $productType)
-                                        <option value="{{ $productType->id }}" {{ old('type') == $productType->id ? 'selected' : '' }}>{{ $productType->type }}</option>
-                                    @endforeach
-                                </select>
-                                @error('type')
-                                <div class="text-red-600 text-sm mt-2">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-
-
-
+{{--                            <div>--}}
+{{--                                <select name="type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">--}}
+{{--                                    <option value="" selected>Select Type</option>--}}
+{{--                                    @foreach($productTypes as $productType)--}}
+{{--                                        <option value="{{ $productType->id }}" {{ old('type') == $productType->id ? 'selected' : '' }}>{{ $productType->type }}</option>--}}
+{{--                                    @endforeach--}}
+{{--                                </select>--}}
+{{--                                @error('type')--}}
+{{--                                <div class="text-red-600 text-sm mt-2">{{ $message }}</div>--}}
+{{--                                @enderror--}}
+{{--                            </div>--}}
 
                         </div>
                     </div>
