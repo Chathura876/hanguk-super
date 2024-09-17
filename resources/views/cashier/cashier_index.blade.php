@@ -334,7 +334,7 @@
 
             <!-- Payment Button -->
             <button class="bg-[#10A721] text-white py-2 rounded text-lg font-bold focus:outline-none hover:bg-[#062108]"
-                    style=width:446px;"
+                    style=width:160px;"
                     onclick="dataSend()"
             >
                 Payment
@@ -344,7 +344,7 @@
             <button class="bg-[#10A721] text-white py-2
             rounded text-lg font-bold focus:outline-none
             hover:bg-[#8FD14F]"
-            style="width:446px; background-color: white; color: black; margin-top: 10px;"
+            style="width:160px; background-color: white; color: black; margin-top: 10px;"
             onclick="printCard()"
             >
                 Bill Print
@@ -535,27 +535,6 @@
         </div>
 </div>
 
-<!-- Modal -->
-{{--<div id="modal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">--}}
-{{--    <div class="bg-white p-6 rounded-lg shadow-lg w-96">--}}
-{{--        <h2 class="text-xl font-bold mb-4">Add Price</h2>--}}
-{{--        <div class="mb-4">--}}
-{{--            <label for="price" class="block text-sm font-medium text-gray-700">Enter Price</label>--}}
-{{--            <input type="number" id="price" class="mt-1 block w-full p-2 border rounded-md">--}}
-{{--        </div>--}}
-{{--        <div class="mb-4">--}}
-{{--            <button id="activeButton" class="bg-green-700 text-white px-4 py-2 rounded" onclick="toggleActiveField()">Use Card</button>--}}
-{{--        </div>--}}
-{{--        <div id="additionalField" class="mb-4 hidden">--}}
-{{--            <label for="additionalPrice" class="block text-sm font-medium text-gray-700">Additional Price</label>--}}
-{{--            <input type="number" id="additionalPrice" class="mt-1 block w-full p-2 border rounded-md">--}}
-{{--        </div>--}}
-{{--        <div class="flex justify-end space-x-4">--}}
-{{--            <button class="bg-gray-500 text-white px-4 py-2 rounded" onclick="closeModal()">Close</button>--}}
-{{--            <button class="bg-blue-600 text-white px-4 py-2 rounded">Save</button>--}}
-{{--        </div>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 <!-- Number Pad Modal -->
 <div id="numberPadModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">
