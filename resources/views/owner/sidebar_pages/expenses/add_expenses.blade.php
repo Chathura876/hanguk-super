@@ -60,16 +60,16 @@
                             <input id="type" name="type" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Type">
                         </div>
 
-                        <div>
-                            <label class="block text-sm font-medium text-default-900 mb-2" for="addBy">Added By</label>
-                            <div class="relative">
-                                <select id="addBy" name="addBy" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50">
-                                    <option value="">Select Person</option>
-                                    <option value="Namal">Namal (Cashier)</option>
-                                    <!-- Add more options as needed -->
-                                </select>
-                            </div>
-                        </div>
+{{--                        <div>--}}
+{{--                            <label class="block text-sm font-medium text-default-900 mb-2" for="addBy">Added By</label>--}}
+{{--                            <div class="relative">--}}
+{{--                                <select id="addBy" name="addBy" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50">--}}
+{{--                                    <option value="">Select Person</option>--}}
+{{--                                    <option value="Namal">Namal (Cashier)</option>--}}
+{{--                                    <!-- Add more options as needed -->--}}
+{{--                                </select>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
 
                         <div>
                             <label class="block text-sm font-medium text-default-900 mb-2" for="amount">Amount</label>

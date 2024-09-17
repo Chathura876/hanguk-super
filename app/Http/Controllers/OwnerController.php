@@ -10,6 +10,7 @@ use App\Models\Order;
 use App\Models\Owner;
 use App\Models\Product;
 use App\Models\Stock;
+use Carbon\Carbon;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -131,7 +132,7 @@ class OwnerController extends Controller
                 'date' => 'required|date',
                 'details' => 'required|string',
                 'type' => 'required|string',
-                'addBy' => 'required|string',
+//                'addBy' => 'required|string',
                 'amount' => 'required|numeric',
             ]);
 
@@ -141,7 +142,7 @@ class OwnerController extends Controller
                 'date' => $request->date,
                 'details' => $request->details,
                 'type' => $request->type,
-                'addBy' => $request->addBy,
+                'addBy' => 'owner',
                 'amount' => $request->amount,
             ]);
 
@@ -152,7 +153,6 @@ class OwnerController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $exception->getMessage());
         }
     }
-
 
     public function edit_expenses($id)
     {
@@ -166,6 +166,7 @@ class OwnerController extends Controller
             return redirect()->route('owner.expenses_list')->with('error', 'Expense not found: ' . $exception->getMessage());
         }
     }
+
     public function update_expenses(Request $request, $id)
     {
         try {
@@ -174,7 +175,7 @@ class OwnerController extends Controller
                 'date' => 'required|date',
                 'details' => 'required|string',
                 'type' => 'required|string',
-                'addBy' => 'required|string',
+//                'addBy' => 'required|string',
                 'amount' => 'required|numeric',
             ]);
 
@@ -186,7 +187,7 @@ class OwnerController extends Controller
                 'date' => $request->date,
                 'details' => $request->details,
                 'type' => $request->type,
-                'addBy' => $request->addBy,
+                'addBy' => 'owner',
                 'amount' => $request->amount,
             ]);
 
@@ -198,12 +199,27 @@ class OwnerController extends Controller
         }
     }
 
-
     public function expenses_list()
     {
-        $expenses = Expense::all();
         $user = Auth::user();
-        return view('owner.sidebar_pages.expenses.expenses_list', compact('user','expenses'));
+        $expenses = Expense::all();
+        // Today's expenses
+        $todayExpenses = Expense::whereDate('date', Carbon::today())->sum('amount');
+
+        // Previous week expenses
+        $previousWeekExpenses = Expense::whereBetween('date', [
+            Carbon::now()->subDays(7), Carbon::today()
+        ])->sum('amount');
+
+        // Expenses to the current date (from the start of the month to today)
+        $currentMonthExpenses = Expense::whereMonth('date', Carbon::now()->month)->sum('amount');
+
+        // July total expenses (replace '7' with the appropriate month)
+        $julyExpenses = Expense::whereMonth('date', 7)->sum('amount');
+
+        return view('owner.sidebar_pages.expenses.expenses_list', compact(
+            'user', 'todayExpenses', 'previousWeekExpenses', 'currentMonthExpenses', 'julyExpenses', 'expenses'
+        ));
     }
 
     public function destroy_expenses($id)
@@ -228,8 +244,8 @@ class OwnerController extends Controller
 
     public function profit()
     {
-        $user=Auth::user();
-        return view('owner.sidebar_pages.sale.profit',compact('user'));
+        $user = Auth::user();
+        return view('owner.sidebar_pages.sale.profit', compact('user'));
     }
 
     public function return_items()
@@ -253,9 +269,9 @@ class OwnerController extends Controller
 
     public function issued_bills()
     {
-        $user=Auth::user();
-        $bill=Order::all();
-        return view('owner.receipt.issued_bills',compact('bill','user'));
+        $user = Auth::user();
+        $bill = Order::all();
+        return view('owner.receipt.issued_bills', compact('bill', 'user'));
     }
 
     public function sale()

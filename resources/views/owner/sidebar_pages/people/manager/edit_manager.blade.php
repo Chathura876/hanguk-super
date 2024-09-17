@@ -88,10 +88,10 @@
                     </div>
 
                     <div class="flex justify-end gap-4">
-                        <a href="{{ route('manager.index') }}" class="flex items-center justify-center gap-2 rounded-md bg-primary/10 px-6 py-2.5 text-center text-sm font-semibold text-primary shadow-sm transition-all duration-200 hover:bg-primary hover:text-white">
-                            <i class="ti ti-arrow-back-up text-lg"></i>
-                            Undo
-                        </a>
+{{--                        <a href="{{ route('manager.index') }}" class="flex items-center justify-center gap-2 rounded-md bg-primary/10 px-6 py-2.5 text-center text-sm font-semibold text-primary shadow-sm transition-all duration-200 hover:bg-primary hover:text-white">--}}
+{{--                            <i class="ti ti-arrow-back-up text-lg"></i>--}}
+{{--                            Undo--}}
+{{--                        </a>--}}
                         <button type="submit" class="flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-2.5 text-center text-sm font-semibold text-white shadow-sm transition-all duration-200 hover:bg-primary-500">
                             <i class="ti ti-device-floppy text-lg"></i>
                             Save Changes

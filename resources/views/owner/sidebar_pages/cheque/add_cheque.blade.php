@@ -68,9 +68,9 @@
                     </div>
 
                     <div class="flex justify-end gap-4">
-                        <button type="button" class="flex items-center justify-center gap-2 rounded-md bg-primary/10 px-6 py-2.5 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white">
-                            <i class="ti ti-arrow-back-up text-lg"></i> Undo
-                        </button>
+{{--                        <button type="button" class="flex items-center justify-center gap-2 rounded-md bg-primary/10 px-6 py-2.5 text-sm font-semibold text-primary transition-all duration-200 hover:bg-primary hover:text-white">--}}
+{{--                            <i class="ti ti-arrow-back-up text-lg"></i> Undo--}}
+{{--                        </button>--}}
                         <button type="submit" class="flex items-center justify-center gap-2 rounded-md bg-primary px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-primary-500">
                             <i class="ti ti-device-floppy text-lg"></i> Save
                         </button>
