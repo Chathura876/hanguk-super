@@ -115,6 +115,7 @@
                             <select name="unit_type" class="select-dropdown block w-full bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-primary-500 focus:border-primary-500 sm:text-sm pl-4 pr-8 py-2">
                                 <option value="" selected>Select Unit Type</option>
                                 <option value="pcs" {{ old('unit_type') == 'pcs' ? 'selected' : '' }}>Piece (pcs)</option>
+                                <option value="pcs" {{ old('unit_type') == 'pcs' ? 'selected' : '' }}>Packet (pac)</option>
                                 <option value="kg" {{ old('unit_type') == 'kg' ? 'selected' : '' }}>Kilogram (kg)</option>
                                 <option value="g" {{ old('unit_type') == 'g' ? 'selected' : '' }}>Gram (g)</option>
                                 <option value="ltr" {{ old('unit_type') == 'ltr' ? 'selected' : '' }}>Liter (ltr)</option>

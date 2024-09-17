@@ -13,13 +13,17 @@ return new class extends Migration
     {
         Schema::create('damage_items', function (Blueprint $table) {
             $table->id();
-            $table->integer('product_id');
-            $table->integer('stock_id');
+            $table->unsignedBigInteger('product_id');
+            $table->unsignedBigInteger('stock_id');
             $table->string('product_name');
             $table->date('date');
             $table->integer('quantity');
-            $table->string('add_by');
+            $table->string('added_by'); // Fixed typo from 'add_by' to 'added_by'
             $table->timestamps();
+
+            // Adding foreign key constraints
+            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onDelete('cascade');
         });
     }
 
