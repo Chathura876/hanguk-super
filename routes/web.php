@@ -97,7 +97,7 @@ Route::middleware(['auth:owner'])->group(function () {
             Route::prefix('stock')->group(function () {
                 Route::get('/', [StockController::class, 'index'])->name('stock.index');
                 Route::get('/add', [StockController::class, 'create'])->name('stock.create');
-                Route::get('/report', [StockController::class, 'report'])->name('stock.report');
+                Route::get('/report', [StockController::class, 'generatePDF'])->name('stock.report');
                 Route::post('/', [StockController::class, 'store'])->name('stock.store');
                 Route::get('/{id}', [StockController::class, 'edit'])->name('stock.edit');
                 Route::post('/{id}', [StockController::class, 'update'])->name('stock.update');
@@ -193,6 +193,14 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('pos/stock/add', [SuperMarketPosController::class, 'create_stock'])->name('pos.stock.create');
         Route::post('pos/stock/store', [SuperMarketPosController::class, 'stock_store'])->name('pos.stock.store');
         Route::get('/reports', [SuperMarketPosController::class, 'reports'])->name('pos.reports');
+
+//       *** report genaratae ***
+        Route::get('/reports/daily', [SuperMarketPosController::class, 'dailyReport'])->name('reports.daily');
+        Route::get('/reports/weekly', [SuperMarketPosController::class, 'weeklyReport'])->name('reports.weekly');
+        Route::get('/reports/monthly', [SuperMarketPosController::class, 'monthlyReport'])->name('reports.monthly');
+        Route::get('/reports/download/{period}', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
+
+
         Route::get('/members', [SuperMarketPosController::class, 'members'])->name('pos.members');
         Route::post('/product/scan', [SuperMarketPosController::class, 'productScan'])->name('product.scan');
         Route::post('/order/submit', [OrderController::class, 'orderSubmit'])->name('order.save');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Stock;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -13,8 +14,9 @@ class StockController extends Controller
     public function index(Request $request)
     {
         try {
-            $user=Auth::user();
+            $user = Auth::user();
             $search = $request->input('search');
+
 
             // Start the query with eager loading of the related product
             $query = Stock::with('product');
@@ -23,6 +25,9 @@ class StockController extends Controller
             if ($search !== null) {
                 $query->where('id', 'like', '%' . $search . '%');
             }
+
+            // Order by id (latest first)
+            $query->orderBy('id', 'desc');
 
             // Paginate the results
             $stock = $query->paginate(15);
@@ -34,6 +39,7 @@ class StockController extends Controller
             return $exception;
         }
     }
+
 
 
     public function create()
@@ -168,5 +174,21 @@ class StockController extends Controller
     public function report()
     {
         return view('owner.sidebar_pages.stock.stock_report');
+    }
+
+    public function generatePDF()
+    {
+        try {
+            $user = Auth::user();
+            $stock = Stock::with('product')->orderBy('id', 'desc')->get(); // Fetch all stock items
+
+            // Load a view and pass stock data to it
+            $pdf = PDF::loadView('owner.sidebar_pages.stock.stock_report', compact('stock', 'user'));
+
+            // Return the PDF as a download
+            return $pdf->download('stock_report.pdf');
+        } catch (\Exception $exception) {
+            return $exception;
+        }
     }
 }

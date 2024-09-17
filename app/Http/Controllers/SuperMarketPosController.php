@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\Stock;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -139,11 +140,73 @@ class SuperMarketPosController extends Controller
             return redirect()->back()->with('error', 'An error occurred: ' . $exception->getMessage());
         }
     }
+    public function dailyReport()
+    {
+        $user = Auth::user();
+        $today = now()->startOfDay();
+        $stock = Stock::with('product')
+            ->whereDate('created_at', $today)
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('cashier.sidebar_pages.reports', compact('user', 'stock', 'today'));
+    }
+    public function weeklyReport()
+    {
+        $user = Auth::user();
+        $startOfWeek = now()->startOfWeek();
+        $endOfWeek = now()->endOfWeek();
+        $stock = Stock::with('product')
+            ->whereBetween('created_at', [$startOfWeek, $endOfWeek])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('cashier.sidebar_pages.reports', compact('user', 'stock', 'startOfWeek', 'endOfWeek'));
+    }
+    public function monthlyReport()
+    {
+        $user = Auth::user();
+        $startOfMonth = now()->startOfMonth();
+        $endOfMonth = now()->endOfMonth();
+        $stock = Stock::with('product')
+            ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        return view('cashier.sidebar_pages.reports', compact('user', 'stock', 'startOfMonth', 'endOfMonth'));
+    }
+    public function downloadReport($period)
+    {
+        $user = Auth::user();
+
+        if ($period == 'daily') {
+            $startDate = now()->startOfDay();
+            $endDate = now()->endOfDay();
+        } elseif ($period == 'weekly') {
+            $startDate = now()->startOfWeek();
+            $endDate = now()->endOfWeek();
+        } elseif ($period == 'monthly') {
+            $startDate = now()->startOfMonth();
+            $endDate = now()->endOfMonth();
+        }
+
+        $stock = Stock::with('product')
+            ->whereBetween('created_at', [$startDate, $endDate])
+            ->orderBy('id', 'desc')
+            ->get();
+
+        $pdf = Pdf::loadView('cashier.sidebar_pages.reports_pdf', compact('user', 'stock', 'startDate', 'endDate'));
+        return $pdf->download("stock_report_{$period}.pdf");
+    }
+
     public function reports()
     {
         $user = Auth::user();
-        return view('cashier.sidebar_pages.reports', compact('user'));
+        $stock = Stock::with('product')->get();
+
+        return view('cashier.sidebar_pages.reports', compact('user', 'stock'));
     }
+
 
     public function members()
     {

@@ -36,68 +36,65 @@
                 </li>
             </ol>
         </div>
-        <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
-            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-                <div class="p-5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-base font-semibold text-default-600">Today profit</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4">Rs 10000.00</h4>
-                        </div>
-                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-primary/20 text-primary">
-                        <i class="ti ti-chalkboard text-4xl"></i>
-                      </span>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-                <div class="p-5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-base font-semibold text-default-600">Previous Week Profit</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
-                        </div>
-                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-500">
-                        <i class="ti ti-brand-planetscale text-4xl"></i>
-                      </span>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-                <div class="p-5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-base font-semibold text-default-600">Profit to (Current Date)</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
-                        </div>
-                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-amber-500/20 text-amber-500">
-                        <i class="ti ti-activity-heartbeat text-4xl"></i>
-                      </span>
-                    </div>
-                </div>
-            </div>
-            <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-                <div class="p-5">
-                    <div class="flex items-center justify-between">
-                        <div>
-                            <p class="text-base font-semibold text-default-600">July Total Profit (Previous Month)</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
-                        </div>
-                        <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-red-500/20 text-red-500">
-                        <i class="ti ti-circle-off text-4xl"></i>
-                      </span>
-                    </div>
-                </div>
-            </div>
-        </div>
+
 
         <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
-            <div class="flex items-center justify-between py-4 px-5">
-                <div class="">
-                    <h5 class="text-lg font-medium text-default-950 capitalize mb-1">Sales Reports</h5>
-                    {{--                        <p class="text-default-600 text-sm font-medium">Theme Default Tab.</p>--}}
+
+            <div class="grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-6">
+                <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-base font-semibold text-default-600">Today profit</p>
+                                <h4 class="text-2xl font-semibold text-default-900 mt-4">Rs 10000.00</h4>
+                            </div>
+                            <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-primary/20 text-primary">
+                        <i class="ti ti-chalkboard text-4xl"></i>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-base font-semibold text-default-600">Previous Week Profit</p>
+                                <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
+                            </div>
+                            <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-cyan-500/20 text-cyan-500">
+                        <i class="ti ti-brand-planetscale text-4xl"></i>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-base font-semibold text-default-600">Profit to (Current Date)</p>
+                                <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
+                            </div>
+                            <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-amber-500/20 text-amber-500">
+                        <i class="ti ti-activity-heartbeat text-4xl"></i>
+                      </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
+                    <div class="p-5">
+                        <div class="flex items-center justify-between">
+                            <div>
+                                <p class="text-base font-semibold text-default-600">July Total Profit (Previous Month)</p>
+                                <h4 class="text-2xl font-semibold text-default-900 mt-4"></h4>
+                            </div>
+                            <span class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-red-500/20 text-red-500">
+                        <i class="ti ti-circle-off text-4xl"></i>
+                      </span>
+                        </div>
+                    </div>
                 </div>
             </div>
+
             <div class="p-5 border-t border-dashed border-default-200">
                 <div class="border-b border-default-200">
                     <nav class="flex space-x-2" aria-label="Tabs" role="tablist">
@@ -154,49 +151,50 @@
                                         </div> <!-- flex-end -->
                                     </div>
 
+                                    <!-- Filter Options -->
                                     <div class="mb-5">
                                         <div class="flex flex-col">
                                             <div>
                                                 <div class="min-w-full inline-block align-middle overflow-hidden border border-default-200 rounded-md">
 
                                                     <table class="min-w-full">
-                                                        <thead class="border-b py-3 bg-default-100 border-default-200 ">
+                                                        <thead class="border-b py-3 bg-default-100 border-default-200">
                                                         <tr>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Id</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Description</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Price (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Amount (Rs.)</th>
-                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Expenses</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Quantity</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Discount Price</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
-                                                        </tr> <!-- tr-end -->
-                                                        </thead> <!-- thead-end -->
+                                                        </tr>
+                                                        </thead>
 
                                                         <tbody>
-                                                        <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
-                                                            <td class="px-6 py-2 font-medium">#4357</td>
-                                                            <td class="px-6 py-2 font-medium">Imorich Blueberry Ice cream</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">750.00</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                            <td class="px-6 py-2 font-medium">1</td>
-                                                        </tr> <!-- tr-end -->
-
-                                                        </tbody> <!-- tbody-end -->
-
-                                                    </table> <!-- table-end -->
+                                                        @foreach ($stock as $item)
+                                                            <tr class="text-default-500 transition-all duration-300 border-b border-default-200 hover:bg-default-100">
+                                                                <td class="px-6 py-2 font-medium">{{ $item->id }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->product ? $item->product->product_name : 'N/A' }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->stock_price }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->qty }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->selling_price }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->discount_price }}</td>
+                                                                <td class="px-6 py-2 font-medium">{{ $item->qty * $item->stock_price }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                        </tbody>
+                                                    </table>
 
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
+                                    <!-- Report Summary -->
+                                    <div class="border-b border-default-200 bg-default-100 mb-8">
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs. {{ $stock->sum(fn($item) => $item->qty * $item->stock_price) }}</h6>
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
@@ -204,21 +202,22 @@
                                         </div>
                                         <div class="flex items-center justify-between p-3">
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
-                                            <h6 class="text-base text-default-800 font-medium">Rs. 750.00</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs. {{ $stock->sum(fn($item) => $item->qty * $item->stock_price) }}</h6>
                                         </div>
-
                                     </div>
 
-                                    <div class="mt-10">
-                                        <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
-                                            </a>
-                                            {{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
-
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
+                                    <!-- Filter Buttons -->
+                                    <div class="flex gap-2 mb-6">
+                                        <!-- Button for downloading weekly report when clicking "Daily Report" -->
+                                        <a href="{{ route('reports.download', ['period' => 'daily']) }}" class="inline-flex items-center justify-center px-4 py-2 font-semibold text-white bg-primary-600 rounded-lg hover:bg-primary-700">
+                                            Daily Report
+                                        </a>
+                                        <a href="{{ route('reports.download', ['period' => 'weekly']) }}" class="inline-flex items-center justify-center px-4 py-2 font-semibold text-white bg-primary-600 rounded-lg hover:bg-primary-700">
+                                            Weekly Report
+                                        </a>
+                                        <a href="{{ route('reports.download', ['period' => 'monthly']) }}" class="inline-flex items-center justify-center px-4 py-2 font-semibold text-white bg-primary-600 rounded-lg hover:bg-primary-700">
+                                            Monthly Report
+                                        </a>
                                     </div>
 
                                 </div>
@@ -429,17 +428,7 @@
 
                                     </div>
 
-                                    <div class="mt-10">
-                                        <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
-                                            </a>
-                                            {{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
 
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
-                                    </div>
 
                                 </div>
                             </div>
@@ -539,17 +528,7 @@
 
                                     </div>
 
-                                    <div class="mt-10">
-                                        <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
-                                            </a>
-                                            {{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
 
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
-                                    </div>
 
                                 </div>
                             </div>
