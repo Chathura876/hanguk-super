@@ -74,6 +74,9 @@ class ProductController extends Controller
 //            ? $imageController->imgUpload($request->file('IMG'), 'product_image_', 'product')
 //            : null;
 
+//        dd($request->all());
+
+
         try {
             $product = Product::query()->create([
                 'product_name' => $request->input('product_name'),
@@ -85,6 +88,8 @@ class ProductController extends Controller
                 'category_id' => $request->input('category_id'),
                 'sub_category_id' => $request->input('sub_category_id'),
                 'add_by' => 'owner',
+                'free_item'=>$request->free_item,
+                'unit'=>$request->unit_type,
                 'sale_on_hare_price' => 0,
                 'enable_stock_group' => $request->input('enable_stock_group')
             ]);
@@ -110,6 +115,24 @@ class ProductController extends Controller
                 'to_item' => 'nullable|numeric',
                 'unit_type' =>'required|string|max:255',
             ]);
+
+//            if ($request->unit_type ==='kg'){
+//               $gm=$request->qty*1000;
+//               $sprice=$request->selling_price/1000;
+//               $stockPrice=$request->stock_price/1000;
+//               $disp=$request->discount_price/$gm;
+//
+//                Stock::query()->create([
+//                    'item_id' => $product->id,
+//                    'qty' => $gm,
+//                    'stock_price' => $stockPrice,
+//                    'selling_price' => $sprice,
+//                    'discount_price' => $disp,
+//                    'from_item' => $request->from_item,
+//                    'to_item' => $request->to_item,
+//                    'unit' => $request->unit_type
+//                ]);
+//            }
 
             // Create a new stock record
             Stock::query()->create([

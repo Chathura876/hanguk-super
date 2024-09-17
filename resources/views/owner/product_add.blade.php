@@ -215,7 +215,10 @@
                         <label class="block text-sm font-medium text-default-900 mb-2" for="percentage">Percentage (%)</label>
                         <input id="percentage" name="percentage" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="Add Percentage">
                     </div>
-
+                    <div class="w-full">
+                        <label class="block text-sm font-medium text-default-900 mb-2" for="to_item">free Item</label>
+                        <input id="to_item" name="free_item" class="block w-full rounded-md py-2.5 px-4 text-default-800 text-sm focus:ring-transparent border-default-200 dark:bg-default-50" type="text" placeholder="quantity">
+                    </div>
 
                     <!-- From Item to To Item -->
                     <div class="flex items-center">
