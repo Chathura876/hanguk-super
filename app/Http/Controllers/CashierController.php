@@ -58,28 +58,23 @@ class CashierController extends Controller
     {
         try {
             Cashier::query()->create([
-                'first_name'=>$request->first_name,
-                'last_name'=>$request->last_name,
-                'address'=>$request->address,
-                'NIC_no'=>$request->NIC_no,
-                'phone_no'=>$request->phone_no,
-                'whatsapp_no'=>$request->whatsapp_no,
-                'IMG'=>0,
-                'username'=>$request->username,
-                'password'=>$request->password
+                'first_name' => $request->first_name,
+                'last_name' => $request->last_name,
+                'address' => $request->address,
+                'NIC_no' => $request->NIC_no,
+                'phone_no' => $request->phone_no,
+                'whatsapp_no' => $request->whatsapp_no,
+                'IMG' => 0,
+                'username' => $request->username,
+                'password' => Hash::make($request->password)
             ]);
+
             return redirect()->back()->with('success', 'Cashier added successfully.');
+        } catch (Exception $exception) {
+            return $exception;
         }
-        catch (Exception $exception){
-            return  $exception;
-        }
-
-//        $cashier->username = $request->username;
-//        $cashier->password = bcrypt($request->password);
-//        $cashier->save();
-
-//        return redirect()->route('cashiers.index')->with('success', 'Cashier added successfully.');
     }
+
 
 
     /**
