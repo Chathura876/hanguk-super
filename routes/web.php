@@ -9,7 +9,7 @@ use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
 use App\Http\Controllers\ProductController;
-use App\Http\Controllers\ProductTypeController;
+//use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\StockController;

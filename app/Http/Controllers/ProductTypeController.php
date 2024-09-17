@@ -22,12 +22,13 @@ class ProductTypeController extends Controller
 
     public function store_type(Request $request)
     {
+
         try {
             // Validate the request
-            $request->validate([
-                'type' => 'required|string|max:255',
-                'Description' => 'nullable|string|max:255',
-            ]);
+//            $request->validate([
+//                'type' => 'required|string|max:255',
+//                'Description' => 'nullable|string|max:255',
+//            ]);
 
 
             // Create the new ProductType record
@@ -36,8 +37,9 @@ class ProductTypeController extends Controller
                 'Description' => $request->description,
             ]);
 
+
             // Redirect with success message
-            return redirect()->route('product-type.index')->with('success', 'Product Type added successfully.');
+            return redirect()->route('product-type.index');
         } catch (\Exception $e) {
             return redirect()->route('product.type_create')->with('error', 'An error occurred while adding the product type.');
         }
