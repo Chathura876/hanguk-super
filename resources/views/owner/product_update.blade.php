@@ -54,17 +54,17 @@
                         </div>
 
                         <!-- Image -->
-                        <div>
-                            <label for="image" class="block text-sm font-medium text-default-700">Image</label>
-                            <input type="file" name="img" id="image"
-                                   class="mt-1 block w-full border border-default-300 rounded-lg px-3 py-2 text-default-900 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">
-                            @if ($product->image)
-                                <img src="{{ asset($product->image) }}" alt="Product Image" class="mt-2 max-w-full h-auto">
-                            @endif
-                            @error('IMG')
-                            <span class="text-red-500 text-sm">{{ $message }}</span>
-                            @enderror
-                        </div>
+{{--                        <div>--}}
+{{--                            <label for="image" class="block text-sm font-medium text-default-700">Image</label>--}}
+{{--                            <input type="file" name="img" id="image"--}}
+{{--                                   class="mt-1 block w-full border border-default-300 rounded-lg px-3 py-2 text-default-900 shadow-sm focus:border-primary focus:ring-primary sm:text-sm">--}}
+{{--                            @if ($product->image)--}}
+{{--                                <img src="{{ asset($product->image) }}" alt="Product Image" class="mt-2 max-w-full h-auto">--}}
+{{--                            @endif--}}
+{{--                            @error('IMG')--}}
+{{--                            <span class="text-red-500 text-sm">{{ $message }}</span>--}}
+{{--                            @enderror--}}
+{{--                        </div>--}}
 
                         <!-- Brand ID -->
                         <div>
