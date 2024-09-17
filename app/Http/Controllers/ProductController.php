@@ -21,7 +21,7 @@ class ProductController extends Controller
     {
         $user = Auth::user();
         $search = $request->input('search', '');
-
+        $productCount = Product::count();
         $product = Product::query()
             ->when($search, function ($query, $search) {
                 return $query->where('product_name', 'like', '%' . $search . '%')
@@ -29,7 +29,7 @@ class ProductController extends Controller
             })
             ->paginate(10);
 
-        return view('owner.product', compact('product', 'user'));
+        return view('owner.product', compact('product', 'user','productCount'));
     }
 
     public function create()

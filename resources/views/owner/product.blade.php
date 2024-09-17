@@ -34,7 +34,7 @@
                     <div class="flex items-center justify-between">
                         <div>
                             <p class="text-base font-semibold text-default-600">All Products</p>
-                            <h4 class="text-2xl font-semibold text-default-900 mt-4">{{ $product->count() }}</h4>
+                            <h4 class="text-2xl font-semibold text-default-900 mt-4">{{ $productCount }}</h4>
                         </div>
                         <span
                             class="shrink h-18 w-18 inline-flex items-center justify-center rounded-lg bg-blue-500/20 text-blue-500">
