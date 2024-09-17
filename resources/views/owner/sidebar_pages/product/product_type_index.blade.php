@@ -117,7 +117,7 @@
                     @foreach($productTypes as $productType)
                         <tr>
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $productType->type }}</td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $productType->Description }}</td>
+                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $productType->description }}</td>
 
                             <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                                 <div class="flex items-center justify-center gap-2">

@@ -101,7 +101,7 @@ Route::middleware(['auth:owner'])->group(function () {
                 Route::post('/', [StockController::class, 'store'])->name('stock.store');
                 Route::get('/{id}', [StockController::class, 'edit'])->name('stock.edit');
                 Route::post('/{id}', [StockController::class, 'update'])->name('stock.update');
-                Route::get('/delete/{id}', [StockController::class, 'delete'])->name('stock.delete');
+                Route::post('/delete/{id}', [StockController::class, 'delete'])->name('stock.delete');
             });
 
             Route::prefix('order')->group(function () {
@@ -209,6 +209,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/add_cheque', [SuperMarketPosController::class, 'add_cheque'])->name('pos.add_cheque');
         Route::get('/view_cheque', [SuperMarketPosController::class, 'view_cheque'])->name('pos.view_cheque');
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
+        Route::post('/suggesstions', [SuperMarketPosController::class, 'productSugess'])->name('pos.suggestions');
         Route::get('/purchase', [SuperMarketPosController::class, 'purchase'])->name('pos.purchase');
 
     });

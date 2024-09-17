@@ -34,7 +34,7 @@ class ProductTypeController extends Controller
             // Create the new ProductType record
             ProductType::query()-> create([
                 'type' => $request->type,
-                'Description' => $request->description,
+                'description' => $request->description,
             ]);
 
 

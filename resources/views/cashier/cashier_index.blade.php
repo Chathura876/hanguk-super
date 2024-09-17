@@ -329,7 +329,20 @@
             <p>Cashier:{{$user->first_name}}</p>
         </div>
 {{--        <input type="text" class="bg-green-800 px-4 py-2 rounded" placeholder="Search or Scan">--}}
-        <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="searchProduct" onchange="searchProduct()" placeholder="Search for product">
+        <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="searchProduct" onchange="searchProduct()" oninput="itemSuggess()" placeholder="Search for product">
+        <div style="width: 330px;
+        background-color: rgba(0,255,72,0.75);
+        position: absolute;
+        z-index: 1000;
+        left: 550px;
+         top: 100px;
+          border: 2px solid green;
+          border-radius: 15px;
+         "
+             id="suggestion-box"
+        >
+
+        </div>
         <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="membershipID" placeholder="Membership ID" onchange="getMember()">
         <div class="bg-green-600 px-6 py-4 rounded text-lg">Total: Rs.<span class="finalTotal">0</span></div>
     </div>
@@ -364,7 +377,7 @@
 {{--            </tbody>--}}
 {{--        </table>--}}
 {{--    </div>--}}
-        <div class="">
+        <div class="table-container-return">
             <table class="w-full border-collapse" id="billTable">
                 <thead class="sticky-thead">
                 <tr class="bg-green-700 text-white">
@@ -429,7 +442,7 @@
                            class="w-full p-2 text-xl border rounded gap-4 hidden"
                            style="color: black !important;"
                            placeholder="Card Amount"
-                           onchange="calBalance('card')"
+                           oninput="calBalance('card')"
                     >
                 </div>
 
@@ -806,9 +819,72 @@
             }
         }
 
-        function searchProduct() {
+        function itemSuggess() {
             let productName = $('#searchProduct').val();
 
+            // Ensure the input is not empty before making a request
+            if (productName.length > 0) {
+                $.ajax({
+                    url: "{{ route('pos.suggestions') }}",
+                    type: 'POST',
+                    data: {
+                        name: productName,
+                        _token: '{{ csrf_token() }}'
+                    }
+                })
+                    .then(function(response, textStatus, jqXHR) {
+                        // This will only run after the AJAX response is received
+                        if (jqXHR.status === 200) {
+                            let suggestionBox = $('#suggestion-box');
+                            suggestionBox.empty();
+
+                            // Ensure response is an array or an object containing an array of products
+                            let products = Array.isArray(response) ? response : (response.products || []);
+
+                            console.log(response); // Log the response to check its structure
+                            console.log(products); // Log the products array
+
+                            if (products.length > 0) {
+                                // Iterate through the products and build suggestion items
+                                products.forEach(function(product) {
+                                    suggestionBox.append(`
+                            <div class="suggestion-item" style="width: 100%; height: 60px; border: 1px solid black; border-radius: 10px; cursor: pointer;" onclick="selectProduct('${product.product_name}', ${product.id})">
+                                <h2 style="color: black; text-align: center; font-weight: bold; margin-top: 20px;">${product.product_name}</h2>
+                            </div>
+                        `);
+                                });
+                            } else {
+                                suggestionBox.append('<div>No products found</div>');
+                            }
+
+                            // Ensure the input field remains focused after updating the suggestions
+                            $('#searchProduct').focus();
+                        }
+                    })
+                    .catch(function(error) {
+                        console.error('Error:', error);
+                    });
+            } else {
+                $('#suggestion-box').empty(); // Clear suggestions when the input is empty
+            }
+        }
+
+
+
+
+
+        // Function to select the product from the suggestion box
+        function selectProduct(productName, productId) {
+            $('#searchProduct').val(productName); // Set the selected product name in the input
+            $('#suggestion-box').empty(); // Clear the suggestion box after selection
+        }
+
+
+        function searchProduct() {
+            let productName = $('#searchProduct').val()
+            $('#suggestion-box').hidden;
+            $('#searchProduct').focus()
+              console.log(productName);
             $.ajax({
                 url: "{{ route('product.scan') }}",
                 type: 'POST',
@@ -818,14 +894,15 @@
                 },
                 success: function(response, textStatus, jqXHR) {
                     if (jqXHR.status === 200) {
+
                         itemCount = billItem.length + 1;
                         $('#billItemCount').text(itemCount);
 
                         // Parse float values to handle decimals correctly
                         let sellingPrice = parseFloat(response.selling_price) || 0;
                         let discountPrice = parseFloat(response.discount_price) || 0;
-                        let discount = hasMember == 1 ? sellingPrice - discountPrice : 0;
-                        let subtotal = hasMember == 1 ? discountPrice : sellingPrice;
+                        let discount =  sellingPrice - discountPrice ;
+                       let subtotal = discountPrice ;
 
                         // Create a new row with the response data
                         let newRow = `
@@ -889,12 +966,9 @@
             let newTotalPrice;
             let newTotalDiscount = 0;
 
-            if (hasMember === 1) {
-                newTotalPrice = (discountPrice * qty).toFixed(2);
-                newTotalDiscount = (unitDiscount * qty).toFixed(2);
-            } else {
-                newTotalPrice = (sellingPrice * qty).toFixed(2);
-            }
+            // Apply discount price for all customers
+            newTotalPrice = (discountPrice * qty).toFixed(2);
+            newTotalDiscount = (unitDiscount * qty).toFixed(2);
 
             totalPriceCell.text(newTotalPrice);
             discountPriceCell.text(newTotalDiscount);
@@ -917,6 +991,7 @@
 
 
 
+
         function deleteRow(element) {
             let productId = $(element).closest('tr').data('id');
 
@@ -935,6 +1010,8 @@
             billItem.forEach(item => {
                 netTotal += item.selling_price * item.qty; // Update net total with the correct quantity
                 totalAmount += item.subtotal;
+
+                // Calculate total discount
                 if (item.totalDiscount == 0) {
                     totalDiscount += item.discount;
                 } else {
@@ -942,16 +1019,14 @@
                 }
             });
 
-            if (hasMember == 0) {
-                finalTotal = totalAmount - (totalDiscount + returnAmount);
-            } else {
-                finalTotal = totalAmount - returnAmount;
-            }
+            // Apply total discount and return amount for all customers
+            finalTotal = netTotal - (totalDiscount + returnAmount);
 
             $('#totalAmount').text(netTotal.toFixed(2)); // Display updated net total
             $('#totalDiscount').text(totalDiscount.toFixed(2));
             $('.finalTotal').text(finalTotal.toFixed(2));
         }
+
 
 
 
@@ -963,7 +1038,7 @@
             }
             else {
                 payType='card';
-                let cash = $('#cardNumber').val();
+                 cash = $('#cardNumber').val();
                 balance = cash-finalTotal;
             }
 
@@ -1196,6 +1271,7 @@
 
 
     </script>
+
 
 {{--    ===================================================================================================--}}
 

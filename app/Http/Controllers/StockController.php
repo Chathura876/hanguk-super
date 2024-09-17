@@ -26,7 +26,9 @@ class StockController extends Controller
                 $query->whereHas('product', function ($q) use ($search) {
                     $q->where('product_name', 'like', '%' . $search . '%')
                         ->orWhere('bar_code', 'like', '%' . $search . '%');
-                });
+                })
+                    ->orderBy('id', 'desc'); // Sorting by id in descending order (Z to A for id)
+
             }
 
             // Order by id (latest first)

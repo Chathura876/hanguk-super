@@ -143,6 +143,7 @@ class ProductController extends Controller
                 'discount_price' => $request->discount_price,
                 'from_item' => $request->from_item,
                 'to_item' => $request->to_item,
+                'free_item'=>$request->free_item,
                 'unit' => $request->unit_type
             ]);
 
@@ -457,22 +458,22 @@ class ProductController extends Controller
 
     public function brand_store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'company' => 'required|string|max:255',
-            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
-        ]);
-
-        $imageController = new Imageuploader();
-        $imagePath = $request->hasFile('IMG')
-            ? $imageController->imgUpload($request->file('IMG'), 'brand_image_', 'brand')
-            : null;
+//        $request->validate([
+//            'name' => 'required|string|max:255',
+//            'company' => 'required|string|max:255',
+//            'IMG' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+//        ]);
+//
+//        $imageController = new Imageuploader();
+//        $imagePath = $request->hasFile('IMG')
+//            ? $imageController->imgUpload($request->file('IMG'), 'brand_image_', 'brand')
+//            : null;
 
         try {
             Brand::create([
                 'name' => $request->input('name'),
                 'Company' => $request->input('company'),
-                'IMG' => $imagePath,
+                'IMG' =>'img',
             ]);
 
             return redirect()->back()->with('success', 'Brand created successfully');

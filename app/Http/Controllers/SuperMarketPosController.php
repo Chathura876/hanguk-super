@@ -17,25 +17,33 @@ class SuperMarketPosController extends Controller
 
     public function productScan(Request $request)
     {
-
         try {
             $product = null;
 
-            // Search for the product by name or barcode
-            if ($request->name || $request->barcode) {
+            // Ensure name or barcode is provided
+            if ($request->has('name') || $request->has('barcode')) {
+
+                // Search for the product by name or barcode with partial matching
                 $products = Product::query()
                     ->where(function ($query) use ($request) {
-                        $query->where('product_name', $request->name)
-                            ->orWhere('bar_code', $request->name ?? $request->barcode);
+                        if ($request->filled('name')) {
+                            // Partial match for product name
+                            $query->where('product_name', 'LIKE', '%' . $request->name . '%');
+                        }
+
+                        if ($request->filled('barcode')) {
+                            // Partial match for barcode
+                            $query->orWhere('bar_code', 'LIKE', '%' . $request->barcode . '%');
+                        }
                     })
                     ->first();
 
+                // If the product exists
                 if ($products) {
                     // Fetch stock details for the product
                     $product_stock = Stock::query()
                         ->where('item_id', $products->id)
                         ->first();
-
 
                     if ($product_stock) {
                         // Merge product and stock data
@@ -47,17 +55,62 @@ class SuperMarketPosController extends Controller
                 }
             }
 
-            // Check if product exists and has quantity
+            // If product exists and has stock
             if ($product && $product['qty'] != 0) {
-
-
                 return response()->json($product, 200);
             } else {
                 return response()->json('Stock is 0', 201);
             }
 
         } catch (\Exception $exception) {
-            // Handle exception and return error response
+            // Handle exceptions and return error response
+            return response()->json(['error' => $exception->getMessage()], 500);
+        }
+    }
+
+    public function productSugess(Request $request)
+    {
+        try {
+            // Ensure name or barcode is provided
+            if ($request->has('name') || $request->has('barcode')) {
+
+                // Search for the products by name or barcode with partial matching
+                $products = Product::query()
+                    ->where(function ($query) use ($request) {
+                        if ($request->filled('name')) {
+                            // Partial match for product name
+                            $query->where('product_name', 'LIKE', '%' . $request->name . '%');
+                        }
+
+                        if ($request->filled('barcode')) {
+                            // Partial match for barcode
+                            $query->orWhere('bar_code', 'LIKE', '%' . $request->barcode . '%');
+                        }
+                    })
+                    ->get();  // Use get() instead of first() to fetch multiple results
+
+                // If there are matching products
+                if ($products->count() > 0) {
+                    // Fetch stock details for each product
+                    $productsWithStock = $products->map(function ($product) {
+                        $product_stock = Stock::where('item_id', $product->id)->first();
+
+                        // Merge product and stock data if stock is found
+                        if ($product_stock) {
+                            return array_merge($product->toArray(), $product_stock->toArray());
+                        }
+                        return $product->toArray();
+                    });
+
+                    return response()->json($productsWithStock, 200);  // Return as JSON array
+                }
+            }
+
+            // Return no products found
+            return response()->json([], 200);  // Return an empty array if no matching products
+
+        } catch (\Exception $exception) {
+            // Handle exceptions and return error response
             return response()->json(['error' => $exception->getMessage()], 500);
         }
     }
