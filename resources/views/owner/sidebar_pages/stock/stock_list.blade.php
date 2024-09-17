@@ -39,10 +39,13 @@
             <div class="flex flex-wrap items-center justify-between py-4 px-5">
                 <!-- Search and Filter UI -->
                 <div class="relative lg:flex hidden">
-                    <input type="search" class="ps-12 pe-4 py-2.5 block w-64 bg-default-50/0 text-default-600 border-default-200 rounded-lg text-sm focus:border-primary focus:ring-primary" placeholder="Search...">
+                    <form method="get" action="{{route('stock.index')}}">
+                    <input type="search" class="ps-12 pe-4 py-2.5 block w-64 bg-default-50/0 text-default-600 border-default-200
+                    rounded-lg text-sm focus:border-primary focus:ring-primary" placeholder="Search..." name="search">
                     <span class="absolute start-4 top-2.5">
                         <i class="ti ti-search text-lg/none"></i>
                     </span>
+                    </form>
                 </div>
 
                 <!-- Filter and Actions -->

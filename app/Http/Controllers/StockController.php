@@ -23,7 +23,10 @@ class StockController extends Controller
 
             // Apply search filter if provided
             if ($search !== null) {
-                $query->where('id', 'like', '%' . $search . '%');
+                $query->whereHas('product', function ($q) use ($search) {
+                    $q->where('product_name', 'like', '%' . $search . '%')
+                        ->orWhere('bar_code', 'like', '%' . $search . '%');
+                });
             }
 
             // Order by id (latest first)
@@ -33,7 +36,7 @@ class StockController extends Controller
             $stock = $query->paginate(15);
 
             // Pass the data to the view
-            return view('owner.sidebar_pages.stock.stock_list', compact('stock','user'));
+            return view('owner.sidebar_pages.stock.stock_list', compact('stock', 'user'));
         } catch (\Exception $exception) {
             // Return or handle the exception properly
             return $exception;
