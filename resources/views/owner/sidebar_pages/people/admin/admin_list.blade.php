@@ -35,7 +35,7 @@
                         <th scope="col" class="px-6 py-3 text-start min-w-4">
                             <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
                         </th>
-                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Image</th>
+{{--                        <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Image</th>--}}
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Name</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Phone</th>
                         <th scope="col" class="px-6 py-3 text-start text-sm capitalize font-semibold text-default-900">Email</th>
@@ -48,10 +48,10 @@
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
                             </td>
-                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">
-                                <!-- Assuming image is a URL; otherwise, adjust accordingly -->
-                                <img src="{{ $admin->image }}" alt="Admin Image" class="w-12 h-12 rounded-full object-cover">
-                            </td>
+{{--                            <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">--}}
+{{--                                <!-- Assuming image is a URL; otherwise, adjust accordingly -->--}}
+{{--                                <img src="{{ $admin->image }}" alt="Admin Image" class="w-12 h-12 rounded-full object-cover">--}}
+{{--                            </td>--}}
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $admin->name }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $admin->phone }}</td>
                             <td class="px-6 py-4 whitespace-nowrap text-base text-default-800">{{ $admin->email }}</td>
@@ -63,7 +63,7 @@
                                     <a href="{{ route('admin.edit', $admin->id) }}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                         <i class="ti ti-edit-circle text-base"></i>
                                     </a>
-                                    <form action="{{ route('admin.delete', $admin->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this admin?');">
+                                    <form style="padding-top: 10px" action="{{ route('admin.delete', $admin->id) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this admin?');">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
