@@ -124,7 +124,7 @@ class CashierController extends Controller
                     'whatsapp_no'=>$request->whatsapp_no,
                     'IMG'=>0,
                     'username'=>$request->username,
-                    'password'=>$request->password
+                    'password' => Hash::make($request->password)  // Hashing the password
                 ]);
             return redirect()->route('owner-cashier-index')->with('success', 'Cashier updated successfully.');
         }
