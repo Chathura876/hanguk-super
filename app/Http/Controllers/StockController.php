@@ -13,7 +13,7 @@ class StockController extends Controller
     public function index(Request $request)
     {
         try {
-            $user=Auth::user();
+            $user = Auth::user();
             $search = $request->input('search');
 
             // Start the query with eager loading of the related product
@@ -21,19 +21,23 @@ class StockController extends Controller
 
             // Apply search filter if provided
             if ($search !== null) {
-                $query->where('id', 'like', '%' . $search . '%');
+                $query->whereHas('product', function ($q) use ($search) {
+                    $q->where('product_name', 'like', '%' . $search . '%')
+                        ->orWhere('bar_code', 'like', '%' . $search . '%');
+                });
             }
 
             // Paginate the results
             $stock = $query->paginate(15);
 
             // Pass the data to the view
-            return view('owner.sidebar_pages.stock.stock_list', compact('stock','user'));
+            return view('owner.sidebar_pages.stock.stock_list', compact('stock', 'user'));
         } catch (\Exception $exception) {
             // Return or handle the exception properly
             return $exception;
         }
     }
+
 
 
     public function create()
