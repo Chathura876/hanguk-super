@@ -8,17 +8,18 @@
     <meta content="coderthemes" name="author">
 
     <!-- Head JS -->
-    <script type="module" crossorigin="" src="{{asset("Hanguk_super/assets/JS/admin-dashboard-27890ed3.JS")}}"></script>
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/theme-9c065fc6.JS")}}">
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/apexcharts.common-4fae8482.JS")}}">
-    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/colors-4fe812b9.JS")}}">
-    <link rel="stylesheet" href="{{asset("Hanguk_super/assets/CSS/theme-ecf0ae99.CSS")}}">
+{{--    <script type="module" crossorigin="" src="{{asset("Hanguk_super/assets/JS/admin-dashboard-27890ed3.JS")}}"></script>--}}
+{{--    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/theme-9c065fc6.JS")}}">--}}
+{{--    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/apexcharts.common-4fae8482.JS")}}">--}}
+{{--    <link rel="modulepreload" crossorigin="" href="{{asset("Hanguk_super/assets/JS/colors-4fe812b9.JS")}}">--}}
+{{--    <link rel="stylesheet" href="{{asset("Hanguk_super/assets/CSS/theme-ecf0ae99.CSS")}}">--}}
     <!-- Include SweetAlert2 CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
+
     <!-- Include SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.js"></script>
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
 
         #application-sidebar {

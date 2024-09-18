@@ -3,31 +3,31 @@
 
 <style>
     /* Ensure the rest of the page fits within the viewport */
-    #posSection {
-        max-height: calc(100vh - 50px); /* Adjust the offset as needed */
-        overflow: hidden;
-    }
+    /*#posSection {*/
+    /*    max-height: calc(100vh - 50px); !* Adjust the offset as needed *!*/
+    /*    overflow: hidden;*/
+    /*}*/
 
-    .table-container {
-        max-height: 250px; /* Set your desired max height */
-        overflow-y: auto;  /* Enable vertical scrolling */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-        position: relative; /* Create a containing block for sticky elements */
-    }
+    /*.table-container {*/
+    /*    max-height: 250px; !* Set your desired max height *!*/
+    /*    overflow-y: auto;  !* Enable vertical scrolling *!*/
+    /*    overflow-x: hidden; !* Prevent horizontal scrolling *!*/
+    /*    position: relative; !* Create a containing block for sticky elements *!*/
+    /*}*/
 
-    .table-container-return {
-        max-height: 320px; /* Set your desired max height */
-        overflow-y: auto;  /* Enable vertical scrolling */
-        overflow-x: hidden; /* Prevent horizontal scrolling */
-        position: relative; /* Create a containing block for sticky elements */
-    }
+    /*.table-container-return {*/
+    /*    max-height: 320px; !* Set your desired max height *!*/
+    /*    overflow-y: auto;  !* Enable vertical scrolling *!*/
+    /*    overflow-x: hidden; !* Prevent horizontal scrolling *!*/
+    /*    position: relative; !* Create a containing block for sticky elements *!*/
+    /*}*/
 
-    .sticky-thead {
-        position: sticky;
-        top: 0; /* Stick the thead to the top of the table container */
-        z-index: 2; /* Ensure it appears above the tbody content */
-        background-color: #2d6a4f; /* Background color to match your header */
-    }
+    /*.sticky-thead {*/
+    /*    position: sticky;*/
+    /*    top: 0; !* Stick the thead to the top of the table container *!*/
+    /*    z-index: 2; !* Ensure it appears above the tbody content *!*/
+    /*    background-color: #2d6a4f; !* Background color to match your header *!*/
+    /*}*/
 
     /* Force the table height and evenly distribute row height */
     /*tbody {*/
@@ -58,34 +58,45 @@
         display: none;
     }
 
-    #billTable{
-        height: 200px;
+    tr{
+        height: 0 !important;
+    }
+    td{
+        height: 0 !important;
     }
 
-    #billTable tbody tr{
-        height: 60px;
-    }
-    @media print {
-        .receipt {
-            width: 7.8cm; /* Set the width to 7.8cm */
-            padding: 0;
-            margin: 0;
-            font-size: 12px; /* Adjust the font size for readability */
-        }
+    /*#billTable{*/
+    /*    height: 200px;*/
+    /*}*/
 
-        /* Additional styles to control layout on print */
-        .max-w-sm {
-            max-width: 100%;
-        }
+    /*#billTable tbody tr{*/
+    /*    height: 60px;*/
+    /*}*/
+    /*@media print {*/
+    /*    .receipt {*/
+    /*        width: 7.8cm; !* Set the width to 7.8cm *!*/
+    /*        padding: 0;*/
+    /*        margin: 0;*/
+    /*        font-size: 12px; !* Adjust the font size for readability *!*/
+    /*    }*/
 
-        .no-print {
-            display: none; /* Hide any elements not needed for printing */
-        }
-    }
-    th{
-        font-size: 12px;
-    }
-    .bill-details{
+    /*    !* Additional styles to control layout on print *!*/
+    /*    .max-w-sm {*/
+    /*        max-width: 100%;*/
+    /*    }*/
+
+    /*    .no-print {*/
+    /*        display: none; !* Hide any elements not needed for printing *!*/
+    /*    }*/
+    /*}*/
+    /*th{*/
+    /*    font-size: 12px;*/
+    /*}*/
+    /*.bill-details{*/
+    /*    font-size: 12px !important;*/
+    /*}*/
+
+    .bill-font{
         font-size: 12px !important;
     }
 
@@ -93,222 +104,110 @@
     <script src="https://cdn.tailwindcss.com"></script>
 @endpush
 @section('content')
-{{--    <section class="bill d-none">--}}
-{{--        <div class="receipt max-w-sm bg-white shadow-lg rounded-lg p-4" id="receipt" style="width: 7.8cm">--}}
-{{--            <!-- Header -->--}}
-{{--            <div class="items-center">--}}
-{{--                <!-- Right Column: Text -->--}}
-{{--                <div class="text-center">--}}
-{{--                    <h2 class="text-2xl font-bold mt-4">හන්ගුක් Super</h2>--}}
-{{--                    <p class="text-xs font-bold">එන්න ඔබේ සහන සෙවනට</p>--}}
-{{--                    <p class="text-xs font-bold">No. 23/1, Wadurawa, Veyangoda</p>--}}
-{{--                    <p class="text-xs font-bold mt-2">දු.ක. : 0332054327</p>--}}
-{{--                </div>--}}
-{{--            </div>--}}
+    <section class="bill">
+        <div class="receipt bg-white shadow-lg rounded-lg p-4 mx-auto" id="receipt" style="width: 7.8cm">
+            <!-- Header -->
+            <div class="text-center mb-2">
+                <h2 class="h4 font-weight-bold">හන්ගුක් Super</h2>
+                <p class="small font-weight-bold">එන්න ඔබේ සහන සෙවනට</p>
+                <p class="small font-weight-bold">No. 23/1, Wadurawa, Veyangoda</p>
+                <p class="small font-weight-bold">දු.ක. : 0332054327</p>
+            </div>
 
-{{--            <hr class="border-t-2 border-dashed border-gray-600 my-4">--}}
+{{--            <hr class="border-dashed">--}}
 
-{{--            <!-- Receipt Details -->--}}
-{{--            <div class="mt-4">--}}
-{{--                <table class="text-sm">--}}
+            <!-- Receipt Details -->
+            <div class="mb-3">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td class="font-weight-bold bill-font">දිනය</td>
+                        <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold bill-font">බිල් අංකය</td>
+                        <td>: #7248</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold bill-font">අයකැමි</td>
+                        <td>: hanguksuper</td>
+                    </tr>
 {{--                    <tr>--}}
-{{--                        <td class="font-bold bill-details">දිනය </td>--}}
-{{--                        <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td class="font-bold bill-details">බිල් අංකය </td>--}}
-{{--                        <td>: #7248</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td class="font-bold bill-details">අයකැමි </td>--}}
-{{--                        <td>: hanguksuper</td>--}}
-{{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td class="font-bold bill-details">පාරිභෝගිකයා </td>--}}
+{{--                        <td class="font-weight-bold bill-font">පාරිභෝගිකයා</td>--}}
 {{--                        <td>: Walk in Customer</td>--}}
 {{--                    </tr>--}}
-{{--                    <tr>--}}
-{{--                        <td class="font-bold bill-details">ආරම්භක වේලාව </td>--}}
-{{--                        <td>: <span class="live-time"></span></td>--}}
-{{--                    </tr>--}}
-{{--                </table>--}}
-{{--            </div>--}}
 
-{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
-
-{{--            <!-- Items Table -->--}}
-{{--            <table class="w-full text-sm border-collapse" id="printBillTable">--}}
-{{--                <thead>--}}
-{{--                <tr>--}}
-{{--                    <th class="border-0 px-1 py-1 bill-details">ප්‍රමාණය</th>--}}
-{{--                    <th class="border-0 px-1 py-1 bill-details">සිල්ලර මිල</th>--}}
-{{--                    <th class="border-0 px-1 py-1 bill-details">අපේ මිල</th>--}}
-{{--                    <th class="border-0 px-1 py-1 bill-details">වටිනාකම</th>--}}
-{{--                </tr>--}}
-{{--                <tr>--}}
-{{--                    <td colspan="5" class="border-0 p-0"><hr class="border-t-2 border-dashed border-gray-600 my-0"></td>--}}
-{{--                </tr>--}}
-{{--                </thead>--}}
-{{--                <tbody class="text-center">--}}
-{{--                <tr>--}}
-{{--                    <td class="border-0 px-2 py-1" style="text-align: left">1.</td>--}}
-{{--                    <td class="border-0 px-2 py-1" colspan="3" style="text-align: left">Kotmale Fresh Milk</td>--}}
-{{--                </tr>--}}
-{{--                <tr style="margin-left: 30px;">--}}
-{{--                    <td class="border-0 px-2 py-1">1</td>--}}
-{{--                    <td class="border-0 px-2 py-1">500.00</td>--}}
-{{--                    <td class="border-0 px-2 py-1">500.00</td>--}}
-{{--                    <td class="border-0 px-2 py-1">500.00</td>--}}
-{{--                </tr>--}}
-{{--                </tbody>--}}
-{{--            </table>--}}
-
-{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
-
-{{--            <!-- Totals and Summary -->--}}
-{{--            <div class="mt-4">--}}
-{{--                <div class="flex justify-between">--}}
-{{--                    <span class="bill-details">සිල්ලර එකතුව</span>--}}
-{{--                    <span class="bill-details" id="printBillNetTotal"></span>--}}
-{{--                </div>--}}
-{{--                <div class="flex justify-between">--}}
-{{--                    <span class="bill-details">වට්ටම්</span>--}}
-{{--                    <span class="bill-details printBillDiscount"></span>--}}
-{{--                </div>--}}
-{{--                <div class="flex justify-between">--}}
-{{--                    <span class="font-bold bill-details">මුළු එකතුව</span>--}}
-{{--                    <span class="bill-details" id="printBillFinalTotal"></span>--}}
-{{--                </div>--}}
-{{--                <div class="flex justify-between">--}}
-{{--                    <span class="bill-details">මුදල් ගෙවීම</span>--}}
-{{--                    <span class="bill-details" id="printBillPayAmo"></span>--}}
-{{--                </div>--}}
-{{--                <div class="flex justify-between">--}}
-{{--                    <span class="bill-details">ඉතිරි මුදල</span>--}}
-{{--                    <span class="bill-details" id="printBillBalance"></span>--}}
-{{--                </div>--}}
-{{--            </div>--}}
-
-{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
-
-{{--            <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span></h2>--}}
-
-{{--            <!-- Footer -->--}}
-{{--            <div class="mt-4 text-center text-sm">--}}
-{{--                <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>--}}
-{{--                <p>වාසි සපිරි සුපිරි තැන</p>--}}
-{{--                <p class="mt-2">අවසන් වේලාව : 04.58.04 PM</p>--}}
-{{--                <p class="mt-4 font-bold">** CodeXpress Technologies +94 77 767 4308**</p>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </section>--}}
-
-<section class="bill d-none">
-    <div class="receipt bg-white shadow-lg rounded-lg p-4" id="receipt" style="width: 7.8cm;">
-        <!-- Header -->
-        <div class="text-center">
-            <h2 class="h4 font-weight-bold mt-4">හන්ගුක් Super</h2>
-            <p class="small font-weight-bold">එන්න ඔබේ සහන සෙවනට</p>
-            <p class="small font-weight-bold">No. 23/1, Wadurawa, Veyangoda</p>
-            <p class="small font-weight-bold mt-2">දු.ක. : 0332054327</p>
-        </div>
-
-        <hr class="border-top border-dashed my-4">
-
-        <!-- Receipt Details -->
-        <div class="mt-4">
-            <table class="table table-sm">
-                <tr>
-                    <td class="font-weight-bold">දිනය</td>
-                    <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">බිල් අංකය</td>
-                    <td>: #7248</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">අයකැමි</td>
-                    <td>: hanguksuper</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">පාරිභෝගිකයා</td>
-                    <td>: Walk in Customer</td>
-                </tr>
-                <tr>
-                    <td class="font-weight-bold">ආරම්භක වේලාව</td>
-                    <td>: <span class="live-time"></span></td>
-                </tr>
-            </table>
-        </div>
-
-        <hr class="border-top border-dashed my-4">
-
-        <!-- Items Table -->
-        <table class="table table-bordered text-center table-sm" id="printBillTable" style="border-collapse: separate;
-        border-spacing: 40px 0;">
-            <thead>
-            <tr>
-                <th>ප්‍රමාණය</th>
-                <th>සිල්ලර මිල</th>
-                <th>අපේ මිල</th>
-                <th>වටිනාකම</th>
-            </tr>
-            </thead>
-            <tbody>
-            <!-- Item rows will be inserted here -->
-            <tr>
-                <td>1.</td>
-                <td>Kotmale Fresh Milk</td>
-            </tr>
-            <tr>
-                <td>1</td>
-                <td>500.00</td>
-                <td>500.00</td>
-                <td>500.00</td>
-            </tr>
-            </tbody>
-        </table>
-
-        <hr class="border-top border-dashed my-4">
-
-        <!-- Totals and Summary -->
-        <div class="mt-4">
-            <div class="d-flex justify-content-between">
-                <span>සිල්ලර එකතුව</span>
-                <span id="printBillNetTotal"></span>
+                    <tr>
+                        <td class="font-weight-bold bill-font">ආරම්භක වේලාව</td>
+                        <td>: <span class="live-time"></span></td>
+                    </tr>
+                </table>
             </div>
-            <div class="d-flex justify-content-between">
-                <span>වට්ටම්</span>
-                <span class="printBillDiscount"></span>
+            <div class="mb-1">
+                <table class="table table-sm" id="printBillTable">
+                    <thead>
+
+                    <tr>
+                        <th class="bill-font">ප්‍රමාණය</th>
+                        <th class="bill-font">සිල්ලර මිල</th>
+                        <th class="bill-font">අපේ මිල</th>
+                        <th class="bill-font">වටිනාකම</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+
+                        <td class="" colspan="4" style="text-align: left">1.hgfghf gdchyfd</td>
+                    </tr>
+                    <tr class="">
+                        <td class="">1</td>
+                        <td class="" style="padding-left: 50px;">10</td>
+
+
+                        <td class="">120</td>
+                        <td class="">1502</td>
+                    </tr>
+                    </tbody>
+                </table>
             </div>
-            <div class="d-flex justify-content-between font-weight-bold">
-                <span>මුළු එකතුව</span>
-                <span id="printBillFinalTotal"></span>
+
+{{--            <hr class="border-dashed">--}}
+
+            <!-- Totals and Summary -->
+            <div class="mb-2">
+                <div class="d-flex justify-content-between">
+                    <span class="font-weight-bold bill-font">සිල්ලර එකතුව</span>
+                    <span id="printBillNetTotal"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="bill-font">වට්ටම්</span>
+                    <span class="printBillDiscount bill-font"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="font-weight-bold bill-font">මුළු එකතුව</span>
+                    <span id="printBillFinalTotal" class="bill-font"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="bill-font">මුදල් ගෙවීම</span>
+                    <span id="printBillPayAmo" class="bill-font"></span>
+                </div>
+                <div class="d-flex justify-content-between">
+                    <span class="bill-font">ඉතිරි මුදල</span>
+                    <span id="printBillBalance" class="bill-font"></span>
+                </div>
             </div>
-            <div class="d-flex justify-content-between">
-                <span>මුදල් ගෙවීම</span>
-                <span id="printBillPayAmo"></span>
-            </div>
-            <div class="d-flex justify-content-between">
-                <span>ඉතිරි මුදල</span>
-                <span id="printBillBalance"></span>
+
+            <hr class="border-dashed">
+
+            <h2 class="text-center font-weight-bold mt-1" style="font-size: 14px; font-weight: bold;">ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span></h2>
+
+            <!-- Footer -->
+            <div class="text-center mt-3 small">
+                <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>
+                <p>වාසි සපිරි සුපිරි තැන</p>
+                <p class="font-weight-bold mt-3">** CodeXpress Technologies +94 77 767 4308 **</p>
             </div>
         </div>
-
-        <hr class="border-top border-dashed my-4">
-
-        <h2 class="text-center font-weight-bold border border-dark mt-4">
-            ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span>
-        </h2>
-
-        <!-- Footer -->
-        <div class="mt-4 text-center small">
-            <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>
-            <p>වාසි සපිරි සුපිරි තැන</p>
-            <p class="mt-4 font-weight-bold">** CodeXpress Technologies +94 77 767 4308 **</p>
-        </div>
-    </div>
-</section>
+    </section>
 
 
     <div id="posSection" class="p-6 space-y-6">
@@ -330,75 +229,44 @@
         </div>
 {{--        <input type="text" class="bg-green-800 px-4 py-2 rounded" placeholder="Search or Scan">--}}
         <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="searchProduct" onchange="searchProduct()" oninput="itemSuggess()" placeholder="Search for product">
-        <div style="width: 330px;
-        background-color: rgba(0,255,72,0.75);
-        position: absolute;
-        z-index: 1000;
-        left: 550px;
-         top: 100px;
-          border: 2px solid green;
-          border-radius: 15px;
-         "
-             id="suggestion-box"
-        >
+{{--        <div style="width: 330px;--}}
+{{--        background-color: rgba(0,255,72,0.75);--}}
+{{--        position: absolute;--}}
+{{--        z-index: 1000;--}}
+{{--        left: 550px;--}}
+{{--         top: 100px;--}}
+{{--          border: 2px solid green;--}}
+{{--          border-radius: 15px;--}}
+{{--         "--}}
+{{--             id="suggestion-box"--}}
+{{--        >--}}
 
-        </div>
+{{--        </div>--}}
         <input type="text" class="bg-green-800 px-4 py-2 rounded w-80" id="membershipID" placeholder="Membership ID" onchange="getMember()">
         <div class="bg-green-600 px-6 py-4 rounded text-lg">Total: Rs.<span class="finalTotal">0</span></div>
     </div>
 
-    <!-- Table -->
-{{--    <div class="table-container">--}}
-{{--        <table class="w-full border-collapse" id="billTable" >--}}
-{{--            <thead class="sticky-thead">--}}
-{{--            <tr class="bg-green-700 text-white">--}}
-{{--                <th class="p-1 border">No.</th>--}}
-{{--                <th class="p-1 border">Name</th>--}}
-{{--                <th class="p-1 border">Price (Rs.)</th>--}}
-{{--                <th class="p-1 border">Qty</th>--}}
-{{--                <th class="p-1 border">Discount (Rs.)</th>--}}
-{{--                <th class="p-1 border">Subtotal (Rs.)</th>--}}
-{{--                <th class="p-1 border">Action</th>--}}
-{{--            </tr>--}}
-{{--            </thead>--}}
-{{--            <tbody class="min-h-[180px] h-[175px]">--}}
-{{--                <tr class="text-center">--}}
-{{--                    <td colspan="7" class="py-10">No data available</td>--}}
-{{--                </tr>--}}
-{{--                <tr class="text-center">--}}
-{{--                    <td class="p-1 border">01</td>--}}
-{{--                    <td class="p-1 border">Name_01</td>--}}
-{{--                    <td class="p-1 border">500.00</td>--}}
-{{--                    <td class="p-1 border"><input type="text" value="1" class="w-10 text-center border p-1"></td>--}}
-{{--                    <td class="p-1 border">1000.00</td>--}}
-{{--                    <td class="p-1 border">1000.00</td>--}}
-{{--                    <td class="p-1 border text-red-600 cursor-pointer" onclick="deleteRow(this)">❌</td>--}}
-{{--                </tr>--}}
-{{--            </tbody>--}}
-{{--        </table>--}}
-{{--    </div>--}}
-        <div class="table-container-return">
-            <table class="w-full border-collapse" id="billTable">
-                <thead class="sticky-thead">
-                <tr class="bg-green-700 text-white">
-                    <th class="p-1 border">No.</th>
-                    <th class="p-1 border">Name</th>
-                    <th class="p-1 border">Price (Rs.)</th>
-                    <th class="p-1 border">Qty</th>
-                    <th class="p-1 border">Discount (Rs.)</th>
-                    <th class="p-1 border">Subtotal (Rs.)</th>
-                    <th class="p-1 border">Action</th>
+        <div class="table-responsive" style="height: 300px; overflow-y: auto;">
+            <table class="table table-bordered" id="billTable" style="table-layout: fixed;">
+                <thead class="bg-green-600">
+                <tr>
+                    <th class="p-2 text-white">No.</th>
+                    <th class="p-2 text-white">Name</th>
+                    <th class="p-2 text-white">Price (Rs.)</th>
+                    <th class="p-2 text-white">Qty</th>
+                    <th class="p-2 text-white">Discount (Rs.)</th>
+                    <th class="p-2 text-white">Subtotal (Rs.)</th>
+                    <th class="p-2 text-white">Action</th>
                 </tr>
                 </thead>
-{{--                 <tbody class="min-h-[180px] h-[175px]">--}}
                 <tbody>
-
                 <!-- Additional rows can be added here -->
                 </tbody>
             </table>
         </div>
 
-    <div class="flex justify-between items-center bg-green-700 text-white font-bold text-xl p-3 mt-4 rounded">
+
+        <div class="flex justify-between items-center bg-green-700 text-white font-bold text-xl p-3 mt-4 rounded">
         <!-- Summary -->
         <div class="w-1/3 bg-green-700 text-white font-bold text-xl p-3 rounded">
             <div class="flex justify-between">
@@ -540,7 +408,7 @@
     <!-- Table -->
     <div class="table-container-return">
         <table class="w-full border-collapse" id="returnProductTable">
-            <thead class="sticky-thead">
+            <thead class="sticky-thead" style="position: sticky; top: 0; z-index: 1;">
             <tr class="bg-green-700 text-white">
                 <th class="p-1 border">No.</th>
                 <th class="p-1 border">Name</th>
@@ -819,55 +687,55 @@
             }
         }
 
-        function itemSuggess() {
-            let productName = $('#searchProduct').val();
+        {{--function itemSuggess() {--}}
+        {{--    let productName = $('#searchProduct').val();--}}
 
-            // Ensure the input is not empty before making a request
-            if (productName.length > 0) {
-                $.ajax({
-                    url: "{{ route('pos.suggestions') }}",
-                    type: 'POST',
-                    data: {
-                        name: productName,
-                        _token: '{{ csrf_token() }}'
-                    }
-                })
-                    .then(function(response, textStatus, jqXHR) {
-                        // This will only run after the AJAX response is received
-                        if (jqXHR.status === 200) {
-                            let suggestionBox = $('#suggestion-box');
-                            suggestionBox.empty();
+        {{--    // Ensure the input is not empty before making a request--}}
+        {{--    if (productName.length > 0) {--}}
+        {{--        $.ajax({--}}
+        {{--            url: "{{ route('pos.suggestions') }}",--}}
+        {{--            type: 'POST',--}}
+        {{--            data: {--}}
+        {{--                name: productName,--}}
+        {{--                _token: '{{ csrf_token() }}'--}}
+        {{--            }--}}
+        {{--        })--}}
+        {{--            .then(function(response, textStatus, jqXHR) {--}}
+        {{--                // This will only run after the AJAX response is received--}}
+        {{--                if (jqXHR.status === 200) {--}}
+        {{--                    let suggestionBox = $('#suggestion-box');--}}
+        {{--                    suggestionBox.empty();--}}
 
-                            // Ensure response is an array or an object containing an array of products
-                            let products = Array.isArray(response) ? response : (response.products || []);
+        {{--                    // Ensure response is an array or an object containing an array of products--}}
+        {{--                    let products = Array.isArray(response) ? response : (response.products || []);--}}
 
-                            console.log(response); // Log the response to check its structure
-                            console.log(products); // Log the products array
+        {{--                    console.log(response); // Log the response to check its structure--}}
+        {{--                    console.log(products); // Log the products array--}}
 
-                            if (products.length > 0) {
-                                // Iterate through the products and build suggestion items
-                                products.forEach(function(product) {
-                                    suggestionBox.append(`
-                            <div class="suggestion-item" style="width: 100%; height: 60px; border: 1px solid black; border-radius: 10px; cursor: pointer;" onclick="selectProduct('${product.product_name}', ${product.id})">
-                                <h2 style="color: black; text-align: center; font-weight: bold; margin-top: 20px;">${product.product_name}</h2>
-                            </div>
-                        `);
-                                });
-                            } else {
-                                suggestionBox.append('<div>No products found</div>');
-                            }
+        {{--                    if (products.length > 0) {--}}
+        {{--                        // Iterate through the products and build suggestion items--}}
+        {{--                        products.forEach(function(product) {--}}
+        {{--                            suggestionBox.append(`--}}
+        {{--                    <div class="suggestion-item" style="width: 100%; height: 60px; border: 1px solid black; border-radius: 10px; cursor: pointer;" onclick="selectProduct('${product.product_name}', ${product.id})">--}}
+        {{--                        <h2 style="color: black; text-align: center; font-weight: bold; margin-top: 20px;">${product.product_name}</h2>--}}
+        {{--                    </div>--}}
+        {{--                `);--}}
+        {{--                        });--}}
+        {{--                    } else {--}}
+        {{--                        suggestionBox.append('<div>No products found</div>');--}}
+        {{--                    }--}}
 
-                            // Ensure the input field remains focused after updating the suggestions
-                            $('#searchProduct').focus();
-                        }
-                    })
-                    .catch(function(error) {
-                        console.error('Error:', error);
-                    });
-            } else {
-                $('#suggestion-box').empty(); // Clear suggestions when the input is empty
-            }
-        }
+        {{--                    // Ensure the input field remains focused after updating the suggestions--}}
+        {{--                    $('#searchProduct').focus();--}}
+        {{--                }--}}
+        {{--            })--}}
+        {{--            .catch(function(error) {--}}
+        {{--                console.error('Error:', error);--}}
+        {{--            });--}}
+        {{--    } else {--}}
+        {{--        $('#suggestion-box').empty(); // Clear suggestions when the input is empty--}}
+        {{--    }--}}
+        {{--}--}}
 
 
 
@@ -876,7 +744,7 @@
         // Function to select the product from the suggestion box
         function selectProduct(productName, productId) {
             $('#searchProduct').val(productName); // Set the selected product name in the input
-            $('#suggestion-box').empty(); // Clear the suggestion box after selection
+            // $('#suggestion-box').empty(); // Clear the suggestion box after selection
         }
 
 
@@ -906,16 +774,16 @@
 
                         // Create a new row with the response data
                         let newRow = `
-                    <tr class="text-center" data-id="${response.id}" style="height: 60px;">
-                        <td class="p-1 border">${itemCount}</td>
-                        <td class="p-1 border">${response.product_name}</td>
-                        <td class="p-1 border">${sellingPrice.toFixed(2)}</td>
-                        <td class="p-1 border">
+                    <tr class="text-center" data-id="${response.id}" style="height: 40px;">
+                        <td class="">${itemCount}</td>
+                        <td class="">${response.product_name}</td>
+                        <td class="">${sellingPrice.toFixed(2)}</td>
+                        <td class="">
                             <input type="text" value="1" class="w-10 text-center border p-1 productQtyCount" onchange="updateTotal(this, ${sellingPrice},${discountPrice})">
                         </td>
-                        <td class="p-1 border">${discountPrice.toFixed(2)}</td>
-                        <td class="p-1 border totalPrice">${subtotal.toFixed(2)}</td>
-                        <td class="p-1 border text-red-600 cursor-pointer" onclick="deleteRow(this)">❌</td>
+                        <td class="">${discountPrice.toFixed(2)}</td>
+                        <td class="" totalPrice">${subtotal.toFixed(2)}</td>
+                        <td class=" text-red-600 cursor-pointer" onclick="deleteRow(this)">❌</td>
                     </tr>
                 `;
 
@@ -1227,6 +1095,7 @@
 
         function printCard() {
             let sellprice=0;
+            console.log(billItem);
             billItem.forEach((item, index) => {
                 // Calculate sell price based on membership status
                 if (hasMember == 1) {
@@ -1238,14 +1107,15 @@
                 // Create the new row for each item
                 let newRow = `
             <tr>
-                <td class="border-0 px-2 py-1" style="text-align: left">${index + 1}.</td>
-                <td class="border-0 px-2 py-1" colspan="3" style="text-align: left">${item.product_name}</td>
+
+                <td class="" colspan="4" style="text-align: left">${index + 1}.${item.product_name}</td>
             </tr>
-            <tr>
-                <td class="border-0 px-2 py-1">${item.qty}</td>
-                <td class="border-0 px-2 py-1">${item.selling_price}</td>
-                <td class="border-0 px-2 py-1">${sellprice.toFixed(2)}</td>
-                <td class="border-0 px-2 py-1">${item.subtotal.toFixed(2)}</td>
+            <tr class="">
+                <td class="" style="padding-left: 50px;">${item.qty}</td>
+
+                <td class="">${item.selling_price}</td>
+                <td class="">${item.selling_price-item.discount}</td>
+                <td class="">${item.subtotal.toFixed(2)}</td>
             </tr>
         `;
                 // Append the new row to the table body

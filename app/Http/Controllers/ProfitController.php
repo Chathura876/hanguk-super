@@ -43,6 +43,7 @@ class ProfitController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
+                    'stocks.discount_price',
                     'order_items.discount_price as discount',
                     DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
                 )
@@ -60,6 +61,7 @@ class ProfitController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
+                    'stocks.discount_price',
                     'order_items.discount_price as discount',
                     DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
                 )
@@ -77,6 +79,7 @@ class ProfitController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
+                    'stocks.discount_price',
                     'order_items.discount_price as discount',
                     DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
                 )
@@ -102,6 +105,7 @@ class ProfitController extends Controller
                             'selling_price' => $item->selling_price,
                             'stock_price' => $item->stock_price,
                             'discount' => $item->discount,
+                            'discount_price'=>$item->discount_price,
                             'profit' => $item->profit,
                             'barcode' => $item->product_barcode
                         ];
@@ -140,6 +144,7 @@ class ProfitController extends Controller
 
 //            dd($profits,$profitsToday,$profits7Day,$profits30Day);
             // Return the profits for each time range in a view
+
             $user = Auth::user();
             return view('owner.sidebar_pages.sale.profit', compact('user',
                 'profits',

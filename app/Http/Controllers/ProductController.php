@@ -19,8 +19,9 @@ class ProductController extends Controller
 {
     public function index(Request $request)
     {
+//        dd($request);
         $user = Auth::user();
-        $search = $request->input('search', '');
+        $search = $request->input('search');
         $productCount = Product::count();
         $product = Product::query()
             ->when($search, function ($query, $search) {

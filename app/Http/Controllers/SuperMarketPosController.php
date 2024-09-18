@@ -31,9 +31,9 @@ class SuperMarketPosController extends Controller
                             $query->where('product_name', 'LIKE', '%' . $request->name . '%');
                         }
 
-                        if ($request->filled('barcode')) {
+                        if ($request->filled('name')) {
                             // Partial match for barcode
-                            $query->orWhere('bar_code', 'LIKE', '%' . $request->barcode . '%');
+                            $query->orWhere('bar_code', 'LIKE', '%' . $request->name . '%');
                         }
                     })
                     ->first();

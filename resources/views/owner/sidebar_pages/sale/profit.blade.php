@@ -179,6 +179,7 @@
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Selling Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Stock Price (Rs.)</th>
+                                                            <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Discount Price (Rs.)</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Qty</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Total (Rs.)</th>
                                                         </tr> <!-- tr-end -->
@@ -191,6 +192,7 @@
                                                             <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
                                                             <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
                                                             <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
+                                                            <td class="px-6 py-2 font-medium">{{$profit['discount_price']}}</td>
                                                             <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
                                                             <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
                                                         </tr> <!-- tr-end -->

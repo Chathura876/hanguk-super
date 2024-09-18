@@ -10,7 +10,7 @@
 
     @yield('content')
 
-    @include('cashier.components.footer')
+{{--    @include('cashier.components.footer')--}}
 {{--</div>--}}
 @stack('script')
 </body>

@@ -48,20 +48,20 @@
 
         <div class="border border-default-200 rounded-lg bg-white dark:bg-default-50 h-fit">
             <div class="flex flex-wrap items-center justify-between py-4 px-5">
-{{--                <form method="POST" class="relative lg:flex hidden">--}}
+                <form method="get" action="{{route('product.index')}}" class="relative lg:flex hidden">
 
                     <input type="text" name="search"
                            class="ps-12 pe-4 py-2.5 block w-64 bg-default-50/0 text-default-600 border-default-200
                            rounded-lg text-sm focus:border-primary focus:ring-primary"
                            placeholder="Search..."
-                           id="searchBox"
-                           oninput="searchProduct()"
+
+
                     >
                     <span class="absolute start-4 top-2.5">
                         <i class="ti ti-search text-lg/none"></i>
                     </span>
 
-{{--                </form>--}}
+                </form>
                 <a href="{{ route('product.create') }}"
                    class="relative overflow-hidden py-2.5 pe-6 ps-12 inline-flex items-center justify-center font-semibold align-middle duration-500 text-sm text-center bg-primary-600 text-white rounded-full hover:bg-primary-700">
                     <span
@@ -92,10 +92,7 @@
                             class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
                             Bar Code
                         </th>
-                        <th scope="col"
-                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
-                            Shop ID
-                        </th>
+
                         {{--                        <th scope="col"--}}
                         {{--                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">--}}
                         {{--                            Type--}}
@@ -116,10 +113,7 @@
                         {{--                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">--}}
                         {{--                            Created By--}}
                         {{--                        </th>--}}
-                        <th scope="col"
-                            class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
-                            Sale on Hare Price
-                        </th>
+
                         <th scope="col"
                             class="px-6 py-3 text-start text-base capitalize font-semibold text-default-900 min-w-32">
                             Enable Stock Group
@@ -150,13 +144,12 @@
 {{--                            </td>--}}
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->product_name }}</td>
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->bar_code }}</td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->shop_id }}</td>
                             {{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->type }}</td>--}}
                             <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->brand_id }}</td>
                             {{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->category_id }}</td>--}}
                             {{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">{{ $item->sub_category_id }}</td>--}}
                             {{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $item->add_by }}</td>--}}
-                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $item->sale_on_hare_price }}</td>
+{{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">{{ $item->sale_on_hare_price }}</td>--}}
                             <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
                                 <input type="checkbox" disabled {{ $item->enable_stock_group ? 'checked' : '' }}>
                             </td>
