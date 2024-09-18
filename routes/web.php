@@ -195,8 +195,8 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
 
     });
-  });
-});
+//  });
+//});
 //});
 
 

@@ -93,63 +93,63 @@
     <script src="https://cdn.tailwindcss.com"></script>
 @endpush
 @section('content')
-    <section class="bill d-none">
-        <div class="receipt max-w-sm bg-white shadow-lg rounded-lg p-4" id="receipt" style="width: 7.8cm">
-            <!-- Header -->
-            <div class="items-center">
-                <!-- Right Column: Text -->
-                <div class="text-center">
-                    <h2 class="text-2xl font-bold mt-4">හන්ගුක් Super</h2>
-                    <p class="text-xs font-bold">එන්න ඔබේ සහන සෙවනට</p>
-                    <p class="text-xs font-bold">No. 23/1, Wadurawa, Veyangoda</p>
-                    <p class="text-xs font-bold mt-2">දු.ක. : 0332054327</p>
-                </div>
-            </div>
+{{--    <section class="bill d-none">--}}
+{{--        <div class="receipt max-w-sm bg-white shadow-lg rounded-lg p-4" id="receipt" style="width: 7.8cm">--}}
+{{--            <!-- Header -->--}}
+{{--            <div class="items-center">--}}
+{{--                <!-- Right Column: Text -->--}}
+{{--                <div class="text-center">--}}
+{{--                    <h2 class="text-2xl font-bold mt-4">හන්ගුක් Super</h2>--}}
+{{--                    <p class="text-xs font-bold">එන්න ඔබේ සහන සෙවනට</p>--}}
+{{--                    <p class="text-xs font-bold">No. 23/1, Wadurawa, Veyangoda</p>--}}
+{{--                    <p class="text-xs font-bold mt-2">දු.ක. : 0332054327</p>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <hr class="border-t-2 border-dashed border-gray-600 my-4">
+{{--            <hr class="border-t-2 border-dashed border-gray-600 my-4">--}}
 
-            <!-- Receipt Details -->
-            <div class="mt-4">
-                <table class="text-sm">
-                    <tr>
-                        <td class="font-bold bill-details">දිනය </td>
-                        <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bill-details">බිල් අංකය </td>
-                        <td>: #7248</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bill-details">අයකැමි </td>
-                        <td>: hanguksuper</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bill-details">පාරිභෝගිකයා </td>
-                        <td>: Walk in Customer</td>
-                    </tr>
-                    <tr>
-                        <td class="font-bold bill-details">ආරම්භක වේලාව </td>
-                        <td>: <span class="live-time"></span></td>
-                    </tr>
-                </table>
-            </div>
+{{--            <!-- Receipt Details -->--}}
+{{--            <div class="mt-4">--}}
+{{--                <table class="text-sm">--}}
+{{--                    <tr>--}}
+{{--                        <td class="font-bold bill-details">දිනය </td>--}}
+{{--                        <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="font-bold bill-details">බිල් අංකය </td>--}}
+{{--                        <td>: #7248</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="font-bold bill-details">අයකැමි </td>--}}
+{{--                        <td>: hanguksuper</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="font-bold bill-details">පාරිභෝගිකයා </td>--}}
+{{--                        <td>: Walk in Customer</td>--}}
+{{--                    </tr>--}}
+{{--                    <tr>--}}
+{{--                        <td class="font-bold bill-details">ආරම්භක වේලාව </td>--}}
+{{--                        <td>: <span class="live-time"></span></td>--}}
+{{--                    </tr>--}}
+{{--                </table>--}}
+{{--            </div>--}}
 
-            <hr class="border-t-2 border-dashed border-gray-600 mt-4">
+{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
 
-            <!-- Items Table -->
-            <table class="w-full text-sm border-collapse" id="printBillTable">
-                <thead>
-                <tr>
-                    <th class="border-0 px-1 py-1 bill-details">ප්‍රමාණය</th>
-                    <th class="border-0 px-1 py-1 bill-details">සිල්ලර මිල</th>
-                    <th class="border-0 px-1 py-1 bill-details">අපේ මිල</th>
-                    <th class="border-0 px-1 py-1 bill-details">වටිනාකම</th>
-                </tr>
-                <tr>
-                    <td colspan="5" class="border-0 p-0"><hr class="border-t-2 border-dashed border-gray-600 my-0"></td>
-                </tr>
-                </thead>
-                <tbody class="text-center">
+{{--            <!-- Items Table -->--}}
+{{--            <table class="w-full text-sm border-collapse" id="printBillTable">--}}
+{{--                <thead>--}}
+{{--                <tr>--}}
+{{--                    <th class="border-0 px-1 py-1 bill-details">ප්‍රමාණය</th>--}}
+{{--                    <th class="border-0 px-1 py-1 bill-details">සිල්ලර මිල</th>--}}
+{{--                    <th class="border-0 px-1 py-1 bill-details">අපේ මිල</th>--}}
+{{--                    <th class="border-0 px-1 py-1 bill-details">වටිනාකම</th>--}}
+{{--                </tr>--}}
+{{--                <tr>--}}
+{{--                    <td colspan="5" class="border-0 p-0"><hr class="border-t-2 border-dashed border-gray-600 my-0"></td>--}}
+{{--                </tr>--}}
+{{--                </thead>--}}
+{{--                <tbody class="text-center">--}}
 {{--                <tr>--}}
 {{--                    <td class="border-0 px-2 py-1" style="text-align: left">1.</td>--}}
 {{--                    <td class="border-0 px-2 py-1" colspan="3" style="text-align: left">Kotmale Fresh Milk</td>--}}
@@ -160,48 +160,156 @@
 {{--                    <td class="border-0 px-2 py-1">500.00</td>--}}
 {{--                    <td class="border-0 px-2 py-1">500.00</td>--}}
 {{--                </tr>--}}
-                </tbody>
-            </table>
+{{--                </tbody>--}}
+{{--            </table>--}}
 
-            <hr class="border-t-2 border-dashed border-gray-600 mt-4">
+{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
 
-            <!-- Totals and Summary -->
-            <div class="mt-4">
-                <div class="flex justify-between">
-                    <span class="bill-details">සිල්ලර එකතුව</span>
-                    <span class="bill-details" id="printBillNetTotal"></span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="bill-details">වට්ටම්</span>
-                    <span class="bill-details printBillDiscount"></span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="font-bold bill-details">මුළු එකතුව</span>
-                    <span class="bill-details" id="printBillFinalTotal"></span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="bill-details">මුදල් ගෙවීම</span>
-                    <span class="bill-details" id="printBillPayAmo"></span>
-                </div>
-                <div class="flex justify-between">
-                    <span class="bill-details">ඉතිරි මුදල</span>
-                    <span class="bill-details" id="printBillBalance"></span>
-                </div>
-            </div>
+{{--            <!-- Totals and Summary -->--}}
+{{--            <div class="mt-4">--}}
+{{--                <div class="flex justify-between">--}}
+{{--                    <span class="bill-details">සිල්ලර එකතුව</span>--}}
+{{--                    <span class="bill-details" id="printBillNetTotal"></span>--}}
+{{--                </div>--}}
+{{--                <div class="flex justify-between">--}}
+{{--                    <span class="bill-details">වට්ටම්</span>--}}
+{{--                    <span class="bill-details printBillDiscount"></span>--}}
+{{--                </div>--}}
+{{--                <div class="flex justify-between">--}}
+{{--                    <span class="font-bold bill-details">මුළු එකතුව</span>--}}
+{{--                    <span class="bill-details" id="printBillFinalTotal"></span>--}}
+{{--                </div>--}}
+{{--                <div class="flex justify-between">--}}
+{{--                    <span class="bill-details">මුදල් ගෙවීම</span>--}}
+{{--                    <span class="bill-details" id="printBillPayAmo"></span>--}}
+{{--                </div>--}}
+{{--                <div class="flex justify-between">--}}
+{{--                    <span class="bill-details">ඉතිරි මුදල</span>--}}
+{{--                    <span class="bill-details" id="printBillBalance"></span>--}}
+{{--                </div>--}}
+{{--            </div>--}}
 
-            <hr class="border-t-2 border-dashed border-gray-600 mt-4">
+{{--            <hr class="border-t-2 border-dashed border-gray-600 mt-4">--}}
 
-            <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span></h2>
+{{--            <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span></h2>--}}
 
-            <!-- Footer -->
-            <div class="mt-4 text-center text-sm">
-                <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>
-                <p>වාසි සපිරි සුපිරි තැන</p>
+{{--            <!-- Footer -->--}}
+{{--            <div class="mt-4 text-center text-sm">--}}
+{{--                <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>--}}
+{{--                <p>වාසි සපිරි සුපිරි තැන</p>--}}
 {{--                <p class="mt-2">අවසන් වේලාව : 04.58.04 PM</p>--}}
-                <p class="mt-4 font-bold">** CodeXpress Technologies +94 77 767 4308**</p>
+{{--                <p class="mt-4 font-bold">** CodeXpress Technologies +94 77 767 4308**</p>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </section>--}}
+
+<section class="bill d-none">
+    <div class="receipt bg-white shadow-lg rounded-lg p-4" id="receipt" style="width: 7.8cm;">
+        <!-- Header -->
+        <div class="text-center">
+            <h2 class="h4 font-weight-bold mt-4">හන්ගුක් Super</h2>
+            <p class="small font-weight-bold">එන්න ඔබේ සහන සෙවනට</p>
+            <p class="small font-weight-bold">No. 23/1, Wadurawa, Veyangoda</p>
+            <p class="small font-weight-bold mt-2">දු.ක. : 0332054327</p>
+        </div>
+
+        <hr class="border-top border-dashed my-4">
+
+        <!-- Receipt Details -->
+        <div class="mt-4">
+            <table class="table table-sm">
+                <tr>
+                    <td class="font-weight-bold">දිනය</td>
+                    <td>: {{ \Carbon\Carbon::today()->format('Y-m-d') }}</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">බිල් අංකය</td>
+                    <td>: #7248</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">අයකැමි</td>
+                    <td>: hanguksuper</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">පාරිභෝගිකයා</td>
+                    <td>: Walk in Customer</td>
+                </tr>
+                <tr>
+                    <td class="font-weight-bold">ආරම්භක වේලාව</td>
+                    <td>: <span class="live-time"></span></td>
+                </tr>
+            </table>
+        </div>
+
+        <hr class="border-top border-dashed my-4">
+
+        <!-- Items Table -->
+        <table class="table table-bordered text-center table-sm" id="printBillTable" style="border-collapse: separate;
+        border-spacing: 40px 0;">
+            <thead>
+            <tr>
+                <th>ප්‍රමාණය</th>
+                <th>සිල්ලර මිල</th>
+                <th>අපේ මිල</th>
+                <th>වටිනාකම</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Item rows will be inserted here -->
+            <tr>
+                <td>1.</td>
+                <td>Kotmale Fresh Milk</td>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>500.00</td>
+                <td>500.00</td>
+                <td>500.00</td>
+            </tr>
+            </tbody>
+        </table>
+
+        <hr class="border-top border-dashed my-4">
+
+        <!-- Totals and Summary -->
+        <div class="mt-4">
+            <div class="d-flex justify-content-between">
+                <span>සිල්ලර එකතුව</span>
+                <span id="printBillNetTotal"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>වට්ටම්</span>
+                <span class="printBillDiscount"></span>
+            </div>
+            <div class="d-flex justify-content-between font-weight-bold">
+                <span>මුළු එකතුව</span>
+                <span id="printBillFinalTotal"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>මුදල් ගෙවීම</span>
+                <span id="printBillPayAmo"></span>
+            </div>
+            <div class="d-flex justify-content-between">
+                <span>ඉතිරි මුදල</span>
+                <span id="printBillBalance"></span>
             </div>
         </div>
-    </section>
+
+        <hr class="border-top border-dashed my-4">
+
+        <h2 class="text-center font-weight-bold border border-dark mt-4">
+            ඔබට ලැබුණු ලාභය රුපියල් : <span class="printBillDiscount"></span>
+        </h2>
+
+        <!-- Footer -->
+        <div class="mt-4 text-center small">
+            <p>භාණ්ඩ සංඛ්‍යාව : <span id="printBillItemCount">0</span></p>
+            <p>වාසි සපිරි සුපිරි තැන</p>
+            <p class="mt-4 font-weight-bold">** CodeXpress Technologies +94 77 767 4308 **</p>
+        </div>
+    </div>
+</section>
+
 
     <div id="posSection" class="p-6 space-y-6">
 <!-- Container -->
