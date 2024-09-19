@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Expense;
+use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Product;
 use App\Models\Stock;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Contracts\Support\Renderable;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 
 class SuperMarketPosController extends Controller
@@ -252,15 +257,246 @@ class SuperMarketPosController extends Controller
         return $pdf->download("stock_report_{$period}.pdf");
     }
 
-    public function reports()
-    {
-        $user = Auth::user();
-        $stock = Stock::with('product')->get();
+//    public function reports()
+//    {
+//        $user = Auth::user();
+//        $stock = Stock::with('product')->get();
+//
+//        return view('cashier.sidebar_pages.reports', compact('user', 'stock'));
+//    }
 
-        return view('cashier.sidebar_pages.reports', compact('user', 'stock'));
+    public function reports(Request $request)
+    {
+        try {
+            $startDate = $request->input('start_date');
+            $endDate = $request->input('end_date');
+
+            // Fetch OrderItems with related product and stock details using joins
+            $sellItems = DB::table('order_items')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->select(
+                    'order_items.order_id',
+                    'order_items.product_id',
+                    'products.product_name',
+                    'products.bar_code as product_barcode',
+                    'order_items.quantity',
+                    'order_items.price as selling_price',
+                    'stocks.stock_price',
+                    'order_items.discount_price as discount',
+                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                )
+                ->whereBetween('order_items.date', [$startDate, $endDate])
+                ->get();
+
+            $sellItemsToday = DB::table('order_items')
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->join('products', 'stocks.item_id', '=', 'products.id')
+                ->select(
+                    'order_items.order_id',
+                    'order_items.product_id',
+                    'products.product_name',
+                    'products.bar_code as product_barcode',
+                    'order_items.quantity',
+                    'order_items.price as selling_price',
+                    'stocks.stock_price',
+                    'stocks.discount_price',
+                    'order_items.discount_price as discount',
+                    DB::raw('(
+            (order_items.price - stocks.stock_price - order_items.discount_price) * order_items.quantity
+        ) as profit')
+                )
+                ->whereDate('order_items.date', today())
+                ->get();
+
+
+            $sellItems7day = DB::table('order_items')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->select(
+                    'order_items.order_id',
+                    'order_items.product_id',
+                    'products.product_name',
+                    'products.bar_code as product_barcode',
+                    'order_items.quantity',
+                    'order_items.price as selling_price',
+                    'stocks.stock_price',
+                    'stocks.discount_price',
+                    'order_items.discount_price as discount',
+                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                )
+                ->whereBetween('order_items.date', [today(), today()->addDays(7)])
+                ->get();
+
+            $sellItems30day = DB::table('order_items')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->select(
+                    'order_items.order_id',
+                    'order_items.product_id',
+                    'products.product_name',
+                    'products.bar_code as product_barcode',
+                    'order_items.quantity',
+                    'order_items.price as selling_price',
+                    'stocks.stock_price',
+                    'stocks.discount_price',
+                    'order_items.discount_price as discount',
+                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                )
+                ->whereBetween('order_items.date', [today(), today()->addDays(30)])
+                ->get();
+
+            // Function to aggregate profits by product
+            $aggregateProfits = function ($sellItems) {
+                $profits = [];
+
+                foreach ($sellItems as $item) {
+                    $productId = $item->product_id;
+
+                    if (isset($profits[$productId])) {
+                        $profits[$productId]['quantity'] += $item->quantity;
+                        $profits[$productId]['profit'] += $item->profit;
+                    } else {
+                        $profits[$productId] = [
+                            'order_id' => $item->order_id,
+                            'product_id' => $item->product_id,
+                            'product_name' => $item->product_name,
+                            'quantity' => $item->quantity,
+                            'selling_price' => $item->selling_price,
+                            'stock_price' => $item->stock_price,
+                            'discount' => $item->discount,
+                            'discount_price'=>$item->discount_price,
+                            'profit' => $item->profit,
+                            'barcode' => $item->product_barcode
+                        ];
+                    }
+                }
+
+                return array_values($profits);
+            };
+
+            $profits = $aggregateProfits($sellItems);
+            $profitsToday = $aggregateProfits($sellItemsToday);
+            $profits7Day = $aggregateProfits($sellItems7day);
+            $profits30Day = $aggregateProfits($sellItems30day);
+
+            $totalProfitToday=0;
+            $totalProfit7Day=0;
+            $totalProfit30Day=0;
+            $totalSaleToday=0;
+            $totalSale7Day=0;
+            $totalSale30Day=0;
+            $totalCostToday=0;
+
+            foreach ($profitsToday as $profit){
+                $totalProfitToday += $profit['profit'];
+                $totalSaleToday += $profit['selling_price'] * $profit['quantity'];
+                $totalCostToday += $profit['stock_price'] * $profit['quantity'];
+            }
+
+            foreach ($profits7Day as $profit){
+                $totalProfit7Day += $profit['profit'];
+                $totalSale7Day += $profit['selling_price'] * $profit['quantity'];
+            }
+
+            foreach ($profits30Day as $profit){
+                $totalProfit30Day += $profit['profit'];
+                $totalSale30Day += $profit['selling_price'] * $profit['quantity'];
+            }
+
+//            dd($profits,$profitsToday,$profits7Day,$profits30Day);
+            // Return the profits for each time range in a view
+
+            $user = Auth::user();
+            $totalCashToday= $this->cashPayment();
+            $totalCardToday= $this->cardPayment();
+            $todayExpences= $this->expencesToday();
+//            $todayTotalCost=$this->totalCost();
+
+
+            return view('cashier.sidebar_pages.reports', compact('user',
+                'profits',
+                'profitsToday',
+                'profits7Day',
+                'profits30Day',
+                'totalProfitToday',
+                'totalProfit7Day',
+                'totalProfit30Day',
+                'totalSaleToday',
+                'totalSale7Day',
+                'totalSale30Day',
+                 'todayExpences',
+                 'totalCardToday',
+                   'totalCashToday',
+                    'totalCostToday'
+
+            ));
+
+        } catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
     }
 
 
+    public function totalCost()
+    {
+        try {
+            $today = Carbon::today();
+            $totalCostToday = OrderItem::query()
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->whereDate('order_items.created_at', $today)
+                ->selectRaw('SUM(stocks.stock_price) as total_cost')
+                ->value('total_cost');;
+
+            return $totalCostToday;
+        }
+        catch (\Exception $exception) {
+            return $exception->getMessage();
+        }
+    }
+    public function cashPayment()
+    {
+        try {
+            $today = Carbon::today(); // Get today's date
+            $cashPayToday = Order::query()
+                ->where('type', 'cash')
+                ->whereDate('created_at', $today) // Assuming 'created_at' is the date column
+                ->sum('net_total');
+           return $cashPayToday;
+        }
+        catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public function cardPayment()
+    {
+        try {
+            $today = Carbon::today(); // Get today's date
+            $cardPayToday = Order::query()
+                ->where('type', 'card')
+                ->whereDate('created_at', $today) // Assuming 'created_at' is the date column
+                ->sum('net_total');
+           return $cardPayToday;
+        }
+        catch (\Exception $exception){
+            return $exception->getMessage();
+        }
+    }
+
+    public function expencesToday()
+    {
+        try {
+             $todayExpenses=Expense::query()
+                 ->whereDate('date', today())
+                 ->sum('amount');
+
+             return $todayExpenses;
+        }
+        catch (\Exception $exception){
+
+        }
+    }
     public function members()
     {
         $user = Auth::user();
