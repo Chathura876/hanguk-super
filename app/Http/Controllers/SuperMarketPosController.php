@@ -127,4 +127,10 @@ class SuperMarketPosController extends Controller
         return view('cashier.sidebar_pages.cheque.edit_cheque',compact('user'));
     }
 
+    public function purchase()
+    {
+//        $user=Auth::user();
+        return view('cashier.purchase_cashier');
+    }
+
 }

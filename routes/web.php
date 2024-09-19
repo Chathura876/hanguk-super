@@ -193,6 +193,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/add_cheque', [SuperMarketPosController::class, 'add_cheque'])->name('pos.add_cheque');
         Route::get('/view_cheque', [SuperMarketPosController::class, 'view_cheque'])->name('pos.view_cheque');
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
+        Route::get('/purchase', [SuperMarketPosController::class, 'purchase'])->name('pos.purchase');
 
     });
 //  });
