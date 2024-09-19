@@ -12,6 +12,7 @@ use App\Http\Controllers\ProductController;
 //use App\Http\Controllers\ProductTypeController;
 use App\Http\Controllers\ProfitController;
 use App\Http\Controllers\ProductTypeController;
+use App\Http\Controllers\Reportcontroller;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SuperMarketPosController;
 use Illuminate\Support\Facades\Route;
@@ -217,6 +218,9 @@ Route::middleware(['auth:owner'])->group(function () {
 
   Route::prefix('profit')->group(function () {
       Route::get('/', [ProfitController::class, 'profit'])->name('profit.index');
+      Route::get('/report/daily', [Reportcontroller::class, 'dailyReport'])->name('report.daily');
+      Route::get('/report/weekly', [Reportcontroller::class, 'weeklyReport'])->name('report.weekly');
+      Route::get('/report/monthly', [Reportcontroller::class, 'monthlyReport'])->name('report.monthly');
   });
 
 //});

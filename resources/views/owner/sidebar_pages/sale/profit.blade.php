@@ -224,14 +224,9 @@
 
                                     <div class="mt-10">
                                         <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
+                                            <a href="{{ route('report.daily') }}" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
+                                                <i class="fas fa-file-alt text-lg me-1"></i> Daily Report
                                             </a>
-{{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
-
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
                                     </div>
 
                                 </div>
@@ -442,15 +437,14 @@
 
                                     <div class="mt-10">
                                         <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
-                                            </a>
-                                            {{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
 
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
+                                            <!-- Button for Generating Profit Report -->
+                                            <a href="{{ route('report.daily') }}" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
+                                                <i class="ti ti-chart-line text-lg/none me-1"></i> Profit Report
+                                            </a>
+                                        </div> <!-- flex-end -->
                                     </div>
+
 
                                 </div>
                             </div>
@@ -501,8 +495,15 @@
                                             <div>
                                                 <div class="min-w-full inline-block align-middle overflow-hidden border border-default-200 rounded-md">
 
+                                                    <!-- Button for Generating Profit Report -->
+                                                    <div class="flex justify-end mb-3">
+                                                        <a href="{{ route('report.daily') }}" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
+                                                            <i class="fas fa-file-download text-lg me-1"></i> Generate Profit Report
+                                                        </a>
+                                                    </div>
+
                                                     <table class="min-w-full">
-                                                        <thead class="border-b py-3 bg-default-100 border-default-200 ">
+                                                        <thead class="border-b py-3 bg-default-100 border-default-200">
                                                         <tr>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product ID</th>
                                                             <th scope="col" class="px-6 py-2 text-left font-semibold text-default-500">Product Name</th>
@@ -546,20 +547,29 @@
                                             <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
                                             <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfit30Day}}</span></h6>
                                         </div>
+                                    </div>
+
+
+                                    <div class="*:border-b *:border-default-200 bg-default-100 mb-8">
+                                        <div class="flex items-center justify-between p-3">
+                                            <h6 class="text-base text-default-800 font-medium">Sales Amount :</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalSale30Day}}</span></h6>
+                                        </div>
+                                        <div class="flex items-center justify-between p-3">
+                                            <h6 class="text-base text-default-800 font-medium">Total Expenses :</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs. 00.00</h6>
+                                        </div>
+                                        <div class="flex items-center justify-between p-3">
+                                            <h6 class="text-base text-default-800 font-medium">Net Profit :</h6>
+                                            <h6 class="text-base text-default-800 font-medium">Rs.<span>{{$totalProfit30Day}}</span></h6>
+                                        </div>
 
                                     </div>
 
-                                    <div class="mt-10">
-                                        <div class="flex sm:justify-end gap-2 print:hidden">
-                                            <a href="#" download="filename.xlsx" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded">
-                                                <i class="ti ti-file-spreadsheet text-lg/none me-1"></i> Excel
-                                            </a>
-                                            {{--                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>--}}
-                                            <a href="javascript:window.print()" class="py-2 px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-printer text-lg/none me-1"></i> Print</a>
 
-                                            <button type="button" class="px-4 inline-flex items-center justify-center font-semibold tracking-wide align-middle duration-500 text-xs text-center bg-primary-500 hover:bg-primary-600 text-white rounded"><i class="ti ti-file-download text-lg/none me-1"></i> Save
-                                            </button></div> <!-- flex-end -->
-                                    </div>
+
+
+
 
                                 </div>
                             </div>
