@@ -202,64 +202,64 @@
     <script src="{{asset('Hanguk_super/assets/JS/jquary/jquery-3.7.1.min.JS')}}"></script>
 
     <!-- Your custom JavaScript -->
-    <script>
-        function searchProduct() {
+{{--    <script>--}}
+{{--        function searchProduct() {--}}
 
-            let name = $('#searchBox').val();
+{{--            let name = $('#searchBox').val();--}}
 
-            $.ajax({
-                url: "{{ route('product.search') }}",
-                type: 'POST',
-                data: {
-                    search: name,
-                    _token: '{{ csrf_token() }}'
-                },
-                success: function(response) {
-                    let tbody = $('#productTable tbody');
-                    tbody.empty();
+{{--            $.ajax({--}}
+{{--                url: "{{ route('product.search') }}",--}}
+{{--                type: 'POST',--}}
+{{--                data: {--}}
+{{--                    search: name,--}}
+{{--                    _token: '{{ csrf_token() }}'--}}
+{{--                },--}}
+{{--                success: function(response) {--}}
+{{--                    let tbody = $('#productTable tbody');--}}
+{{--                    tbody.empty();--}}
 
-                    response.forEach(product => {
-                        let row = `
-                        <tr>
-                            <td class="px-6 py-3">
-                                <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">
-                            </td>
-                            <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">
-                                <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">
-                                    <img src="{{ asset('storage/') }}/${product.image.replace('public/', '')}" alt="${product.product_name}" class="max-w-full h-full rounded-full">
-                                </span>
-                            </td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.product_name}</td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.bar_code}</td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.shop_id}</td>
-                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.brand_id}</td>
-                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">${product.sale_on_hare_price}</td>
-                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">
-                                <input type="checkbox" disabled ${product.enable_stock_group ? 'checked' : ''}>
-                            </td>
-                            <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
-                                <div class="flex items-center justify-center gap-2">
-                                    <button type="button" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                        <i class="ti ti-eye text-lg"></i>
-                                    </button>
-                                    <!-- Example of how to dynamically set href with product id -->
-                                    <a href="{{ url('product/edit') }}/${product.id}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                        <i class="ti ti-edit-circle text-base"></i>
-                                    </a>
-                                    <a href="{{ url('product/delete') }}/${product.id}" class="btn inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
-                                        <i class="ti ti-trash text-lg"></i>
-                                    </a>
-                                </div>
-                            </td>
-                        </tr>
-                    `;
-                        tbody.append(row);
-                    });
-                },
-                error: function(xhr) {
-                    console.error('Error fetching data:', xhr);
-                }
-            });
-        }
-    </script>
+{{--                    response.forEach(product => {--}}
+{{--                        let row = `--}}
+{{--                        <tr>--}}
+{{--                            <td class="px-6 py-3">--}}
+{{--                                <input type="checkbox" class="form-checkbox transition-all duration-100 ease-in-out border-default-200 cursor-pointer rounded text-primary bg-default-50 focus:ring-transparent focus:ring-offset-0">--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-3 text-default-900 font-semibold whitespace-nowrap">--}}
+{{--                                <span class="h-10 w-10 inline-flex items-center justify-center rounded-full">--}}
+{{--                                    <img src="{{ asset('storage/') }}/${product.image.replace('public/', '')}" alt="${product.product_name}" class="max-w-full h-full rounded-full">--}}
+{{--                                </span>--}}
+{{--                            </td>--}}
+{{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.product_name}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.bar_code}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.shop_id}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-900 font-medium whitespace-nowrap">${product.brand_id}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">${product.sale_on_hare_price}</td>--}}
+{{--                            <td class="px-6 py-3 text-default-600 font-medium whitespace-nowrap">--}}
+{{--                                <input type="checkbox" disabled ${product.enable_stock_group ? 'checked' : ''}>--}}
+{{--                            </td>--}}
+{{--                            <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">--}}
+{{--                                <div class="flex items-center justify-center gap-2">--}}
+{{--                                    <button type="button" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">--}}
+{{--                                        <i class="ti ti-eye text-lg"></i>--}}
+{{--                                    </button>--}}
+{{--                                    <!-- Example of how to dynamically set href with product id -->--}}
+{{--                                    <a href="{{ url('product/edit') }}/${product.id}" class="inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">--}}
+{{--                                        <i class="ti ti-edit-circle text-base"></i>--}}
+{{--                                    </a>--}}
+{{--                                    <a href="{{ url('product/delete') }}/${product.id}" class="btn inline-flex items-center justify-center h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">--}}
+{{--                                        <i class="ti ti-trash text-lg"></i>--}}
+{{--                                    </a>--}}
+{{--                                </div>--}}
+{{--                            </td>--}}
+{{--                        </tr>--}}
+{{--                    `;--}}
+{{--                        tbody.append(row);--}}
+{{--                    });--}}
+{{--                },--}}
+{{--                error: function(xhr) {--}}
+{{--                    console.error('Error fetching data:', xhr);--}}
+{{--                }--}}
+{{--            });--}}
+{{--        }--}}
+{{--    </script>--}}
 @endpush
