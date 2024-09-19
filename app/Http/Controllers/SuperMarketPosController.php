@@ -233,29 +233,7 @@ class SuperMarketPosController extends Controller
 
         return view('cashier.sidebar_pages.reports', compact('user', 'stock', 'startOfMonth', 'endOfMonth'));
     }
-    public function downloadReport($period)
-    {
-        $user = Auth::user();
 
-        if ($period == 'daily') {
-            $startDate = now()->startOfDay();
-            $endDate = now()->endOfDay();
-        } elseif ($period == 'weekly') {
-            $startDate = now()->startOfWeek();
-            $endDate = now()->endOfWeek();
-        } elseif ($period == 'monthly') {
-            $startDate = now()->startOfMonth();
-            $endDate = now()->endOfMonth();
-        }
-
-        $stock = Stock::with('product')
-            ->whereBetween('created_at', [$startDate, $endDate])
-            ->orderBy('id', 'desc')
-            ->get();
-
-        $pdf = Pdf::loadView('cashier.sidebar_pages.reports_pdf', compact('user', 'stock', 'startDate', 'endDate'));
-        return $pdf->download("stock_report_{$period}.pdf");
-    }
 
 //    public function reports()
 //    {
@@ -436,7 +414,94 @@ class SuperMarketPosController extends Controller
             return $exception->getMessage();
         }
     }
+    public function downloadReport(Request $request, $period)
+    {
+        try {
+            // Define date ranges based on the period
+            $startDate = now()->startOfDay();
+            $endDate = now()->endOfDay();
 
+            if ($period === 'weekly') {
+                $startDate = now()->startOfWeek();
+                $endDate = now()->endOfWeek();
+            } elseif ($period === 'monthly') {
+                $startDate = now()->startOfMonth();
+                $endDate = now()->endOfMonth();
+            }
+
+            // Fetch order items for the specified period
+            $sellItems = DB::table('order_items')
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
+                ->select(
+                    'order_items.order_id',
+                    'order_items.product_id',
+                    'products.product_name',
+                    'products.bar_code as product_barcode',
+                    'order_items.quantity',
+                    'order_items.price as selling_price',
+                    'stocks.stock_price',
+                    'order_items.discount_price as discount',
+                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                )
+                ->whereBetween('order_items.date', [$startDate, $endDate])
+                ->get();
+
+            // Aggregate profits
+            $aggregateProfits = function ($sellItems) {
+                $profits = [];
+                foreach ($sellItems as $item) {
+                    $productId = $item->product_id;
+                    if (isset($profits[$productId])) {
+                        $profits[$productId]['quantity'] += $item->quantity;
+                        $profits[$productId]['profit'] += $item->profit;
+                    } else {
+                        $profits[$productId] = [
+                            'order_id' => $item->order_id,
+                            'product_id' => $item->product_id,
+                            'product_name' => $item->product_name,
+                            'quantity' => $item->quantity,
+                            'selling_price' => $item->selling_price,
+                            'stock_price' => $item->stock_price,
+                            'discount' => $item->discount,
+                            'discount_price' => $item->discount_price,
+                            'profit' => $item->profit,
+                            'barcode' => $item->product_barcode
+                        ];
+                    }
+                }
+                return array_values($profits);
+            };
+
+            $profits = $aggregateProfits($sellItems);
+
+            // Convert to collection
+            $profitsCollection = collect($profits);
+
+            // Calculate totals
+            $totalProfit = $profitsCollection->sum('profit');
+            $totalSales = $profitsCollection->sum(function ($item) {
+                return $item['selling_price'] * $item['quantity'];
+            });
+            $totalCost = $profitsCollection->sum(function ($item) {
+                return $item['stock_price'] * $item['quantity'];
+            });
+
+            // Generate PDF
+            $pdf = PDF::loadView('owner.sidebar_pages.sale.Profit_report', [
+                'profits' => $profits,
+                'totalProfit' => $totalProfit,
+                'totalSales' => $totalSales,
+                'totalCost' => $totalCost,
+                'startDate' => $startDate->format('Y-m-d'),
+                'endDate' => $endDate->format('Y-m-d'),
+            ]);
+
+            return $pdf->download('profit_report_' . $period . '.pdf');
+        } catch (\Exception $exception) {
+            return response()->json(['error' => $exception->getMessage()], 500);
+        }
+    }
 
     public function totalCost()
     {

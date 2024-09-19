@@ -222,6 +222,7 @@
                                                 <a href="{{ route('reports.download', ['period' => 'monthly']) }}" class="btn btn-primary mr-2">Monthly Report</a>
                                             </div>
 
+
                                             <div class="flex-column">
                                                 <div class="d-grid gap-2">
                                                     <div class="row">

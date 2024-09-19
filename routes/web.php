@@ -199,7 +199,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/reports/daily', [SuperMarketPosController::class, 'dailyReport'])->name('reports.daily');
         Route::get('/reports/weekly', [SuperMarketPosController::class, 'weeklyReport'])->name('reports.weekly');
         Route::get('/reports/monthly', [SuperMarketPosController::class, 'monthlyReport'])->name('reports.monthly');
-        Route::get('/reports/download/{period}', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
+//        Route::get('/reports/download/{period}', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
 
 
         Route::get('/members', [SuperMarketPosController::class, 'members'])->name('pos.members');
@@ -215,6 +215,10 @@ Route::middleware(['auth:owner'])->group(function () {
 
     });
   });
+
+Route::prefix('reports')->group(function () {
+    Route::get('/download/{period}', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
+});
 
   Route::prefix('profit')->group(function () {
       Route::get('/', [ProfitController::class, 'profit'])->name('profit.index');
