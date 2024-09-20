@@ -217,7 +217,7 @@ Route::middleware(['auth:owner'])->group(function () {
   });
 
 Route::prefix('reports')->group(function () {
-    Route::get('/download/{period}', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
+    Route::get('/download/', [SuperMarketPosController::class, 'downloadReport'])->name('reports.download');
 });
 
   Route::prefix('profit')->group(function () {

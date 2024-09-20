@@ -217,9 +217,14 @@
 
                                             </div>
                                             <div class="d-flex gap-2 mb-4 ">
-                                                <a href="{{ route('reports.download', ['period' => 'daily']) }}" class="btn btn-primary mr-2">Daily Report</a>
-                                                <a href="{{ route('reports.download', ['period' => 'weekly']) }}" class="btn btn-primary mr-2">Weekly Report</a>
-                                                <a href="{{ route('reports.download', ['period' => 'monthly']) }}" class="btn btn-primary mr-2">Monthly Report</a>
+                                                <form action="{{ route('reports.download') }}" method="GET">
+                                                    <label for="start_date">Start Date:</label>
+                                                    <input type="date" name="start_date" required>
+                                                    <label for="end_date">End Date:</label>
+                                                    <input type="date" name="end_date" required>
+                                                    <button type="submit">Generate Report</button>
+                                                    <input type="hidden" name="generate_pdf" value="1">
+                                                </form>
                                             </div>
 
 
