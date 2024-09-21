@@ -111,6 +111,10 @@
             font-weight: bold;
         }
 
+        #billTable td{
+            padding: 0;
+        }
+
     </style>
     <script src="https://cdn.tailwindcss.com"></script>
 @endpush
@@ -852,12 +856,12 @@
 
                                 // Create a new row with the response data
                                 let newRow = `
-                                <tr class="text-center" data-id="${response.id}" style="height: 40px;">
+                                <tr class="text-center" data-id="${response.id}" style="height: 10px;">
                                     <td class="">${itemCount}</td>
                                     <td class="">${response.product_name}</td>
                                     <td class="">${sellingPrice.toFixed(2)}</td>
                                     <td class="">
-                                        <input type="text" value="1" class="w-10 text-center border p-1 productQtyCount" onchange="updateTotal(this, ${sellingPrice},${discountPrice})">
+                                        <input type="text" value="1" class="w-20 text-center border p-1 productQtyCount" onchange="updateTotal(this, ${sellingPrice},${discountPrice})">
                                     </td>
                                     <td class="">${discountPrice.toFixed(2)}</td>
                                     <td class="totalPrice">${subtotal.toFixed(2)}</td>
