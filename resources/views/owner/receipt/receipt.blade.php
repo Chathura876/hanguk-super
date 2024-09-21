@@ -29,11 +29,12 @@
         <table class="text-sm">
             <tr>
                 <td class="font-bold">දිනය </td>
-                <td>: 2024.08.27</td>
+                <td>: {{ $bill->created_at->format('Y-m-d') }}</td> <!-- Format as Year-Month-Day -->
             </tr>
+
             <tr>
                 <td class="font-bold">බිල් අංකය </td>
-                <td>: #7248</td>
+                <td>: {{$bill->id}}</td>
             </tr>
             <tr>
                 <td class="font-bold">අයකැමි </td>
@@ -44,9 +45,10 @@
                 <td>: Walk in Customer</td>
             </tr>
             <tr>
-                <td class="font-bold">ආරම්භක වේලාව </td>
-                <td>: 04.57.04 PM</td>
+                <td class="font-bold">වේලාව</td>
+                <td>: {{ $bill->created_at->format('H:i:s') }}</td> <!-- Format as Hours:Minutes:Seconds -->
             </tr>
+
         </table>
     </div>
 
@@ -55,7 +57,6 @@
     <table class="w-full text-sm border-collapse">
         <thead>
         <tr>
-            <th class="border-0 px-1 py-1"></th>
             <th class="border-0 px-1 py-1">ප්‍රමාණය</th>
             <th class="border-0 px-1 py-1" style="white-space: nowrap;">සිල්ලර මිල</th>
             <th class="border-0 px-1 py-1" style="white-space: nowrap;">අපේ මිල</th>
@@ -67,17 +68,30 @@
         </thead>
 {{--        <hr class="border-t-2 border-dashed border-gray-600 my-4">--}}
         <tbody class="text-center">
-        <tr>
-            <td class="border-0 px-2 py-1">1.</td>
-            <td class="border-0 px-2 py-1">Kotmale Fresh Milk</td>
-        </tr>
-        <tr>
-            <td class="border-0 px-2 py-1"></td>
-            <td class="border-0 px-2 py-1">1</td>
-            <td class="border-0 px-2 py-1">500.00</td>
-            <td class="border-0 px-2 py-1">500.00</td>
-            <td class="border-0 px-2 py-1">500.00</td>
-        </tr>
+        @php
+            $count = 1; // Initialize the counter outside the loop
+            $total=0;
+            $totalDiscount=0;
+        @endphp
+
+        @foreach($billItem as $item)
+            <tr>
+                <td class="border-0" style="text-align: left;" colspan="4">{{ $count }}.{{ $item->product_name }}</td> <!-- Product name -->
+            </tr>
+            <tr>
+                <td class="border-0 px-2 py-1">{{$item->quantity}}</td>
+                <td class="border-0 px-2 py-1">{{$item->price}}</td>
+                <td class="border-0 px-2 py-1">{{$item->price-$item->discount_price}}</td>
+                <td class="border-0 px-2 py-1">{{$item->sub_total}}</td>
+            </tr>
+
+            @php
+                $count++; // Increment the counter after each loop iteration
+            $total=$total+($item->price * $item->quantity);
+            $totalDiscount= $totalDiscount+($item->discount_price * $item->quantity);
+            @endphp
+        @endforeach
+
         <!-- Add more rows as needed -->
         </tbody>
     </table>
@@ -87,35 +101,35 @@
     <div class="mt-4">
         <div class="flex justify-between">
             <span>සිල්ලර එකතුව</span>
-            <span>500.00</span>
+            <span>{{$total}}</span>
         </div>
         <div class="flex justify-between">
             <span>වට්ටම්</span>
-            <span>0.00</span>
+            <span>{{$totalDiscount}}</span>
         </div>
         <div class="flex justify-between">
             <span class="font-bold">මුළු එකතුව</span>
-            <span>500.00</span>
+            <span>{{$total- $totalDiscount}}</span>
         </div>
         <div class="flex justify-between">
             <span>මුදල් ගෙවීම</span>
-            <span>500.00</span>
+            <span>{{$bill->pay_amount}}</span>
         </div>
         <div class="flex justify-between">
             <span>ඉතිරි මුදල</span>
-            <span>0.00</span>
+            <span>{{$bill->balance}}</span>
         </div>
 
     </div>
 
     <hr class="border-t-2 border-dashed border-gray-600 mt-4">
 
-    <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් 0.00</h2>
+    <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් {{$totalDiscount}}</h2>
     <!-- Footer -->
     <div class="mt-4 text-center text-sm">
-        <p>භාණ්ඩ සංඛ්‍යාව 1</p>
+        <p>භාණ්ඩ සංඛ්‍යාව {{$count}}</p>
         <p>වාසි සපිරි සුපිරි තැන</p>
-        <p class="mt-2">අවසන් වේලාව : 04.58.04 PM</p>
+        <p class="mt-2">අවසන් වේලාව : {{ $bill->created_at->format('H:i:s') }}</p>
         <p class="mt-4 font-bold">** CodeXpress Technologies +94 77 767 4308**</p>
     </div>
 </div>

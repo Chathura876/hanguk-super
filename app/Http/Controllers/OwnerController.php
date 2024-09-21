@@ -7,6 +7,7 @@ use App\Http\Controllers\Imageuploader;
 use App\Models\Admin;
 use App\Models\Expense;
 use App\Models\Order;
+use App\Models\OrderItem;
 use App\Models\Owner;
 use App\Models\Product;
 use App\Models\Stock;
@@ -17,6 +18,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Mockery\Exception;
 
 class OwnerController extends Controller
 {
@@ -262,15 +264,34 @@ class OwnerController extends Controller
     }
 
 
-    public function receipt()
+    public function receipt($id)
     {
-        return view('owner.receipt.receipt');
+        try {
+            $bill= Order::query()
+                ->where('id', $id)
+                ->first();
+            $billItem = OrderItem::query()
+                ->where('order_id', $bill->id)
+                ->join('products', 'order_items.product_id', '=', 'products.id')
+                ->select('order_items.*', 'products.product_name as product_name')
+                ->get();
+
+
+
+            return view('owner.receipt.receipt',compact('bill','billItem'));
+        }
+        catch (Exception $exception){
+            return $exception;
+        }
+
     }
 
     public function issued_bills()
     {
         $user = Auth::user();
-        $bill = Order::all();
+        $bill = Order::orderBy('id', 'desc')->get();
+
+
         return view('owner.receipt.issued_bills', compact('bill', 'user'));
     }
 

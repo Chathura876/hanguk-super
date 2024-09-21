@@ -73,7 +73,7 @@
                         </td>
                         <td class="whitespace-nowrap py-3 px-3 text-center text-sm font-medium">
                             <div class="flex items-center justify-center gap-2">
-                                <a href="{{ route("owner.receipt") }}" class="inline-flex items-center justify-center
+                                <a href="{{ route("owner.receipt",$bills->id) }}" class="inline-flex items-center justify-center
                                 h-9 w-9 rounded-full bg-default-100 border border-default-200 text-default-900
                                 transition-all duration-200 hover:border-primary hover:bg-primary hover:text-white">
                                     <i class="ti ti-eye text-base"></i>

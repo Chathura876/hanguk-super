@@ -32,7 +32,7 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::post('/create', [OwnerController::class, 'create'])->name('owner.create');
 
             Route::get('/profile', [OwnerController::class, 'profile'])->name('owner.profile');
-            Route::get('/receipt', [OwnerController::class, 'receipt'])->name('owner.receipt');
+            Route::get('/receipt/{id}', [OwnerController::class, 'receipt'])->name('owner.receipt');
             Route::get('/issued_bills', [OwnerController::class, 'issued_bills'])->name('owner.issued_bills');
 
             Route::prefix('cashier')->group(function () {
