@@ -236,13 +236,6 @@ class SuperMarketPosController extends Controller
     }
 
 
-//    public function reports()
-//    {
-//        $user = Auth::user();
-//        $stock = Stock::with('product')->get();
-//
-//        return view('cashier.sidebar_pages.reports', compact('user', 'stock'));
-//    }
 
     public function reports(Request $request)
     {
@@ -436,8 +429,8 @@ class SuperMarketPosController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
-                    'order_items.discount_price as discount',
-                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                    DB::raw('IFNULL(order_items.discount_price, 0) as discount'), // Handle NULL
+                    DB::raw('((order_items.price - stocks.stock_price) - IFNULL(order_items.discount_price, 0)) * order_items.quantity as profit')
                 )
                 ->whereBetween('order_items.date', [$startDate, $endDate])
                 ->get();
@@ -453,15 +446,13 @@ class SuperMarketPosController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
-                    'stocks.discount_price',
-                    'order_items.discount_price as discount',
+                    DB::raw('IFNULL(order_items.discount_price, 0) as discount'), // Handle NULL
                     DB::raw('(
-            (order_items.price - stocks.stock_price - order_items.discount_price) * order_items.quantity
-        ) as profit')
+                    (order_items.price - stocks.stock_price - IFNULL(order_items.discount_price, 0)) * order_items.quantity
+                ) as profit')
                 )
                 ->whereDate('order_items.date', today())
                 ->get();
-
 
             $sellItems7day = DB::table('order_items')
                 ->join('products', 'order_items.product_id', '=', 'products.id')
@@ -474,9 +465,8 @@ class SuperMarketPosController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
-                    'stocks.discount_price',
-                    'order_items.discount_price as discount',
-                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                    DB::raw('IFNULL(order_items.discount_price, 0) as discount'), // Handle NULL
+                    DB::raw('((order_items.price - stocks.stock_price) - IFNULL(order_items.discount_price, 0)) * order_items.quantity as profit')
                 )
                 ->whereBetween('order_items.date', [today(), today()->addDays(7)])
                 ->get();
@@ -492,9 +482,8 @@ class SuperMarketPosController extends Controller
                     'order_items.quantity',
                     'order_items.price as selling_price',
                     'stocks.stock_price',
-                    'stocks.discount_price',
-                    'order_items.discount_price as discount',
-                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
+                    DB::raw('IFNULL(order_items.discount_price, 0) as discount'), // Handle NULL
+                    DB::raw('((order_items.price - stocks.stock_price) - IFNULL(order_items.discount_price, 0)) * order_items.quantity as profit')
                 )
                 ->whereBetween('order_items.date', [today(), today()->addDays(30)])
                 ->get();
@@ -517,8 +506,7 @@ class SuperMarketPosController extends Controller
                             'quantity' => $item->quantity,
                             'selling_price' => $item->selling_price,
                             'stock_price' => $item->stock_price,
-                            'discount' => $item->discount,
-                            'discount_price'=>$item->discount_price,
+                            'discount' => $item->discount ?? 0, // Handle NULL discount
                             'profit' => $item->profit,
                             'barcode' => $item->product_barcode
                         ];
@@ -533,41 +521,40 @@ class SuperMarketPosController extends Controller
             $profits7Day = $aggregateProfits($sellItems7day);
             $profits30Day = $aggregateProfits($sellItems30day);
 
-            $totalProfitToday=0;
-            $totalProfit7Day=0;
-            $totalProfit30Day=0;
-            $totalSaleToday=0;
-            $totalSale7Day=0;
-            $totalSale30Day=0;
-            $totalCostToday=0;
+            $totalProfitToday = 0;
+            $totalProfit7Day = 0;
+            $totalProfit30Day = 0;
+            $totalSaleToday = 0;
+            $totalSale7Day = 0;
+            $totalSale30Day = 0;
+            $totalCostToday = 0;
 
-            foreach ($profitsToday as $profit){
+            foreach ($profitsToday as $profit) {
                 $totalProfitToday += $profit['profit'];
                 $totalSaleToday += $profit['selling_price'] * $profit['quantity'];
                 $totalCostToday += $profit['stock_price'] * $profit['quantity'];
             }
 
-            foreach ($profits7Day as $profit){
+            foreach ($profits7Day as $profit) {
                 $totalProfit7Day += $profit['profit'];
                 $totalSale7Day += $profit['selling_price'] * $profit['quantity'];
             }
 
-            foreach ($profits30Day as $profit){
+            foreach ($profits30Day as $profit) {
                 $totalProfit30Day += $profit['profit'];
                 $totalSale30Day += $profit['selling_price'] * $profit['quantity'];
             }
 
-//            dd($profits);
-            // Return the profits for each time range in a view
-
             $user = Auth::user();
-            $totalCashToday= $this->cashPayment();
-            $totalCardToday= $this->cardPayment();
-            $todayExpences= $this->expencesToday();
-//            $todayTotalCost=$this->totalCost();
+            $totalCashToday = $this->cashPayment();
+            $totalCardToday = $this->cardPayment();
+            $todayExpences = $this->expencesToday();
+            $todayTotalCost = $this->totalCost();
+
             // Check if PDF generation is requested
             if ($request->input('generate_pdf')) {
-                $pdf = Pdf::loadView('owner.sidebar_pages.sale.Profit_report',compact('user',
+                $pdf = Pdf::loadView('owner.sidebar_pages.sale.Profit_report', compact(
+                    'user',
                     'profits',
                     'profitsToday',
                     'profits7Day',
@@ -584,99 +571,16 @@ class SuperMarketPosController extends Controller
                     'totalCostToday',
                     'startDate',
                     'endDate'
-
                 ));
                 return $pdf->download('profit_report.pdf'); // Download the PDF
             }
-
 
         } catch (\Exception $exception) {
             return $exception->getMessage();
         }
     }
-    public function dawnloadReport(Request $request)
-    {
-        try {
-            $startDate = $request->input('start_date');
-            $endDate = $request->input('end_date');
 
-            // Fetch OrderItems with related product and stock details using joins
-            $sellItems = DB::table('order_items')
-                ->join('products', 'order_items.product_id', '=', 'products.id')
-                ->join('stocks', 'order_items.stock_id', '=', 'stocks.id')
-                ->select(
-                    'order_items.order_id',
-                    'order_items.product_id',
-                    'products.product_name',
-                    'products.bar_code as product_barcode',
-                    'order_items.quantity',
-                    'order_items.price as selling_price',
-                    'stocks.stock_price',
-                    'order_items.discount_price as discount',
-                    DB::raw('((order_items.price - stocks.stock_price) - order_items.discount_price) * order_items.quantity as profit')
-                )
-                ->whereBetween('order_items.date', [$startDate, $endDate])
-                ->get();
 
-            // Aggregate profits by product
-            $aggregateProfits = function ($sellItems) {
-                $profits = [];
-                foreach ($sellItems as $item) {
-                    $productId = $item->product_id;
-                    if (isset($profits[$productId])) {
-                        $profits[$productId]['quantity'] += $item->quantity;
-                        $profits[$productId]['profit'] += $item->profit;
-                    } else {
-                        $profits[$productId] = [
-                            'order_id' => $item->order_id,
-                            'product_id' => $item->product_id,
-                            'product_name' => $item->product_name,
-                            'quantity' => $item->quantity,
-                            'selling_price' => $item->selling_price,
-                            'stock_price' => $item->stock_price,
-                            'discount' => $item->discount,
-                            'profit' => $item->profit,
-                            'barcode' => $item->product_barcode
-                        ];
-                    }
-                }
-                return array_values($profits);
-            };
-
-            $profits = $aggregateProfits($sellItems);
-
-            // Calculate totals
-            $totalProfit = array_sum(array_column($profits, 'profit'));
-            $totalSales = array_sum(array_column($profits, 'selling_price'));
-            $totalCost = array_sum(array_column($profits, 'stock_price'));
-
-            // Check if PDF generation is requested
-            if ($request->input('generate_pdf')) {
-                $pdf = Pdf::loadView('cashier.sidebar_pages.reports', compact(
-                    'profits',
-                    'totalProfit',
-                    'totalSales',
-                    'totalCost',
-                    'startDate',
-                    'endDate'
-                ));
-                return $pdf->download('profit_report.pdf'); // Download the PDF
-            }
-
-            // Return the view if PDF is not requested
-            return view('cashier.sidebar_pages.reports', compact(
-                'profits',
-                'totalProfit',
-                'totalSales',
-                'totalCost',
-                'startDate',
-                'endDate'
-            ));
-
-        } catch (\Exception $exception) {
-            return $exception->getMessage();
-        }
-    }
 
     public function totalCost()
     {

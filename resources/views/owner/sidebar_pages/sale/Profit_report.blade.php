@@ -1,4 +1,3 @@
-
 @extends('cashier.cashier_app')
 @section('content')
     <!DOCTYPE html>
@@ -64,15 +63,15 @@
     </tr>
     </thead>
     <tbody>
-    @foreach ($profitsToday  as $profit)
+    @foreach ($profitsToday as $profit)
         <tr>
-            <td class="px-6 py-2 font-medium">{{$profit['barcode']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['product_name']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['selling_price']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['stock_price']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['discount_price']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['quantity']}}</td>
-            <td class="px-6 py-2 font-medium">{{$profit['profit']}}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['barcode'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['product_name'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['selling_price'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['stock_price'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['discount'] - $profit['discount'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['quantity'] }}</td>
+            <td class="px-6 py-2 font-medium">{{ $profit['profit'] }}</td>
         </tr>
     @endforeach
     </tbody>
