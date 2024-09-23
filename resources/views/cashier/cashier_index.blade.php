@@ -638,6 +638,7 @@
 @endsection
 
 @push('script')
+
     <script src="{{asset('Hanguk_super/assets/JS/jquary/jquery-3.7.1.min.JS')}}"></script>
     <script>
         function deleteRow(button) {

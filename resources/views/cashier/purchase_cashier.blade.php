@@ -2,6 +2,11 @@
 @extends('cashier.cashier_app')
 
 @push('CSS')
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         /* Ensure the rest of the page fits within the viewport */
@@ -175,6 +180,7 @@
                         <p class="mb-1">Discount</p>
                         <p class="mb-1">Return Amount</p>
                         <p class="mb-1">Total</p>
+                        <p class="mb-1">Balance: Rs.</p>
                     </div>
                     <div class="text-right">
                         <p id="billItemCount" class="mb-1">0</p>
@@ -182,14 +188,11 @@
                         <p class="mb-1">Rs.<span id="totalDiscount">0</span></p>
                         <p class="mb-1">Rs.<span class="return-amount" id="returnAmount">0</span></p>
                         <p class="mb-1">Rs.<span class="finalTotal" id="finalTotal">0</span></p>
+                        <p class="mb-1">Rs.<span id="txtBalance">0</span></p>
                     </div>
                 </div>
             </div>
 
-            <!-- Balance Section -->
-            <div class="text-center" style="font-size:30px;">
-                <p>Balance: Rs.<span id="txtBalance">0</span></p>
-            </div>
 
             <!-- Right Section for Input Field and Tabs -->
             <div class="d-flex flex-column align-items-end w-25">
@@ -202,13 +205,86 @@
 
                     <!-- Tabs -->
                     <div class="btn-group" role="group" aria-label="Payment Method">
-                        <button id="cashTab" class="btn" onclick="showCashTab()" style="background-color: #4ade80">Cash</button>
-                        <button id="cardTab" class="btn" onclick="showCardTab()" style="background-color: #16a34a">Cheque</button>
+                        <button id="cashTab" class="btn" style="background-color: #4ade80">Cash</button>
+                        <button id="cardTab" class="btn" data-bs-toggle="modal" data-bs-target="#chequeModal" style="background-color: #16a34a">Cheque</button>
                     </div>
                 </div>
 
-                <!-- Payment Button -->
-                {{--                <button class="btn btn-lg mb-2 w-100" style="background-color: #10A721">Payment</button>--}}
+
+                <!-- Modal Structure -->
+                <div class="modal fade" id="chequeModal" tabindex="-1" aria-labelledby="chequeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg"> <!-- modal-lg for large size modal -->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="chequeModalLabel" style="color: black;">Add Cheque</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <!-- Cheque Form -->
+                                <form action="
+                                {{ route('cheque.store') }}" method="POST">
+                                    @csrf
+                                    <div class="grid lg:grid-cols-2 gap-6 mb-6">
+                                        <!-- Cheque Number -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="number" style="color: black;">Cheque Number</label>
+                                            <input id="number" name="number" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="text" placeholder="Add Cheque Number" required>
+                                        </div>
+
+                                        <!-- Bank Name -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="bank" style="color: black;">Bank Name</label>
+                                            <input id="bank" name="bank" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="text" placeholder="Add Bank Name" required>
+                                        </div>
+
+                                        <!-- Company Name -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="company" style="color: black;">Company Name</label>
+                                            <input id="company" name="company" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="text" placeholder="Add Company Name" required>
+                                        </div>
+
+                                        <!-- Amount -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="amount" style="color: black;">Amount</label>
+                                            <input id="amount" name="amount" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="number" placeholder="Add Amount" required>
+                                        </div>
+
+                                        <!-- Issued Date -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="issued_date" style="color: black;">Issued Date</label>
+                                            <input id="issued_date" name="issued_date" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="date" required>
+                                        </div>
+
+                                        <!-- Date Written on Cheque -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="written_date" style="color: black;">Date Written on the Cheque</label>
+                                            <input id="written_date" name="written_date" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="date" required>
+                                        </div>
+
+                                        <!-- Collected By -->
+                                        <div>
+                                            <label class="block text-sm font-medium mb-2" for="collect_by" style="color: black;">Collected By</label>
+                                            <input id="collect_by" name="collect_by" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="text" placeholder="Add Collected By">
+                                        </div>
+
+                                        <!-- Money Collected Switch -->
+                                        <div class="flex items-center">
+                                            <input name="status" class="w-9 h-5 flex items-center appearance-none bg-default-200 border-2 border-black rounded-full cursor-pointer transition-colors ease-in-out duration-200 checked:bg-none before:w-4 before:h-4 before:bg-black before:rounded-full before:translate-x-0 before:transition-transform before:ease-in-out before:checked:translate-x-full before:duration-200" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+                                            <label class="ms-1.5" for="flexSwitchCheckDefault" style="color: black;">Money Collected</label>
+                                        </div>
+                                    </div>
+
+                                    <!-- Submit Button -->
+                                    <div class="flex justify-end gap-4">
+                                        <button type="submit" class="flex items-center justify-center gap-2 rounded-md bg-black px-6 py-2.5 text-sm font-semibold text-white transition-all duration-200 hover:bg-gray-800">
+                                            <i class="ti ti-device-floppy text-lg"></i> Save
+                                        </button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
         </div>
