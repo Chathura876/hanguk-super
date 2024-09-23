@@ -267,11 +267,44 @@
                                             <input id="collect_by" name="collect_by" class="block w-full rounded-md py-2.5 px-4 text-black text-sm border border-black focus:ring-black" type="text" placeholder="Add Collected By">
                                         </div>
 
-                                        <!-- Money Collected Switch -->
                                         <div class="flex items-center">
-                                            <input name="status" class="w-9 h-5 flex items-center appearance-none bg-default-200 border-2 border-black rounded-full cursor-pointer transition-colors ease-in-out duration-200 checked:bg-none before:w-4 before:h-4 before:bg-black before:rounded-full before:translate-x-0 before:transition-transform before:ease-in-out before:checked:translate-x-full before:duration-200" type="checkbox" role="switch" id="flexSwitchCheckDefault">
-                                            <label class="ms-1.5" for="flexSwitchCheckDefault" style="color: black;">Money Collected</label>
+                                            <input name="status" class="sr-only" type="checkbox" id="flexSwitchCheckDefault">
+                                            <div class="flex items-center cursor-pointer" onclick="toggleSwitch()">
+                                                <div class="relative inline-block w-12">
+                                                    <div class="block bg-default-200 w-full h-6 rounded-full border-2 border-black"></div>
+                                                    <div class="dot absolute left-1 top-1 bg-black w-4 h-4 rounded-full transition-transform duration-200" id="toggleDot"></div>
+                                                </div>
+                                                <span class="ms-2" id="statusText" style="color: black;">No</span>
+                                            </div>
+                                            <label class="ms-1.5 mx-5" for="flexSwitchCheckDefault" style="color: black;">Money Collected</label>
                                         </div>
+
+                                        <script>
+                                            const checkbox = document.getElementById('flexSwitchCheckDefault');
+                                            const statusText = document.getElementById('statusText');
+                                            const toggleDot = document.getElementById('toggleDot');
+
+                                            function toggleSwitch() {
+                                                checkbox.checked = !checkbox.checked;
+                                                updateStatus();
+                                            }
+
+                                            function updateStatus() {
+                                                if (checkbox.checked) {
+                                                    statusText.textContent = 'Yes';
+                                                    statusText.style.color = 'green'; // Change text color for "Yes"
+                                                    toggleDot.style.transform = 'translateX(1.5rem)'; // Move dot to the right
+                                                } else {
+                                                    statusText.textContent = 'No';
+                                                    statusText.style.color = 'red'; // Change text color for "No"
+                                                    toggleDot.style.transform = 'translateX(0)'; // Move dot to the left
+                                                }
+                                            }
+
+                                            // Initialize status on page load
+                                            updateStatus();
+                                        </script>
+
                                     </div>
 
                                     <!-- Submit Button -->
