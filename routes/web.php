@@ -27,9 +27,9 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
         Route::post('/login-check', [OwnerController::class, 'login_check'])->name('owner.login.check');
         Route::get('/logout', [OwnerController::class, 'logout'])->name('owner.logout');
 
-Route::middleware(['auth:owner'])->group(function () {
-        Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
-        Route::post('/create', [OwnerController::class, 'create'])->name('owner.create');
+        Route::middleware(['auth:owner'])->group(function () {
+            Route::get('/dashboard', [OwnerController::class, 'index'])->name('owner.dashboard');
+            Route::post('/create', [OwnerController::class, 'create'])->name('owner.create');
 
             Route::get('/profile', [OwnerController::class, 'profile'])->name('owner.profile');
             Route::get('/receipt/{id}', [OwnerController::class, 'receipt'])->name('owner.receipt');
@@ -212,7 +212,6 @@ Route::middleware(['auth:owner'])->group(function () {
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
         Route::post('/suggesstions', [SuperMarketPosController::class, 'productSugess'])->name('pos.suggestions');
         Route::get('/purchase', [SuperMarketPosController::class, 'purchase'])->name('pos.purchase');
-
     });
   });
 

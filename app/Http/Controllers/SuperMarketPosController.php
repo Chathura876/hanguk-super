@@ -673,8 +673,8 @@ class SuperMarketPosController extends Controller
 
     public function purchase()
     {
-//        $user=Auth::user();
-        return view('cashier.purchase_cashier');
+        $user=Auth::user();
+        return view('cashier.purchase_cashier',compact('user'));
     }
 
 }

@@ -2,40 +2,123 @@
 @extends('cashier.cashier_app')
 
 @push('CSS')
+
     <style>
-        #posSection {
-            max-height: calc(100vh - 50px); /* Adjust the offset as needed */
-            overflow: hidden;
-        }
+        /* Ensure the rest of the page fits within the viewport */
+        /*#posSection {*/
+        /*    max-height: calc(100vh - 50px); !* Adjust the offset as needed *!*/
+        /*    overflow: hidden;*/
+        /*}*/
 
-        .table-responsive {
-            max-height: 250px; /* Set your desired max height */
-            overflow-y: auto;  /* Enable vertical scrolling */
-            overflow-x: hidden; /* Prevent horizontal scrolling */
-        }
+        /*.table-container {*/
+        /*    max-height: 250px; !* Set your desired max height *!*/
+        /*    overflow-y: auto;  !* Enable vertical scrolling *!*/
+        /*    overflow-x: hidden; !* Prevent horizontal scrolling *!*/
+        /*    position: relative; !* Create a containing block for sticky elements *!*/
+        /*}*/
 
-        .sticky-thead {
-            position: sticky;
-            top: 0; /* Stick the thead to the top of the table container */
-            z-index: 2; /* Ensure it appears above the tbody content */
-            background-color: #10A721; /* Background color to match your header */
-        }
+        /*.table-container-return {*/
+        /*    max-height: 320px; !* Set your desired max height *!*/
+        /*    overflow-y: auto;  !* Enable vertical scrolling *!*/
+        /*    overflow-x: hidden; !* Prevent horizontal scrolling *!*/
+        /*    position: relative; !* Create a containing block for sticky elements *!*/
+        /*}*/
 
-        #billTable {
-            height: 200px;
-        }
+        /*.sticky-thead {*/
+        /*    position: sticky;*/
+        /*    top: 0; !* Stick the thead to the top of the table container *!*/
+        /*    z-index: 2; !* Ensure it appears above the tbody content *!*/
+        /*    background-color: #2d6a4f; !* Background color to match your header *!*/
+        /*}*/
 
-        #billTable tbody tr {
-            height: 60px;
-        }
+        /* Force the table height and evenly distribute row height */
+        /*tbody {*/
+        /*    display: table-row-group;*/
+        /*    height: 100%;*/
+        /*    display: flex;*/
+        /*    flex-direction: column;*/
+        /*}*/
+
+        /*tbody tr {*/
+        /*    flex: 1;*/
+        /*    display: flex;*/
+        /*}*/
+
+        /*tbody td, tbody th {*/
+        /*    flex: 1;*/
+        /*    display: flex;*/
+        /*    align-items: center;*/
+        /*    justify-content: center;*/
+        /*}*/
+
+        /*!* Hide overflow for table *!*/
+        /*tbody {*/
+        /*    overflow: auto;*/
+        /*}*/
 
         .d-none {
             display: none;
         }
+
+        tr {
+            height: 0 !important;
+        }
+
+        td {
+            height: 0 !important;
+        }
+
+        /*#billTable{*/
+        /*    height: 200px;*/
+        /*}*/
+
+        /*#billTable tbody tr{*/
+        /*    height: 60px;*/
+        /*}*/
+        /*@media print {*/
+        /*    .receipt {*/
+        /*        width: 7.8cm; !* Set the width to 7.8cm *!*/
+        /*        padding: 0;*/
+        /*        margin: 0;*/
+        /*        font-size: 12px; !* Adjust the font size for readability *!*/
+        /*    }*/
+
+        /*    !* Additional styles to control layout on print *!*/
+        /*    .max-w-sm {*/
+        /*        max-width: 100%;*/
+        /*    }*/
+
+        /*    .no-print {*/
+        /*        display: none; !* Hide any elements not needed for printing *!*/
+        /*    }*/
+        /*}*/
+        /*th{*/
+        /*    font-size: 12px;*/
+        /*}*/
+        /*.bill-details{*/
+        /*    font-size: 12px !important;*/
+        /*}*/
+
+        .bill-font {
+            font-size: 40px !important;
+        }
+
+        .bill-font-2 {
+            font-size: 48px !important;
+            font-weight: bold;
+        }
+
+        .bill-font-3 {
+            font-size: 55px !important;
+            font-weight: bold;
+        }
+
+        #billTable td{
+            padding: 0;
+        }
+
     </style>
-
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <script src="https://cdn.tailwindcss.com"></script>
 @endpush
 @section('content')
 
@@ -63,7 +146,7 @@
             <div class="bg-success px-4 py-2 rounded text-lg">Total: Rs.<span class="finalTotal">0</span></div>
         </div>
 
-        <div class="table-responsive">
+        <div class="table-responsive" style="height: 300px; overflow-y: auto;">
             <table class="table table-bordered" id="billTable">
                 <thead class="sticky-thead text-white" style="background-color: #15803d">
                 <tr>
@@ -125,7 +208,7 @@
                 </div>
 
                 <!-- Payment Button -->
-{{--                <button class="btn btn-lg mb-2 w-100" style="background-color: #10A721">Payment</button>--}}
+                {{--                <button class="btn btn-lg mb-2 w-100" style="background-color: #10A721">Payment</button>--}}
 
             </div>
         </div>
@@ -136,36 +219,36 @@
                 <button class="btn btn-danger me-2">Cancel</button>
                 <button class="bg-yellow-500 text-white px-6 py-3 rounded" onclick="toggleSection()">Product</button>
             </div>
-{{--            <div class="d-flex">--}}
-{{--                <a href="{{ route('pos.damage_items') }}" class="btn btn-success me-2">Damage Items</a>--}}
-{{--                <a href="{{ route('pos.stock') }}" class="btn btn-success me-2">Stock</a>--}}
-{{--                <a href="{{ route('pos.reports') }}" class="btn btn-success me-2">Reports</a>--}}
-{{--                <a href="{{ route('pos.members') }}" class="btn btn-success me-2">Members</a>--}}
-{{--                <a href="{{ route('pos.cheque_list') }}" class="btn btn-success">Cheques</a>--}}
-{{--            </div>--}}
+            {{--            <div class="d-flex">--}}
+            {{--                <a href="{{ route('pos.damage_items') }}" class="btn btn-success me-2">Damage Items</a>--}}
+            {{--                <a href="{{ route('pos.stock') }}" class="btn btn-success me-2">Stock</a>--}}
+            {{--                <a href="{{ route('pos.reports') }}" class="btn btn-success me-2">Reports</a>--}}
+            {{--                <a href="{{ route('pos.members') }}" class="btn btn-success me-2">Members</a>--}}
+            {{--                <a href="{{ route('pos.cheque_list') }}" class="btn btn-success">Cheques</a>--}}
+            {{--            </div>--}}
         </div>
     </div>
 
     <!-- Number Pad Modal -->
-{{--    <div id="numberPadModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">--}}
-{{--        <div class="bg-white rounded-lg p-6 space-y-4 w-80">--}}
-{{--            <div class="text-center text-xl font-bold">Number Pad</div>--}}
-{{--            <div class="grid grid-cols-3 gap-4">--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">7</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">8</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">9</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">4</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">5</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">6</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">1</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">2</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">3</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">0</button>--}}
-{{--                <button class="bg-gray-200 p-4 text-xl rounded">.</button>--}}
-{{--                <button class="bg-red-500 text-white p-4 text-xl rounded" onclick="closeNumberPadModal()">Close</button>--}}
-{{--            </div>--}}
-{{--        </div>--}}
-{{--    </div>--}}
+    {{--    <div id="numberPadModal" class="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center hidden">--}}
+    {{--        <div class="bg-white rounded-lg p-6 space-y-4 w-80">--}}
+    {{--            <div class="text-center text-xl font-bold">Number Pad</div>--}}
+    {{--            <div class="grid grid-cols-3 gap-4">--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">7</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">8</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">9</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">4</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">5</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">6</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">1</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">2</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">3</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">0</button>--}}
+    {{--                <button class="bg-gray-200 p-4 text-xl rounded">.</button>--}}
+    {{--                <button class="bg-red-500 text-white p-4 text-xl rounded" onclick="closeNumberPadModal()">Close</button>--}}
+    {{--            </div>--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
 
 @endsection
 
