@@ -84,8 +84,8 @@ class SuperMarketPosController extends Controller
                 $products = Product::query()
                     ->where(function ($query) use ($request) {
                         if ($request->filled('name')) {
-                            // Partial match for product name
-                            $query->where('product_name', 'LIKE', '%' . $request->name . '%');
+                            // Match product names starting with the input characters
+                            $query->where('product_name', 'LIKE', $request->name . '%');
                         }
 
                         if ($request->filled('barcode')) {
@@ -93,7 +93,8 @@ class SuperMarketPosController extends Controller
                             $query->orWhere('bar_code', 'LIKE', '%' . $request->barcode . '%');
                         }
                     })
-                    ->get();  // Use get() instead of first() to fetch multiple results
+                    ->get();
+                // Use get() instead of first() to fetch multiple results
 
                 // If there are matching products
                 if ($products->count() > 0) {
