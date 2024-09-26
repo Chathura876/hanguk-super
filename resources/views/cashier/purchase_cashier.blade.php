@@ -163,7 +163,6 @@
                     <th class="p-1">Qty</th>
                     <th class="p-1">Free Item</th>
                     <th class="p-1">Subtotal (Rs.)</th>
-                    <th class="p-1">Average Stock (Rs.)</th>
                     <th class="p-1">Action</th>
                 </tr>
                 </thead>
@@ -177,8 +176,7 @@
                     <td class="p-1"><input type="number" class="form-control" name="quantity[]" min="1"></td>
                     <td class="p-1"><input type="text" class="form-control" name="free_item[]"></td>
                     <td class="p-1"><input type="number" class="form-control" name="subtotal[]" step="0.01" readonly></td>
-                    <td class="p-1"><input type="number" class="form-control" name="avg_stock[]" step="0.01" readonly></td>
-                    <td class="p-1">
+                   <td class="p-1">
                         <button type="button" class="btn btn-danger remove-item">Remove</button>
                     </td>
                 </tr>
