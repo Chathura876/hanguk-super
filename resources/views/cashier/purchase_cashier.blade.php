@@ -157,18 +157,36 @@
                 <tr>
                     <th class="p-1">No.</th>
                     <th class="p-1">Name</th>
-                    <th class="p-1">Price (Rs.)</th>
-                    <th class="p-1">Qty</th>
+                    <th class="p-1">Stock Price (Rs.)</th>
+                    <th class="p-1">Selling Price (Rs.)</th>
                     <th class="p-1">Discount (Rs.)</th>
+                    <th class="p-1">Qty</th>
+                    <th class="p-1">Free Item</th>
                     <th class="p-1">Subtotal (Rs.)</th>
+                    <th class="p-1">Average Stock (Rs.)</th>
                     <th class="p-1">Action</th>
                 </tr>
                 </thead>
                 <tbody>
-                <!-- Additional rows can be added here -->
+                <tr>
+                    <td class="p-1"><input type="text" class="form-control" name="no[]" readonly value="1"></td>
+                    <td class="p-1"><input type="text" class="form-control" name="name[]"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="stock_price[]" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="selling_price[]" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="discount[]" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="quantity[]" min="1"></td>
+                    <td class="p-1"><input type="text" class="form-control" name="free_item[]"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="subtotal[]" step="0.01" readonly></td>
+                    <td class="p-1"><input type="number" class="form-control" name="avg_stock[]" step="0.01" readonly></td>
+                    <td class="p-1">
+                        <button type="button" class="btn btn-danger remove-item">Remove</button>
+                    </td>
+                </tr>
+                <!-- Add more rows as needed -->
                 </tbody>
             </table>
         </div>
+
 
         <div class="d-flex justify-content-between align-items-center text-white font-weight-bold text-xl p-3 mt-4 rounded" style="background-color: #15803d">
             <!-- Summary -->
