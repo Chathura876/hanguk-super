@@ -221,7 +221,7 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
         Route::get('/view_cheque', [SuperMarketPosController::class, 'view_cheque'])->name('pos.view_cheque');
         Route::get('/edit_cheque', [SuperMarketPosController::class, 'edit_cheque'])->name('pos.edit_cheque');
         Route::post('/suggesstions', [SuperMarketPosController::class, 'productSugess'])->name('pos.suggestions');
-        Route::get('/temp', [SuperMarketPosController::class, 'purchase'])->name('pos.purchase');
+        Route::get('/purchase', [SuperMarketPosController::class, 'purchase'])->name('pos.purchase');
     });
   });
 
