@@ -145,7 +145,7 @@
 
             <div class="row mb-3">
                 <div class="col-md-6">
-                    <input type="text" class="form-control" placeholder="Search for product" style="width: 200px">
+                    <input type="text" id="searchProduct" onchange="searchProduct()" class="form-control" placeholder="Search for product" style="width: 200px">
                 </div>
             </div>
             <div class="bg-success px-4 py-2 rounded text-lg">Total: Rs.<span class="finalTotal">0</span></div>
@@ -167,19 +167,7 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="p-1"><input type="text" class="form-control" name="no[]" readonly value="1"></td>
-                    <td class="p-1"><input type="text" class="form-control" name="name[]"></td>
-                    <td class="p-1"><input type="number" class="form-control" name="stock_price[]" step="0.01"></td>
-                    <td class="p-1"><input type="number" class="form-control" name="selling_price[]" step="0.01"></td>
-                    <td class="p-1"><input type="number" class="form-control" name="discount[]" step="0.01"></td>
-                    <td class="p-1"><input type="number" class="form-control" name="quantity[]" min="1"></td>
-                    <td class="p-1"><input type="text" class="form-control" name="free_item[]"></td>
-                    <td class="p-1"><input type="number" class="form-control" name="subtotal[]" step="0.01" readonly></td>
-                    <td class="p-1">
-                        <button type="button" class="btn btn-danger remove-item">Remove</button>
-                    </td>
-                </tr>
+
                 <!-- Add more rows as needed -->
                 </tbody>
             </table>
@@ -295,31 +283,31 @@
                                             <label class="ms-1.5 mx-5" for="flexSwitchCheckDefault" style="color: black;">Money Collected</label>
                                         </div>
 
-                                        <script>
-                                            const checkbox = document.getElementById('flexSwitchCheckDefault');
-                                            const statusText = document.getElementById('statusText');
-                                            const toggleDot = document.getElementById('toggleDot');
+{{--                                        <script>--}}
+{{--                                            const checkbox = document.getElementById('flexSwitchCheckDefault');--}}
+{{--                                            const statusText = document.getElementById('statusText');--}}
+{{--                                            const toggleDot = document.getElementById('toggleDot');--}}
 
-                                            function toggleSwitch() {
-                                                checkbox.checked = !checkbox.checked;
-                                                updateStatus();
-                                            }
+{{--                                            function toggleSwitch() {--}}
+{{--                                                checkbox.checked = !checkbox.checked;--}}
+{{--                                                updateStatus();--}}
+{{--                                            }--}}
 
-                                            function updateStatus() {
-                                                if (checkbox.checked) {
-                                                    statusText.textContent = 'Yes';
-                                                    statusText.style.color = 'green'; // Change text color for "Yes"
-                                                    toggleDot.style.transform = 'translateX(1.5rem)'; // Move dot to the right
-                                                } else {
-                                                    statusText.textContent = 'No';
-                                                    statusText.style.color = 'red'; // Change text color for "No"
-                                                    toggleDot.style.transform = 'translateX(0)'; // Move dot to the left
-                                                }
-                                            }
+{{--                                            function updateStatus() {--}}
+{{--                                                if (checkbox.checked) {--}}
+{{--                                                    statusText.textContent = 'Yes';--}}
+{{--                                                    statusText.style.color = 'green'; // Change text color for "Yes"--}}
+{{--                                                    toggleDot.style.transform = 'translateX(1.5rem)'; // Move dot to the right--}}
+{{--                                                } else {--}}
+{{--                                                    statusText.textContent = 'No';--}}
+{{--                                                    statusText.style.color = 'red'; // Change text color for "No"--}}
+{{--                                                    toggleDot.style.transform = 'translateX(0)'; // Move dot to the left--}}
+{{--                                                }--}}
+{{--                                            }--}}
 
-                                            // Initialize status on page load
-                                            updateStatus();
-                                        </script>
+{{--                                            // Initialize status on page load--}}
+{{--                                            updateStatus();--}}
+{{--                                        </script>--}}
 
                                     </div>
 
@@ -509,6 +497,8 @@
         }
 
         function searchProduct() {
+
+
             let productName = $('#searchProduct').val();
 
             $.ajax({
@@ -519,29 +509,34 @@
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
+
                     let itemCount = billItem.length + 1;
                     $('#billItemCount').text(itemCount);
 
-                    // Parse float values to handle decimals correctly
-                    let sellingPrice = parseFloat(response.selling_price) || 0;
-                    let discountPrice = parseFloat(response.discount_price) || 0;
-                    let discount = hasMember == 1 ? sellingPrice - discountPrice : 0;
-                    let subtotal = hasMember == 1 ? discountPrice : sellingPrice;
+
+
+                    // // Parse float values to handle decimals correctly
+                    // let sellingPrice = parseFloat(response.selling_price) || 0;
+                    // let discountPrice = parseFloat(response.discount_price) || 0;
+                    // let discount = hasMember == 1 ? sellingPrice - discountPrice : 0;
+                    // let subtotal = hasMember == 1 ? discountPrice : sellingPrice;
 
 
 
                     // Create a new row with the response data
                     let newRow = `
-                <tr class="text-center" data-id="${response.id}" style="height: 60px;">
-                    <td class="p-1 border">${itemCount}</td>
-                    <td class="p-1 border">${response.product_name}</td>
-                    <td class="p-1 border">${sellingPrice.toFixed(2)}</td>
-                    <td class="p-1 border">
-                        <input type="text" value="1" class="w-10 text-center border p-1 productQtyCount" onchange="updateTotal(this, ${sellingPrice},${discountPrice})">
+                <tr>
+                    <td class="p-1"><lable>${itemCount}</lable></td>
+                    <td class="p-1" style="width: 200px;"><label>${response.product_name}</label></td>
+                    <td class="p-1"><input type="number" class="form-control" name="stock_price" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="selling_price" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="discount" step="0.01"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="quantity" min="1"></td>
+                    <td class="p-1"><input type="text" class="form-control" name="free_item"></td>
+                    <td class="p-1"><input type="number" class="form-control" name="subtotal" step="0.01" readonly></td>
+                   <td class="p-1">
+                        <button type="button" class="btn btn-danger remove-item">Remove</button>
                     </td>
-                    <td class="p-1 border">${discountPrice.toFixed(2)}</td>
-                    <td class="p-1 border totalPrice">${subtotal.toFixed(2)}</td>
-                    <td class="p-1 border text-red-600 cursor-pointer" onclick="deleteRow(this)">❌</td>
                 </tr>
             `;
 
@@ -551,14 +546,12 @@
                     billItem.push({
                         id: response.id,
                         product_name: response.product_name,
-                        selling_price: sellingPrice,
-                        qty: 1,
-                        discount: discount,
-                        subtotal: subtotal
+
                     });
+                    console.log(billItem);
 
                     // Update total amount
-                    updateTotalAmount();
+                    // updateTotalAmount();
 
                     // Clear search input
                     $('#searchProduct').val("");
@@ -755,31 +748,31 @@
 
     {{--    ===================================================================================================--}}
 
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('live-time').textContent = `${hours}:${minutes}:${seconds}`;
-        }
+{{--    <script>--}}
+{{--        function updateTime() {--}}
+{{--            const now = new Date();--}}
+{{--            const hours = String(now.getHours()).padStart(2, '0');--}}
+{{--            const minutes = String(now.getMinutes()).padStart(2, '0');--}}
+{{--            const seconds = String(now.getSeconds()).padStart(2, '0');--}}
+{{--            document.getElementById('live-time').textContent = `${hours}:${minutes}:${seconds}`;--}}
+{{--        }--}}
 
-        setInterval(updateTime, 1000);
-        updateTime();
-    </script>
+{{--        setInterval(updateTime, 1000);--}}
+{{--        updateTime();--}}
+{{--    </script>--}}
 
-    <script>
-        function updateTime() {
-            const now = new Date();
-            const hours = String(now.getHours()).padStart(2, '0');
-            const minutes = String(now.getMinutes()).padStart(2, '0');
-            const seconds = String(now.getSeconds()).padStart(2, '0');
-            document.getElementById('r-live-time').textContent = `${hours}:${minutes}:${seconds}`;
-        }
+{{--    <script>--}}
+{{--        function updateTime() {--}}
+{{--            const now = new Date();--}}
+{{--            const hours = String(now.getHours()).padStart(2, '0');--}}
+{{--            const minutes = String(now.getMinutes()).padStart(2, '0');--}}
+{{--            const seconds = String(now.getSeconds()).padStart(2, '0');--}}
+{{--            document.getElementById('r-live-time').textContent = `${hours}:${minutes}:${seconds}`;--}}
+{{--        }--}}
 
-        setInterval(updateTime, 1000);
-        updateTime();
-    </script>
+{{--        setInterval(updateTime, 1000);--}}
+{{--        updateTime();--}}
+{{--    </script>--}}
 
 @endpush
 
