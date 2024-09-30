@@ -5,6 +5,7 @@ use App\Http\Controllers\CashierController;
 use App\Http\Controllers\ChequeController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DamageItemsController;
+use App\Http\Controllers\Grn_Controller;
 use App\Http\Controllers\ManagerController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\OwnerController;
@@ -92,7 +93,10 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
                 Route::get('/edit/{id}', [ProductController::class, 'brand_edit'])->name('brand.edit');
                 Route::post('/{id}', [ProductController::class, 'brand_update'])->name('brand.update');
                 Route::get('/delete/{id}', [ProductController::class, 'brand_delete'])->name('brand.delete');
+            });
 
+            Route::prefix('GRN')->group(function () {
+                Route::get('/', [Grn_Controller::class, 'index'])->name('Grn.index');
             });
 
             Route::prefix('stock')->group(function () {
@@ -147,44 +151,46 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
                 Route::get('/profit', [OwnerController::class, 'profit'])->name('owner.profit');
                 Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
                 Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
-        Route::prefix('sale')->group(function () {
-            Route::get('/profit', [ProfitController::class, 'profit'])->name('owner.profit');
-            Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
-            Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
+                Route::prefix('sale')->group(function () {
+                    Route::get('/profit', [ProfitController::class, 'profit'])->name('owner.profit');
+                    Route::get('/return_items', [OwnerController::class, 'return_items'])->name('owner.return_items');
+                    Route::get('/sale', [OwnerController::class, 'sale'])->name('owner.sale');
+
+                });
+
+                Route::prefix('admin')->group(function () {
+                    Route::get('/', [AdminController::class, 'index'])->name('admin.index');
+                    Route::get('/add', [AdminController::class, 'create'])->name('admin.add');
+                    Route::post('/', [AdminController::class, 'store'])->name('admin.store');
+                    Route::get('/{id}', [AdminController::class, 'edit'])->name('admin.edit');
+                    Route::post('/update/{id}', [AdminController::class, 'update'])->name('admin.update');
+                    Route::post('/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
+                });
+
+                Route::prefix('manager')->group(function () {
+                    Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
+                    Route::get('/add', [ManagerController::class, 'create'])->name('manager.create');
+                    Route::post('/', [ManagerController::class, 'store'])->name('manager.store');
+                    Route::get('/{id}', [ManagerController::class, 'edit'])->name('manager.edit');
+                    Route::post('/{id}', [ManagerController::class, 'update'])->name('manager.update');
+                    Route::get('/delete/{id}', [ManagerController::class, 'delete'])->name('manager.delete');
+
+
+                });
+
+                Route::prefix('customer')->group(function () {
+                    Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
+                    Route::get('/add', [CustomerController::class, 'create'])->name('owner.add_customer');
+                    Route::post('/', [CustomerController::class, 'store'])->name('customer.store');
+                    Route::get('/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
+                    Route::post('/{id}', [CustomerController::class, 'update'])->name('customer.update');
+                    Route::post('/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
+
+                });
 
             });
-
-            Route::prefix('admin')->group(function () {
-                Route::get('/', [AdminController::class, 'index'])->name('admin.index');
-                Route::get('/add', [AdminController::class, 'create'])->name('admin.add');
-                Route::post('/', [AdminController::class, 'store'])->name('admin.store');
-                Route::get('/{id}', [AdminController::class, 'edit'])->name('admin.edit');
-                Route::post('/update/{id}', [AdminController::class, 'update'])->name('admin.update');
-                Route::post('/delete/{id}', [AdminController::class, 'delete'])->name('admin.delete');
-            });
-
-            Route::prefix('manager')->group(function () {
-                Route::get('/', [ManagerController::class, 'index'])->name('manager.index');
-                Route::get('/add', [ManagerController::class, 'create'])->name('manager.create');
-                Route::post('/', [ManagerController::class, 'store'])->name('manager.store');
-                Route::get('/{id}', [ManagerController::class, 'edit'])->name('manager.edit');
-                Route::post('/{id}', [ManagerController::class, 'update'])->name('manager.update');
-                Route::get('/delete/{id}', [ManagerController::class, 'delete'])->name('manager.delete');
-
-
-            });
-
-            Route::prefix('customer')->group(function () {
-                Route::get('/', [CustomerController::class, 'index'])->name('customer.index');
-                Route::get('/add', [CustomerController::class, 'create'])->name('owner.add_customer');
-                Route::post('/', [CustomerController::class, 'store'])->name('customer.store');
-                Route::get('/{id}', [CustomerController::class, 'edit'])->name('customer.edit');
-                Route::post('/{id}', [CustomerController::class, 'update'])->name('customer.update');
-                Route::post('/delete/{id}', [CustomerController::class, 'delete'])->name('customer.delete');
-
-            });
-
         });
+
     });
 
  Route::middleware(['auth:cashier'])->group(function (){
@@ -230,7 +236,7 @@ Route::prefix('reports')->group(function () {
       Route::get('/report/monthly', [Reportcontroller::class, 'monthlyReport'])->name('report.monthly');
   });
 
-});
+//});
 //});
 
 

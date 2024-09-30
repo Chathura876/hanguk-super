@@ -127,6 +127,34 @@
                 <a href="javascript:void(0)"
                    class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
                     <i class="ti ti-list-check text-xl"></i>
+                    GRN
+                    <i class="ti ti-chevron-right ms-auto text-sm transition-all hs-accordion-active:rotate-90"></i>
+                </a>
+
+                <div id="menuBrand" class="hs-accordion-content hidden w-full overflow-hidden transition-[height] duration-300">
+                    <ul class="mt-2 flex flex-col gap-2">
+{{--                        <li class="menu-item">--}}
+{{--                            <a href="{{route("brand.create")}}"--}}
+{{--                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">--}}
+{{--                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>--}}
+{{--                                New Brand--}}
+{{--                            </a>--}}
+{{--                        </li>--}}
+                        <li class="menu-item">
+                            <a href="{{route('Grn.index')}}"
+                               class="flex items-center gap-x-3.5 rounded-full px-8 py-2 text-sm font-medium text-default-700 hover:bg-default-100">
+                                <i class="ti ti-circle-filled scale-[.25] text-lg"></i>
+                                GRN List
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+
+            <li class="menu-item hs-accordion">
+                <a href="javascript:void(0)"
+                   class="hs-accordion-toggle flex items-center gap-x-3.5 rounded-full px-5 py-3 text-sm font-medium text-default-700 transition-all hover:bg-default-100 hs-accordion-active:bg-default-100">
+                    <i class="ti ti-list-check text-xl"></i>
                     Brand
                     <i class="ti ti-chevron-right ms-auto text-sm transition-all hs-accordion-active:rotate-90"></i>
                 </a>
