@@ -283,31 +283,31 @@
                                             <label class="ms-1.5 mx-5" for="flexSwitchCheckDefault" style="color: black;">Money Collected</label>
                                         </div>
 
-{{--                                        <script>--}}
-{{--                                            const checkbox = document.getElementById('flexSwitchCheckDefault');--}}
-{{--                                            const statusText = document.getElementById('statusText');--}}
-{{--                                            const toggleDot = document.getElementById('toggleDot');--}}
+                                        <script>
+                                            const checkbox = document.getElementById('flexSwitchCheckDefault');
+                                            const statusText = document.getElementById('statusText');
+                                            const toggleDot = document.getElementById('toggleDot');
 
-{{--                                            function toggleSwitch() {--}}
-{{--                                                checkbox.checked = !checkbox.checked;--}}
-{{--                                                updateStatus();--}}
-{{--                                            }--}}
+                                            function toggleSwitch() {
+                                                checkbox.checked = !checkbox.checked;
+                                                updateStatus();
+                                            }
 
-{{--                                            function updateStatus() {--}}
-{{--                                                if (checkbox.checked) {--}}
-{{--                                                    statusText.textContent = 'Yes';--}}
-{{--                                                    statusText.style.color = 'green'; // Change text color for "Yes"--}}
-{{--                                                    toggleDot.style.transform = 'translateX(1.5rem)'; // Move dot to the right--}}
-{{--                                                } else {--}}
-{{--                                                    statusText.textContent = 'No';--}}
-{{--                                                    statusText.style.color = 'red'; // Change text color for "No"--}}
-{{--                                                    toggleDot.style.transform = 'translateX(0)'; // Move dot to the left--}}
-{{--                                                }--}}
-{{--                                            }--}}
+                                            function updateStatus() {
+                                                if (checkbox.checked) {
+                                                    statusText.textContent = 'Yes';
+                                                    statusText.style.color = 'green'; // Change text color for "Yes"
+                                                    toggleDot.style.transform = 'translateX(1.5rem)'; // Move dot to the right
+                                                } else {
+                                                    statusText.textContent = 'No';
+                                                    statusText.style.color = 'red'; // Change text color for "No"
+                                                    toggleDot.style.transform = 'translateX(0)'; // Move dot to the left
+                                                }
+                                            }
 
-{{--                                            // Initialize status on page load--}}
-{{--                                            updateStatus();--}}
-{{--                                        </script>--}}
+                                            // Initialize status on page load
+                                            updateStatus();
+                                        </script>
 
                                     </div>
 
