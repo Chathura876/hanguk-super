@@ -176,7 +176,7 @@
                     <td class="p-1"><input type="number" class="form-control" name="quantity[]" min="1"></td>
                     <td class="p-1"><input type="text" class="form-control" name="free_item[]"></td>
                     <td class="p-1"><input type="number" class="form-control" name="subtotal[]" step="0.01" readonly></td>
-                   <td class="p-1">
+                    <td class="p-1">
                         <button type="button" class="btn btn-danger remove-item">Remove</button>
                     </td>
                 </tr>
@@ -381,12 +381,27 @@
 
     <script src="{{asset('Hanguk_super/assets/js/jquary/jquery-3.7.1.min.js')}}"></script>
     <script>
-        function deleteRow(button) {
-            // Find the row to be deleted
-            var row = button.closest('tr');
-            // Remove the row from the table
-            row.remove();
-        }
+        document.addEventListener('DOMContentLoaded', function () {
+            // Attach event listener to the table for dynamic row removal
+            document.querySelector('#billTable').addEventListener('click', function (e) {
+                if (e.target && e.target.classList.contains('remove-item')) {
+                    // Find the closest row (tr) and remove it
+                    const row = e.target.closest('tr');
+                    if (row) {
+                        row.remove();
+                        updateRowNumbers(); // Update row numbers if necessary
+                    }
+                }
+            });
+
+            // Function to update row numbers after deletion
+            function updateRowNumbers() {
+                const rows = document.querySelectorAll('#billTable tbody tr');
+                rows.forEach((row, index) => {
+                    row.querySelector('input[name="no[]"]').value = index + 1; // Update row number
+                });
+            }
+        });
 
         function openModal() {
             document.getElementById('modal').classList.remove('hidden');
