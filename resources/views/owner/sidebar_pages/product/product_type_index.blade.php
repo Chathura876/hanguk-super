@@ -31,7 +31,7 @@
                 <li class="text-sm">
                     <a class="flex items-center gap-2 align-middle font-medium text-default-800 transition-all hover:text-primary"
                        href="javascript:void(0)">
-                        GreenCart
+                        hanguk super
                         <i class="h-4 w-4" data-lucide="chevron-right"></i>
                     </a>
                 </li>

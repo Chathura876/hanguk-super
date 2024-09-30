@@ -97,6 +97,7 @@ Route::post('/', [CashierController::class, 'login_check'])->name('cashier.login
 
             Route::prefix('GRN')->group(function () {
                 Route::get('/', [Grn_Controller::class, 'index'])->name('Grn.index');
+                Route::get('/GRN_receipt/{id}', [Grn_Controller::class, 'receipt'])->name('owner.Grn.receipt');
             });
 
             Route::prefix('stock')->group(function () {

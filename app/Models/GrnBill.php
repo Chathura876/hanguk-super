@@ -12,6 +12,7 @@ class GrnBill extends Model
         'total',
         'net_total',
         'discount',
+        'pay_amount',
         'balance',
         'company_name',
         'date',
