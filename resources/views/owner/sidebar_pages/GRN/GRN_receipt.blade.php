@@ -28,24 +28,24 @@
     <div class="mt-4">
         <table class="text-sm">
             <tr>
-                <td class="font-bold">දිනය </td>
+                <td class="font-bold">Date</td>
                 <td>: {{ $bill->created_at->format('Y-m-d') }}</td> <!-- Format as Year-Month-Day -->
             </tr>
 
             <tr>
-                <td class="font-bold">බිල් අංකය </td>
+                <td class="font-bold">Bill No</td>
                 <td>: {{$bill->id}}</td>
             </tr>
             <tr>
-                <td class="font-bold">අයකැමි </td>
+                <td class="font-bold">Cashier</td>
                 <td>: hanguksuper</td>
             </tr>
             <tr>
-                <td class="font-bold">පාරිභෝගිකයා </td>
-                <td>: Walk in Customer</td>
+                <td class="font-bold">Company</td>
+                <td>: {{$bill->company_name}}</td>
             </tr>
             <tr>
-                <td class="font-bold">වේලාව</td>
+                <td class="font-bold">Time</td>
                 <td>: {{ $bill->created_at->format('H:i:s') }}</td> <!-- Format as Hours:Minutes:Seconds -->
             </tr>
 
@@ -57,16 +57,18 @@
     <table class="w-full text-sm border-collapse">
         <thead>
         <tr>
-            <th class="border-0 px-1 py-1">ප්‍රමාණය</th>
-            <th class="border-0 px-1 py-1" style="white-space: nowrap;">සිල්ලර මිල</th>
-            <th class="border-0 px-1 py-1" style="white-space: nowrap;">අපේ මිල</th>
-            <th class="border-0 px-1 py-1">වටිනාකම</th>
+            <th class="border-0 px-1 py-1">Item</th>
+            <th class="border-0 px-1 py-1" style="white-space: nowrap;">Stock Price</th>
+            <th class="border-0 px-1 py-1" style="white-space: nowrap;">Qty</th>
+            <th class="border-0 px-1 py-1">Sub Total</th>
         </tr>
         <tr>
-            <td colspan="5" class="border-0 p-0"><hr class="border-t-2 border-dashed border-gray-600 my-0"></td>
+            <td colspan="5" class="border-0 p-0">
+                <hr class="border-t-2 border-dashed border-gray-600 my-0">
+            </td>
         </tr>
         </thead>
-{{--        <hr class="border-t-2 border-dashed border-gray-600 my-4">--}}
+        {{--        <hr class="border-t-2 border-dashed border-gray-600 my-4">--}}
         <tbody class="text-center">
         @php
             $count = 1; // Initialize the counter outside the loop
@@ -76,13 +78,15 @@
 
         @foreach($billItem as $item)
             <tr>
-                <td class="border-0" style="text-align: left;" colspan="4">{{ $count }}.{{ $item->product_name }}</td> <!-- Product name -->
+                <td class="border-0" style="text-align: left;" colspan="4">{{ $count }}.{{ $item->product_name }}</td>
+                <!-- Product name -->
             </tr>
             <tr>
-                <td class="border-0 px-2 py-1">{{$item->quantity}}</td>
-                <td class="border-0 px-2 py-1">{{$item->price}}</td>
-                <td class="border-0 px-2 py-1">{{$item->price-$item->discount_price}}</td>
-                <td class="border-0 px-2 py-1">{{$item->sub_total}}</td>
+                <td class="border-0 px-2 py-1"></td>
+                <td class="border-0 px-2 py-1">{{$item->stock_price}}</td>
+                <td class="border-0 px-2 py-1">{{$item->qty}}</td>
+                <td class="border-0 px-2 py-1">{{ $item->stock_price * $item->qty }}</td> <!-- Calculated Subtotal -->
+
             </tr>
 
             @php
@@ -100,34 +104,47 @@
     <!-- Totals and Summary -->
     <div class="mt-4">
         <div class="flex justify-between">
-            <span>සිල්ලර එකතුව</span>
-            <span>{{$total}}</span>
+            <span>Total</span>
+            <span>{{$bill->total}}</span>
         </div>
+
+        @if($bill->discount > 1)
+            <div class="flex justify-between">
+                <span>Discount</span>
+                <span>{{$bill->discount}}</span>
+            </div>
+        @else
+            <div class="flex justify-between">
+                <span>Discount</span>
+                <span>{{$totalDiscount}}</span>
+            </div>
+        @endif
         <div class="flex justify-between">
-            <span>වට්ටම්</span>
-            <span>{{$totalDiscount}}</span>
+            <span class="font-bold">Grand Total</span>
+            <span>{{ $bill->total - $totalDiscount }}</span>
         </div>
+
+
         <div class="flex justify-between">
-            <span class="font-bold">මුළු එකතුව</span>
-            <span>{{$total- $totalDiscount}}</span>
-        </div>
-        <div class="flex justify-between">
-            <span>මුදල් ගෙවීම</span>
+            <span>Given Value</span>
             <span>{{$bill->pay_amount}}</span>
         </div>
         <div class="flex justify-between">
-            <span>ඉතිරි මුදල</span>
+            <span>Balance</span>
             <span>{{$bill->balance}}</span>
+        </div>
+        <div class="flex justify-between">
+            <span>Payment Type</span>
+            <span>{{$bill->payment_type}}</span>
         </div>
 
     </div>
 
     <hr class="border-t-2 border-dashed border-gray-600 mt-4">
 
-    <h2 class="text-center font-bold border-2 border-black mt-4">ඔබට ලැබුණු ලාභය රුපියල් {{$totalDiscount}}</h2>
     <!-- Footer -->
     <div class="mt-4 text-center text-sm">
-        <p>භාණ්ඩ සංඛ්‍යාව {{$count}}</p>
+        <p>භාණ්ඩ සංඛ්‍යාව {{$count - 1}}</p>
         <p>වාසි සපිරි සුපිරි තැන</p>
         <p class="mt-2">අවසන් වේලාව : {{ $bill->created_at->format('H:i:s') }}</p>
         <p class="mt-4 font-bold">** CodeXpress Technologies +94 77 767 4308**</p>
