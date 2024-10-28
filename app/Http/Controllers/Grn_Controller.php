@@ -6,6 +6,7 @@ use App\Models\Brand;
 use App\Models\GrnBill;
 use App\Models\GrnBillItem;
 use App\Models\Order;
+use App\Models\Stock;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -70,6 +71,20 @@ class Grn_Controller extends Controller
             return response()->json(['error' => $e->getMessage()], 500);
         }
     }
+
+    public function updateStock($item_id,$qty,$stock_price,)
+    {
+        try {
+            $oldStockCount=Stock::query()
+                ->where('id',$item_id)
+                ->get();
+            
+        }
+        catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
+    }
+
 
 
 }
